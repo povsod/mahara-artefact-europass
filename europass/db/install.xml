@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="artefact/europass/db" VERSION="20100107" COMMENT="XMLDB file for europass tables"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../lib/xmldb/xmldb.xsd"
+>
+    <TABLES>
+        <TABLE NAME="artefact_europass_mothertongue"> 
+            <FIELDS> 
+                <FIELD NAME="id" TYPE="int" LENGTH="10" SEQUENCE="true" NOTNULL="true" />
+                <FIELD NAME="artefact" TYPE="int" LENGTH="10" NOTNULL="true" />
+                <FIELD NAME="language" TYPE="text" NOTNULL="true" />
+                <FIELD NAME="description" TYPE="text" NOTNULL="false" />
+                <FIELD NAME="displayorder" TYPE="int" LENGTH="10" NOTNULL="true" />
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id" />
+                <KEY NAME="artefactfk" TYPE="foreign" FIELDS="artefact" REFTABLE="artefact" REFFIELDS="id" />
+            </KEYS>
+        </TABLE>
+        <TABLE NAME="artefact_europass_otherlanguage"> 
+            <FIELDS> 
+                <FIELD NAME="id" TYPE="int" LENGTH="10" SEQUENCE="true" NOTNULL="true" />
+                <FIELD NAME="artefact" TYPE="int" LENGTH="10" NOTNULL="true" />
+                <FIELD NAME="language" TYPE="text" NOTNULL="true" />
+                <FIELD NAME="listening" TYPE="text" NOTNULL="true" />
+                <FIELD NAME="reading" TYPE="text" NOTNULL="true" />
+                <FIELD NAME="spokeninteraction" TYPE="text" NOTNULL="true" />
+                <FIELD NAME="spokenproduction" TYPE="text" NOTNULL="true" />
+                <FIELD NAME="writing" TYPE="text" NOTNULL="true" />
+                <FIELD NAME="certificate" TYPE="text" NOTNULL="false" />
+                <FIELD NAME="awardingbody" TYPE="text" NOTNULL="false" />
+                <FIELD NAME="certificatedate" TYPE="text" NOTNULL="false" />
+                <FIELD NAME="europeanlevel" TYPE="text" NOTNULL="false" />
+                <FIELD NAME="experiencestartdate" TYPE="text" NOTNULL="false" />
+                <FIELD NAME="experienceenddate" TYPE="text" NOTNULL="false" />
+                <FIELD NAME="experiencedescription" TYPE="text" NOTNULL="false" />
+                <FIELD NAME="displayorder" TYPE="int" LENGTH="10" NOTNULL="true" />
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id" />
+                <KEY NAME="artefactfk" TYPE="foreign" FIELDS="artefact" REFTABLE="artefact" REFFIELDS="id" />
+            </KEYS>
+        </TABLE>
+    </TABLES>
+</XML>
