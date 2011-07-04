@@ -26,7 +26,7 @@
  */
  
 define('INTERNAL', true);
-define('MENUITEM', 'profile/europass');
+define('MENUITEM', 'content/europass');
 
 require_once(dirname(dirname(dirname(__FILE__))) . '/init.php');
 require_once('pieforms/pieform.php');

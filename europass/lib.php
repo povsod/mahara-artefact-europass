@@ -56,7 +56,7 @@ class PluginArtefactEuropass extends Plugin {
     public static function menu_items() {
         return array(
             array(
-                'path' => 'profile/europass',
+                'path' => 'content/europass',
                 'title' => get_string('europass', 'artefact.europass'),
                 'url' => 'artefact/europass/',
                 'weight' => 90,

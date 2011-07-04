@@ -26,7 +26,7 @@
  */
 
 define('INTERNAL', true);
-define('MENUITEM', 'profile/europass');
+define('MENUITEM', 'content/europass');
 define('SECTION_PLUGINTYPE', 'artefact');
 define('SECTION_PLUGINNAME', 'europass');
 define('SECTION_PAGE', 'index');

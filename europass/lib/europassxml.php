@@ -4,6 +4,16 @@
 require_once(get_config('docroot') . 'artefact/lib.php');
 
 
+// Converts '<' to &lt; and '>' to &gt;
+function replacehtmlchars($html) {
+	return str_replace(array('<', '>'), array('&lt;', '&gt;'), $html);
+}
+
+// Converts '<' to &lt; and '>' to &gt;
+function ireplacehtmlchars($html) {
+	return str_replace(array('&lt;', '&gt;'), array('<', '>'), $html);
+}
+
 // Checks and replaces all html entities, that will otherwise break XML node value.
 function valid_xml_string($string) {
 	// PHP's strip_tags() function will remove tags, but it doesn't remove scripts, styles,
@@ -33,7 +43,7 @@ function valid_xml_string($string) {
 		),
 		$string);
 	$valid = strip_tags($valid);
-	$valid = htmlspecialchars($valid);
+	$valid = replacehtmlchars($valid);
 	return $valid;
 }
 
@@ -531,7 +541,7 @@ function generate_europasscv_xml($userid, $showHTML=false, $locale='en_GB', $int
 				$childRoot = $xmlDoc->getElementsByTagName('workexperience')->item($i);
 				$childElement = $xmlDoc->createElement($child);
 				if ($child == 'activities') {
-					$childElement->nodeValue = ($showHTML ? htmlspecialchars(nl2br($workexperience->positiondescription)) : valid_xml_string($workexperience->positiondescription));
+					$childElement->nodeValue = ($showHTML ? replacehtmlchars(nl2br($workexperience->positiondescription)) : valid_xml_string($workexperience->positiondescription));
 				}
 				$childRoot->appendChild($childElement);
 			}
@@ -842,7 +852,7 @@ function generate_europasscv_xml($userid, $showHTML=false, $locale='en_GB', $int
 		$childRoot = $xmlDoc->getElementsByTagName('skilllist')->item(0);
 		$childElement = $xmlDoc->createElement('skill');
 		$childElement->setAttribute('type', $field);
-		$childElement->nodeValue = ($showHTML ? htmlspecialchars($value) : valid_xml_string($value));
+		$childElement->nodeValue = ($showHTML ? replacehtmlchars($value) : valid_xml_string($value));
 		$childRoot->appendChild($childElement);
 	}
 	
@@ -884,7 +894,7 @@ function generate_europasscv_xml($userid, $showHTML=false, $locale='en_GB', $int
 		$childRoot = $xmlDoc->getElementsByTagName('misclist')->item(0);
 		$childElement = $xmlDoc->createElement('misc');
 		$childElement->setAttribute('type', $field);
-		$childElement->nodeValue = ($showHTML ? htmlspecialchars($value) : valid_xml_string($value));
+		$childElement->nodeValue = ($showHTML ? replacehtmlchars($value) : valid_xml_string($value));
 		$childRoot->appendChild($childElement);
 	}
 
@@ -1121,7 +1131,7 @@ function generate_europasslp_xml($userid, $showHTML=false, $locale='en_GB', $int
 			$childRoot->appendChild($childElement);
 			// diploma awarding body
 			$childElement = $xmlDoc->createElement('awardingBody');
-			$childElement->nodeValue = ($showHTML ? htmlspecialchars(nl2br($otherlanguage->awardingbody)) : valid_xml_string($otherlanguage->awardingbody)); // Execute nl2br transformation for HTML display...
+			$childElement->nodeValue = ($showHTML ? replacehtmlchars(nl2br($otherlanguage->awardingbody)) : valid_xml_string($otherlanguage->awardingbody)); // Execute nl2br transformation for HTML display...
 			$childRoot->appendChild($childElement);
 			// diploma date
 			$childElement = $xmlDoc->createElement('date');
@@ -1204,7 +1214,7 @@ function generate_europasslp_xml($userid, $showHTML=false, $locale='en_GB', $int
 			}
 			// experience description
 			$childElement = $xmlDoc->createElement('description');
-			$childElement->nodeValue = ($showHTML ? htmlspecialchars(nl2br($otherlanguage->experiencedescription)) : valid_xml_string($otherlanguage->experiencedescription));
+			$childElement->nodeValue = ($showHTML ? replacehtmlchars(nl2br($otherlanguage->experiencedescription)) : valid_xml_string($otherlanguage->experiencedescription));
 			$childRoot->appendChild($childElement);
 			
 			$l++;
