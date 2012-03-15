@@ -1,7 +1,7 @@
 <?php
 /**
  * Mahara: Electronic portfolio, weblog, resume builder and social networking
- * Copyright (C) 2006-2010 Catalyst IT Ltd and others; see:
+ * Copyright (C) 2006-2012 Catalyst IT Ltd and others; see:
  *                         http://wiki.mahara.org/Contributors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -17,24 +17,26 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * @package	mahara
- * @subpackage	artefact-europass
- * @author		Gregor Anželj
- * @license		http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @copyright	(C) 2009-2010 Gregor Anzelj, gregor.anzelj@gmail.com
+ * @package    mahara
+ * @subpackage artefact-europass
+ * @author     Gregor Anzelj
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL
+ * @copyright  (C) 2009-2012 Gregor Anzelj, gregor.anzelj@gmail.com
  *
- * @package	Europass Online Tools Labels and Help texts
- * @purpose	Provides the labels and help texts used in the Europass Online Tools.
- * @author(s)	Europass team
- * @copyright	(C) European Communities, 2002-2009 http://europass.cedefop.europa.eu
- * @license		http://europass.cedefop.europa.eu/europass/home/botnav/LegalNotice.csp
- * @version		20090407
- * @URL		http://europass.cedefop.europa.eu/TechnicalResources/EuropassLabels/xforms/europass-labels-xforms-20090407/cv_et_EE.xhtml
- * @URL		http://europass.cedefop.europa.eu/TechnicalResources/EuropassLabels/xforms/europass-labels-xforms-20090407/lp_et_EE.xhtml
+ * @translator 
  *
- * ISO 639-1		http://europass.cedefop.europa.eu/xml/EUROPASS_ISOLanguages_V1.1.xsd
- * ISO 3166-1		http://europass.cedefop.europa.eu/xml/EUROPASS_ISOCountries_V1.1.xsd
- * List of nationalities	http://europass.cedefop.europa.eu/TechnicalResources/XML/xsd/included_schemas/EUROPASS_Nationalities_V1.0.xsd
+ * @package    Europass Online Tools Labels and Help texts
+ * @purpose    Provides the labels and help texts used in the Europass Online Tools.
+ * @author(s)  Europass team
+ * @copyright  (C) European Communities, 2002-2011 http://europass.cedefop.europa.eu
+ * @license    http://europass.cedefop.europa.eu/europass/home/botnav/LegalNotice.csp
+ * @version    20110907
+ * @URL        http://europass.cedefop.europa.eu/TechnicalResources/EuropassLabels/xforms/europass-labels-xforms-20110907/cv_en_GB.xhtml
+ * @URL        http://europass.cedefop.europa.eu/TechnicalResources/EuropassLabels/xforms/europass-labels-xforms-20110907/lp_en_GB.xhtml
+ *
+ * ISO 639-1   http://europass.cedefop.europa.eu/xml/EUROPASS_ISOLanguages_V1.1.xsd
+ * ISO 3166-1  http://europass.cedefop.europa.eu/xml/EUROPASS_ISOCountries_V1.1.xsd
+ * List of nationalities  http://europass.cedefop.europa.eu/TechnicalResources/XML/xsd/included_schemas/EUROPASS_Nationalities_V1.0.xsd
  *(based on ISO 3166-1)
  */
 
@@ -43,38 +45,49 @@ defined('INTERNAL') || die();
 $string['pluginname'] = 'Europass';
 
 $string['europass'] = 'Europass';
-/**/$string['europassartefactsaved'] = 'Europass curriculum vitae saved sucessfully';
-/**/$string['europassexportgenerated'] = 'Please wait while your export is being generated...';
-/**/$string['europassexportnoconncetion'] = 'There was an error with connection to WSDL server. Please try again later.';
-/**/$string['europassexportservererror'] = 'There was an error on WSDL server. Please try again later.';
-/**/$string['europassextensionmissing'] = 'Sorry, you cannot use Europass plugin because your PHP installation is missing required extension:';
-/**/$string['newerversionforcompatibility'] = 'For better performance and compatibility you should upgrade to Mahara version 1.3.0 or newer.';
+$string['europassartefactsaved'] = 'Europass curriculum vitae saved sucessfully';
+$string['europassexportgenerated'] = 'Please wait while your export is being generated...';
+$string['europassexportnoconncetion'] = 'There was an error with connection to WSDL server. Please try again later.';
+$string['europassexportservererror'] = 'There was an error on WSDL server. Please try again later.';
+$string['europassextensionmissing'] = 'Sorry, you cannot use Europass plugin because your PHP installation is missing required extension:';
+$string['newerversionforcompatibility'] = 'For better performance and compatibility you should upgrade to Mahara version 1.3.0 or newer.';
 
-/**/$string['languagesaved'] = 'Language saved sucessfully';
-/**/$string['languagesavefailed'] = 'Failed to save language';
-/**/$string['languagedeleteconfirm'] = 'Are you sure you want to delete this language?';
-/**/$string['languagedeleted'] = 'Language deleted sucessfully';
+$string['languagesaved'] = 'Language saved sucessfully';
+$string['languagesavefailed'] = 'Failed to save language';
+$string['languagedeleteconfirm'] = 'Are you sure you want to delete this language?';
+$string['languagedeleted'] = 'Language deleted sucessfully';
 
-/**/$string['moveup'] = 'Move up';
-/**/$string['movedown'] = 'Move down';
+$string['moveup'] = 'Move up';
+$string['movedown'] = 'Move down';
+
+$string['languagediploma'] = 'Language diploma';
+$string['languageexperience'] = 'Linguistic experience';
+$string['languagediplomadeleteconfirm'] = 'Are you sure you want to delete this language diploma?';
+$string['languageexperiencedeleteconfirm'] = 'Are you sure you want to delete this linguistic experience?';
+$string['languagediplomadeleted'] = 'Language diploma deleted sucessfully';
+$string['languageexperiencedeleted'] = 'Linguistic experience deleted sucessfully';
+$string['languagediplomasaved'] = 'Language diploma saved sucessfully';
+$string['languagediplomasavefailed'] = 'Failed to save language diploma';
+$string['languageexperiencesaved'] = 'Linguistic experience saved sucessfully';
+$string['languageexperiencesavefailed'] = 'Failed to save linguistic experience';
 
 // Export data from Mahara to Europass form...
-/**/$string['exporteuropass'] = 'Export Europass';
-/**/$string['exportstep1'] = '1 - Document language and type';
-/**/$string['selectlocale&type'] = 'Select document language and type';
-/**/$string['selectlocale'] = 'Language';
-/**/$string['selectlocaledesc'] = 'Europass document language';
-/**/$string['selectdocumenttype'] = 'Document';
+$string['exporteuropass'] = 'Export Europass';
+$string['exportstep1'] = '1 - Document language and type';
+$string['selectlocale&type'] = 'Select document language and type';
+$string['selectlocale'] = 'Language';
+$string['selectlocaledesc'] = 'Europass document language';
+$string['selectdocumenttype'] = 'Document';
 $string['europassCV'] = 'Europassi curriculum vitae (CV)';
 $string['europassLP'] = 'Europassi keelepassi';
 $string['photograph'] = 'Foto';
-/**/$string['photographdesc'] = 'Photo will be embeded in Europass XML';
-/**/$string['phototoolarge'] = 'File too big. Filesize must not exceed 100 kB.';
-/**/$string['exportstep2'] = '2 - Document format';
-/**/$string['selectfiletype'] = 'Select file and date format';
-/**/$string['exportdate'] = 'Date';
-/**/$string['internaldateformat'] = 'Internal Date Format';
-/**/$string['selectinternaldatedesc'] = 'Date format used in Mahara';
+$string['photographdesc'] = 'Photo will be embeded in Europass XML';
+$string['phototoolarge'] = 'File too big. Filesize must not exceed 100 kB.';
+$string['exportstep2'] = '2 - Document format';
+$string['selectfiletype'] = 'Select file and date format';
+$string['exportdate'] = 'Date';
+$string['internaldateformat'] = 'Internal Date Format';
+$string['selectinternaldatedesc'] = 'Date format used in Mahara';
 $string['internaldate-dmy11'] = 'pp/kk/aaaa';
 $string['internaldate-dmy12'] = 'pp.kk.aaaa';
 $string['internaldate-dmy13'] = 'pp-kk-aaaa';
@@ -94,25 +107,54 @@ $string['internaldate-ymd21'] = 'aa/kk/pp';
 $string['internaldate-ymd22'] = 'aa.kk.pp';
 $string['internaldate-ymd23'] = 'aa-kk-pp';
 $string['internaldate-yonly'] = 'aaaa';
-/**/$string['internaldate-other'] = 'other';
-/**/$string['externaldateformat'] = 'External Date Format';
-/**/$string['selectexternaldatedesc'] = 'Date format used in export';
+$string['internaldate-other'] = 'other';
+$string['externaldateformat'] = 'External Date Format';
+$string['selectexternaldatedesc'] = 'Date format used in export';
 $string['externaldate-numeric-long'] = 'pp/kk/aaaa';
 $string['externaldate-text-long'] = 'pp. kuu aaaa';
-/**/$string['exportfile'] = 'File';
+$string['exportfile'] = 'File';
 $string['pdf'] = 'Adobe® PDF + XML';
+$string['pdfhrxml'] = 'Adobe® PDF + HR-XML';
 $string['doc'] = 'Microsoft® Word';
 $string['odt'] = 'OpenDocument';
 $string['html'] = 'HTML';
+$string['json'] = 'Europass JSON';
 $string['xml'] = 'Europass XML';
-/**/$string['exportstep3'] = '3 - Export';
-/**/$string['generate'] = 'Generate export';
-/**/$string['generateexport'] = 'Export';
+$string['hrxml'] = 'HR-XML';
+$string['exportstep3'] = '3 - Export';
+$string['generate'] = 'Generate export';
+$string['generateexport'] = 'Export';
+
+// Import data from Europass XML to Mahara...
+$string['importeuropass'] = 'Import Europass';
+$string['importstep1'] = '1 - Import file and options';
+$string['selectfile&options'] = 'Upload Europass XML file and select import options';
+$string['importstep2'] = '2 - Import';
+$string['execute'] = 'Execute import';
+$string['executeimport'] = 'Import';
+$string['importfile'] = 'Europass XML file';
+$string['importfiledesc'] = 'Select valid Europass XML file to import to Mahara';
+$string['notvalidxmlfile'] = 'The uploaded file is not a valid XML file.';
+$string['importoptions'] = 'What to import?';
+$string['importoptionsdesc'] = 'Locked profile fields will not be changed/updated';
+$string['nocheckedoptions'] = 'You have to check at least one option to import.';
+$string['fieldnotimported'] = 'Field "%s" not imported.';
+$string['lockedfieldnotimported'] = 'Locked field "%s" not imported.';
+$string['languagecodemissing'] = 'Field "%s" not imported. Language code is missing.';
+$string['importdate'] = 'Import dates as';
+$string['europassimportexecuted'] = 'The data from Europass XML successfully imported into Mahara.';
+
+// Europass GUI form tabs
+$string['application-tab'] = 'Application';
+$string['workexperience-tab'] = 'Employment';
+$string['education-tab'] = 'Education';
+$string['languages-tab'] = 'Languages';
+$string['skills-tab'] = 'Skills';
 
 // Europass CV - STEP 1
 $string['identification'] = 'Isikuandmed';
 $string['identification-birthdate'] = 'Sünniaeg';
-/**/$string['identification-birthplace'] = 'Sünnikoht';
+$string['identification-birthplace'] = 'Sünnikoht';
 $string['identification-lastname'] = 'Perekonnanimi';
 $string['identification-firstname'] = 'Eesnimi';
 $string['identification-addressLine'] = 'Tänav / maja number';
@@ -284,7 +326,7 @@ $string['language.pt'] = 'portugali';
 $string['language.rm'] = 'retoromaani';
 $string['language.ro'] = 'rumeenia';
 $string['language.ru'] = 'vene';
-/**/$string['language.r0'] = 'Romany'; // doesn't really have an ISO 369-1 code...
+$string['language.r0'] = 'Romany'; // doesn't really have an ISO 369-1 code...
 $string['language.sc'] = 'sardi';
 $string['language.se'] = 'põhjasaami';
 $string['language.sk'] = 'slovaki';
@@ -309,94 +351,94 @@ $string['language.la'] = 'ladina';
 $string['language.oc'] = 'provansi (pärast 1500)';
 $string['language.vo'] = 'volapük';
 // ISO 639-1:2002 languages that had been left out by Europass
-/**/$string['language.aa'] = 'Afar';
-/**/$string['language.ae'] = 'Avestan';
-/**/$string['language.ak'] = 'Akan';
-/**/$string['language.am'] = 'Amharic';
-/**/$string['language.av'] = 'Avaric';
-/**/$string['language.ay'] = 'Aymara';
-/**/$string['language.ba'] = 'Bashkir';
-/**/$string['language.bh'] = 'Bihari languages';
-/**/$string['language.bi'] = 'Bislama';
-/**/$string['language.bm'] = 'Bambara';
-/**/$string['language.ch'] = 'Chamorro';
-/**/$string['language.cr'] = 'Cree';
-/**/$string['language.cv'] = 'Chuvash';
-/**/$string['language.dv'] = 'Divehi; Dhivehi; Maldivian';
-/**/$string['language.dz'] = 'Dzongkha';
-/**/$string['language.ee'] = 'Ewe';
-/**/$string['language.ff'] = 'Fulah';
-/**/$string['language.gn'] = 'Guarani';
-/**/$string['language.gu'] = 'Gujarati';
-/**/$string['language.ha'] = 'Hausa';
-/**/$string['language.ho'] = 'Hiri Motu';
-/**/$string['language.hz'] = 'Herero';
-/**/$string['language.ia'] = 'Interlingua (International Auxiliary Language Association)';
-/**/$string['language.ig'] = 'Igbo';
-/**/$string['language.ii'] = 'Sichuan Yi; Nuosu';
-/**/$string['language.ik'] = 'Inupiaq';
-/**/$string['language.io'] = 'Ido';
-/**/$string['language.iu'] = 'Inuktitut';
-/**/$string['language.ki'] = 'Kikuyu; Gikuyu';
-/**/$string['language.kj'] = 'Kuanyama; Kwanyama';
-/**/$string['language.kk'] = 'Kazakh';
-/**/$string['language.kl'] = 'Kalaallisut; Greenlandic';
-/**/$string['language.km'] = 'Khmer';
-/**/$string['language.kn'] = 'Kannada';
-/**/$string['language.kr'] = 'Kanuri';
-/**/$string['language.ks'] = 'Kashmiri';
-/**/$string['language.kv'] = 'Komi';
-/**/$string['language.lg'] = 'Ganda';
-/**/$string['language.lo'] = 'Lao';
-/**/$string['language.lu'] = 'Luba-Katanga';
-/**/$string['language.mh'] = 'Marshallese';
-/**/$string['language.mi'] = 'Maori';
-/**/$string['language.ml'] = 'Malayalam';
-/**/$string['language.mr'] = 'Marathi';
-/**/$string['language.na'] = 'Nauru';
-/**/$string['language.nd'] = 'Ndebele, North';
-/**/$string['language.ng'] = 'Ndonga';
-/**/$string['language.nr'] = 'Ndebele, South';
-/**/$string['language.nv'] = 'Navajo; Navaho';
-/**/$string['language.ny'] = 'Chichewa; Chewa; Nyanja';
-/**/$string['language.oj'] = 'Ojibwa';
-/**/$string['language.om'] = 'Oromo';
-/**/$string['language.or'] = 'Oriya';
-/**/$string['language.os'] = 'Ossetian; Ossetic';
-/**/$string['language.pa'] = 'Panjabi; Punjabi';
-/**/$string['language.pi'] = 'Pali';
-/**/$string['language.ps'] = 'Pushto; Pashto';
-/**/$string['language.qu'] = 'Quechua';
-/**/$string['language.rn'] = 'Rundi';
-/**/$string['language.rw'] = 'Kinyarwanda';
-/**/$string['language.sa'] = 'Sanskrit';
-/**/$string['language.sd'] = 'Sindhi';
-/**/$string['language.sg'] = 'Sango';
-/**/$string['language.si'] = 'Sinhala; Sinhalese';
-/**/$string['language.sm'] = 'Samoan';
-/**/$string['language.sn'] = 'Shona';
-/**/$string['language.ss'] = 'Swati';
-/**/$string['language.st'] = 'Sotho, Southern';
-/**/$string['language.su'] = 'Sundanese';
-/**/$string['language.ta'] = 'Tamil';
-/**/$string['language.te'] = 'Telugu';
-/**/$string['language.tg'] = 'Tajik';
-/**/$string['language.th'] = 'Thai';
-/**/$string['language.ti'] = 'Tigrinya';
-/**/$string['language.tl'] = 'Tagalog';
-/**/$string['language.tn'] = 'Tswana';
-/**/$string['language.to'] = 'Tonga (Tonga Islands)';
-/**/$string['language.ts'] = 'Tsonga';
-/**/$string['language.tt'] = 'Tatar';
-/**/$string['language.tw'] = 'Twi';
-/**/$string['language.ug'] = 'Uighur; Uyghur';
-/**/$string['language.ve'] = 'Venda';
-/**/$string['language.wa'] = 'Walloon';
-/**/$string['language.wo'] = 'Wolof';
-/**/$string['language.xh'] = 'Xhosa';
-/**/$string['language.yo'] = 'Yoruba';
-/**/$string['language.za'] = 'Zhuang; Chuang';
-/**/$string['language.zu'] = 'Zulu';
+$string['language.aa'] = 'Afar';
+$string['language.ae'] = 'Avestan';
+$string['language.ak'] = 'Akan';
+$string['language.am'] = 'Amharic';
+$string['language.av'] = 'Avaric';
+$string['language.ay'] = 'Aymara';
+$string['language.ba'] = 'Bashkir';
+$string['language.bh'] = 'Bihari languages';
+$string['language.bi'] = 'Bislama';
+$string['language.bm'] = 'Bambara';
+$string['language.ch'] = 'Chamorro';
+$string['language.cr'] = 'Cree';
+$string['language.cv'] = 'Chuvash';
+$string['language.dv'] = 'Divehi; Dhivehi; Maldivian';
+$string['language.dz'] = 'Dzongkha';
+$string['language.ee'] = 'Ewe';
+$string['language.ff'] = 'Fulah';
+$string['language.gn'] = 'Guarani';
+$string['language.gu'] = 'Gujarati';
+$string['language.ha'] = 'Hausa';
+$string['language.ho'] = 'Hiri Motu';
+$string['language.hz'] = 'Herero';
+$string['language.ia'] = 'Interlingua (International Auxiliary Language Association)';
+$string['language.ig'] = 'Igbo';
+$string['language.ii'] = 'Sichuan Yi; Nuosu';
+$string['language.ik'] = 'Inupiaq';
+$string['language.io'] = 'Ido';
+$string['language.iu'] = 'Inuktitut';
+$string['language.ki'] = 'Kikuyu; Gikuyu';
+$string['language.kj'] = 'Kuanyama; Kwanyama';
+$string['language.kk'] = 'Kazakh';
+$string['language.kl'] = 'Kalaallisut; Greenlandic';
+$string['language.km'] = 'Khmer';
+$string['language.kn'] = 'Kannada';
+$string['language.kr'] = 'Kanuri';
+$string['language.ks'] = 'Kashmiri';
+$string['language.kv'] = 'Komi';
+$string['language.lg'] = 'Ganda';
+$string['language.lo'] = 'Lao';
+$string['language.lu'] = 'Luba-Katanga';
+$string['language.mh'] = 'Marshallese';
+$string['language.mi'] = 'Maori';
+$string['language.ml'] = 'Malayalam';
+$string['language.mr'] = 'Marathi';
+$string['language.na'] = 'Nauru';
+$string['language.nd'] = 'Ndebele, North';
+$string['language.ng'] = 'Ndonga';
+$string['language.nr'] = 'Ndebele, South';
+$string['language.nv'] = 'Navajo; Navaho';
+$string['language.ny'] = 'Chichewa; Chewa; Nyanja';
+$string['language.oj'] = 'Ojibwa';
+$string['language.om'] = 'Oromo';
+$string['language.or'] = 'Oriya';
+$string['language.os'] = 'Ossetian; Ossetic';
+$string['language.pa'] = 'Panjabi; Punjabi';
+$string['language.pi'] = 'Pali';
+$string['language.ps'] = 'Pushto; Pashto';
+$string['language.qu'] = 'Quechua';
+$string['language.rn'] = 'Rundi';
+$string['language.rw'] = 'Kinyarwanda';
+$string['language.sa'] = 'Sanskrit';
+$string['language.sd'] = 'Sindhi';
+$string['language.sg'] = 'Sango';
+$string['language.si'] = 'Sinhala; Sinhalese';
+$string['language.sm'] = 'Samoan';
+$string['language.sn'] = 'Shona';
+$string['language.ss'] = 'Swati';
+$string['language.st'] = 'Sotho, Southern';
+$string['language.su'] = 'Sundanese';
+$string['language.ta'] = 'Tamil';
+$string['language.te'] = 'Telugu';
+$string['language.tg'] = 'Tajik';
+$string['language.th'] = 'Thai';
+$string['language.ti'] = 'Tigrinya';
+$string['language.tl'] = 'Tagalog';
+$string['language.tn'] = 'Tswana';
+$string['language.to'] = 'Tonga (Tonga Islands)';
+$string['language.ts'] = 'Tsonga';
+$string['language.tt'] = 'Tatar';
+$string['language.tw'] = 'Twi';
+$string['language.ug'] = 'Uighur; Uyghur';
+$string['language.ve'] = 'Venda';
+$string['language.wa'] = 'Walloon';
+$string['language.wo'] = 'Wolof';
+$string['language.xh'] = 'Xhosa';
+$string['language.yo'] = 'Yoruba';
+$string['language.za'] = 'Zhuang; Chuang';
+$string['language.zu'] = 'Zulu';
 
 // ISO 3166-1-alpha-2 filtered by Europass 
 // (http://www.iso.org/iso/country_codes/iso_3166_code_lists/english_country_names_and_code_elements.htm)
@@ -544,7 +586,7 @@ $string['country.ph'] = 'Filipiinid';
 $string['country.pk'] = 'Pakistan';
 $string['country.pl'] = 'Poola';
 $string['country.pr'] = 'Puerto Rico';
-/**/$string['country.ps'] = '';
+$string['country.ps'] = '';
 $string['country.pt'] = 'Portugal';
 $string['country.pw'] = 'Belau';
 $string['country.py'] = 'Paraguay';
@@ -600,10 +642,10 @@ $string['country.zw'] = 'Zimbabwe';
 
 // List of nationalities based on the ISO 3166-1-alpha-2 filtered by Europass country list
 // (http://europass.cedefop.europa.eu/TechnicalResources/XML/xsd/included_schemas/EUROPASS_Nationalities_V1.0.xsd)
-/**/$string['nationality.ad'] = '';
+$string['nationality.ad'] = '';
 $string['nationality.ae'] = 'Araabia Ühendemiraadid';
 $string['nationality.af'] = 'Afganistan';
-/**/$string['nationality.ag'] = '';
+$string['nationality.ag'] = '';
 $string['nationality.al'] = 'Albaania';
 $string['nationality.am'] = 'Armeenia';
 $string['nationality.ao'] = 'Angola';
@@ -612,7 +654,7 @@ $string['nationality.at'] = 'Austria';
 $string['nationality.au'] = 'Austraalia';
 $string['nationality.az'] = 'Aserbaidžaan';
 $string['nationality.ba'] = 'Bosnia ja Hertsegoviina';
-/**/$string['nationality.bb'] = '';
+$string['nationality.bb'] = '';
 $string['nationality.bd'] = 'Bangladesh';
 $string['nationality.be'] = 'Belgia';
 $string['nationality.bf'] = 'Burkina Faso';
@@ -620,14 +662,14 @@ $string['nationality.bg'] = 'Bulgaaria';
 $string['nationality.bh'] = 'Bahrain';
 $string['nationality.bi'] = 'Burundi';
 $string['nationality.bj'] = 'Benin';
-/**/$string['nationality.bn'] = '';
+$string['nationality.bn'] = '';
 $string['nationality.bo'] = 'Boliivia';
 $string['nationality.br'] = 'Brasiilia';
-/**/$string['nationality.bs'] = '';
+$string['nationality.bs'] = '';
 $string['nationality.bt'] = 'Bhutan';
 $string['nationality.bw'] = 'Botswana';
 $string['nationality.by'] = 'Valgevene';
-/**/$string['nationality.bz'] = '';
+$string['nationality.bz'] = '';
 $string['nationality.ca'] = 'Kanada';
 $string['nationality.cd'] = 'Kongo DV';
 $string['nationality.cf'] = 'Kesk-Aafrika Vabariik';
@@ -646,7 +688,7 @@ $string['nationality.cz'] = 'Tšehhi';
 $string['nationality.de'] = 'Saksamaa';
 $string['nationality.dj'] = 'Djibouti';
 $string['nationality.dk'] = 'Taani';
-/**/$string['nationality.dm'] = '';
+$string['nationality.dm'] = '';
 $string['nationality.do'] = 'Dominikaani Vabariik';
 $string['nationality.dz'] = 'Alžeeria';
 $string['nationality.ec'] = 'Ecuador';
@@ -661,10 +703,10 @@ $string['nationality.fm'] = 'Mehhiko';
 $string['nationality.fr'] = 'Prantsusmaa';
 $string['nationality.ga'] = 'Gabon';
 $string['nationality.gb'] = 'Ühendkuningriik';
-/**/$string['nationality.gd'] = '';
+$string['nationality.gd'] = '';
 $string['nationality.ge'] = 'Georgia';
 $string['nationality.gh'] = 'Ghana';
-/**/$string['nationality.gl'] = '';
+$string['nationality.gl'] = '';
 $string['nationality.gm'] = 'Gambia';
 $string['nationality.gn'] = 'Guinea';
 $string['nationality.gq'] = 'Ekvatoriaal-Guinea';
@@ -690,16 +732,16 @@ $string['nationality.jp'] = 'Jaapan';
 $string['nationality.ke'] = 'Kenya';
 $string['nationality.kg'] = 'Kõrgõzstan';
 $string['nationality.kh'] = 'Kambodža';
-/**/$string['nationality.ki'] = '';
+$string['nationality.ki'] = '';
 $string['nationality.km'] = 'Komoorid';
-/**/$string['nationality.kn'] = '';
+$string['nationality.kn'] = '';
 $string['nationality.kp'] = 'Põhja-Korea';
 $string['nationality.kr'] = 'Lõuna-Korea';
 $string['nationality.kw'] = 'Kuveit';
 $string['nationality.kz'] = 'Kasahstan';
 $string['nationality.la'] = 'Laos';
 $string['nationality.lb'] = 'Liibanon';
-/**/$string['nationality.lc'] = '';
+$string['nationality.lc'] = '';
 $string['nationality.li'] = 'Liechtenstein';
 $string['nationality.lk'] = 'Sri Lanka';
 $string['nationality.lr'] = 'Libeeria';
@@ -711,9 +753,9 @@ $string['nationality.ly'] = 'Liibüa';
 $string['nationality.ma'] = 'Maroko';
 $string['nationality.mc'] = 'Monaco';
 $string['nationality.md'] = 'Moldova';
-/**/$string['nationality.me'] = '';
+$string['nationality.me'] = '';
 $string['nationality.mg'] = 'Madagaskar';
-/**/$string['nationality.mh'] = '';
+$string['nationality.mh'] = '';
 $string['nationality.mk'] = 'endise Jugoslaavia Makedoonia Vabariigi ';
 $string['nationality.ml'] = 'Mali';
 $string['nationality.mm'] = 'Myanmar';
@@ -721,7 +763,7 @@ $string['nationality.mn'] = 'Mongoolia';
 $string['nationality.mr'] = 'Mauritaania';
 $string['nationality.mt'] = 'Malta';
 $string['nationality.mu'] = 'Mauritius';
-/**/$string['nationality.mv'] = '';
+$string['nationality.mv'] = '';
 $string['nationality.mw'] = 'Malawi';
 $string['nationality.mx'] = 'Mehhiko';
 $string['nationality.my'] = 'Malaisia';
@@ -733,8 +775,8 @@ $string['nationality.ni'] = 'Nicaragua';
 $string['nationality.nl'] = 'Holland';
 $string['nationality.no'] = 'Norra';
 $string['nationality.np'] = 'Nepal';
-/**/$string['nationality.nr'] = '';
-/**/$string['nationality.nu'] = '';
+$string['nationality.nr'] = '';
+$string['nationality.nu'] = '';
 $string['nationality.nz'] = 'Uus-Meremaa';
 $string['nationality.om'] = 'Omaan';
 $string['nationality.pa'] = 'Panama';
@@ -744,9 +786,9 @@ $string['nationality.ph'] = 'Filipiinid';
 $string['nationality.pk'] = 'Pakistan';
 $string['nationality.pl'] = 'Poola';
 $string['nationality.pr'] = 'Puerto Rico';
-/**/$string['nationality.ps'] = '';
+$string['nationality.ps'] = '';
 $string['nationality.pt'] = 'Portugal';
-/**/$string['nationality.pw'] = '';
+$string['nationality.pw'] = '';
 $string['nationality.py'] = 'Paraguay';
 $string['nationality.qa'] = 'Katar';
 $string['nationality.ro'] = 'Rumeenia';
@@ -755,18 +797,18 @@ $string['nationality.ru'] = 'Venemaa';
 $string['nationality.rw'] = 'Rwanda';
 $string['nationality.sa'] = 'Saudi Araabia';
 $string['nationality.sb'] = 'Saalomoni Saared';
-/**/$string['nationality.sc'] = '';
+$string['nationality.sc'] = '';
 $string['nationality.sd'] = 'Sudaan';
 $string['nationality.se'] = 'Rootsi';
 $string['nationality.sg'] = 'Singapur';
 $string['nationality.si'] = 'Sloveenia';
 $string['nationality.sk'] = 'Slovakkia';
 $string['nationality.sl'] = 'Sierra Leone';
-/**/$string['nationality.sm'] = '';
+$string['nationality.sm'] = '';
 $string['nationality.sn'] = 'Senegal';
 $string['nationality.so'] = 'Somaalia';
-/**/$string['nationality.sr'] = '';
-/**/$string['nationality.st'] = '';
+$string['nationality.sr'] = '';
+$string['nationality.st'] = '';
 $string['nationality.sv'] = 'El Salvador';
 $string['nationality.sy'] = 'Süüria';
 $string['nationality.sz'] = 'Svaasimaa';
@@ -777,10 +819,10 @@ $string['nationality.tj'] = 'Tadžikistan';
 $string['nationality.tl'] = 'Ida-Timor';
 $string['nationality.tm'] = 'Türkmenistan';
 $string['nationality.tn'] = 'Tuneesia';
-/**/$string['nationality.to'] = '';
+$string['nationality.to'] = '';
 $string['nationality.tr'] = 'Türgi';
 $string['nationality.tt'] = 'Trinidad ja Tobago';
-/**/$string['nationality.tv'] = '';
+$string['nationality.tv'] = '';
 $string['nationality.tz'] = 'Tansaania';
 $string['nationality.ua'] = 'Ukraina';
 $string['nationality.ug'] = 'Uganda';
@@ -788,11 +830,11 @@ $string['nationality.us'] = 'Ameerika Ühendriigid';
 $string['nationality.uy'] = 'Uruguay';
 $string['nationality.uz'] = 'Usbekistan';
 $string['nationality.va'] = 'Vatikan';
-/**/$string['nationality.vc'] = '';
+$string['nationality.vc'] = '';
 $string['nationality.ve'] = 'Venezuela';
 $string['nationality.vn'] = 'Vietnam';
-/**/$string['nationality.vu'] = '';
-/**/$string['nationality.ws'] = '';
+$string['nationality.vu'] = '';
+$string['nationality.ws'] = '';
 $string['nationality.ye'] = 'Jeemen';
 $string['nationality.za'] = 'Lõuna-Aafrika';
 $string['nationality.zm'] = 'Sambia';

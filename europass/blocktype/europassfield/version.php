@@ -19,16 +19,16 @@
  *
  * @package    mahara
  * @subpackage blocktype-europassfield
- * @author     Gregor Anželj
+ * @author     Gregor Anzelj
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @copyright  (C) 2009-2010 Gregor Anželj, gregor.anzelj@gmail.com
+ * @copyright  (C) 2009-2012 Gregor Anzelj, gregor.anzelj@gmail.com
  *
  */
 
 defined('INTERNAL') || die();
 
 $config = new StdClass;
-$config->version = 2010110313;
-$config->release = '1.3.0';
+$config->version = 2012031500;
+$config->release = '2.0.1';
 
 ?>

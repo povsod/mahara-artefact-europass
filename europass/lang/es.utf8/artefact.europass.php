@@ -1,7 +1,7 @@
 <?php
 /**
  * Mahara: Electronic portfolio, weblog, resume builder and social networking
- * Copyright (C) 2006-2010 Catalyst IT Ltd and others; see:
+ * Copyright (C) 2006-2012 Catalyst IT Ltd and others; see:
  *                         http://wiki.mahara.org/Contributors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -17,24 +17,27 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * @package	mahara
- * @subpackage	artefact-europass
- * @author		Gregor Anželj
- * @license		http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @copyright	(C) 2009-2010 Gregor Anzelj, gregor.anzelj@gmail.com
+ * @package    mahara
+ * @subpackage artefact-europass
+ * @author     Gregor Anzelj
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL
+ * @copyright  (C) 2009-2012 Gregor Anzelj, gregor.anzelj@gmail.com
  *
- * @package	Europass Online Tools Labels and Help texts
- * @purpose	Provides the labels and help texts used in the Europass Online Tools.
- * @author(s)	Europass team
- * @copyright	(C) European Communities, 2002-2009 http://europass.cedefop.europa.eu
- * @license		http://europass.cedefop.europa.eu/europass/home/botnav/LegalNotice.csp
- * @version		20090407
- * @URL		http://europass.cedefop.europa.eu/TechnicalResources/EuropassLabels/xforms/europass-labels-xforms-20090407/cv_es_ES.xhtml
- * @URL		http://europass.cedefop.europa.eu/TechnicalResources/EuropassLabels/xforms/europass-labels-xforms-20090407/lp_es_ES.xhtml
+ * @translator Mari Cruz García
+ * @translator Iñaki Arenaza
  *
- * ISO 639-1		http://europass.cedefop.europa.eu/xml/EUROPASS_ISOLanguages_V1.1.xsd
- * ISO 3166-1		http://europass.cedefop.europa.eu/xml/EUROPASS_ISOCountries_V1.1.xsd
- * List of nationalities	http://europass.cedefop.europa.eu/TechnicalResources/XML/xsd/included_schemas/EUROPASS_Nationalities_V1.0.xsd
+ * @package    Europass Online Tools Labels and Help texts
+ * @purpose    Provides the labels and help texts used in the Europass Online Tools.
+ * @author(s)  Europass team
+ * @copyright  (C) European Communities, 2002-2011 http://europass.cedefop.europa.eu
+ * @license    http://europass.cedefop.europa.eu/europass/home/botnav/LegalNotice.csp
+ * @version    20110907
+ * @URL        http://europass.cedefop.europa.eu/TechnicalResources/EuropassLabels/xforms/europass-labels-xforms-20110907/cv_en_GB.xhtml
+ * @URL        http://europass.cedefop.europa.eu/TechnicalResources/EuropassLabels/xforms/europass-labels-xforms-20110907/lp_en_GB.xhtml
+ *
+ * ISO 639-1   http://europass.cedefop.europa.eu/xml/EUROPASS_ISOLanguages_V1.1.xsd
+ * ISO 3166-1  http://europass.cedefop.europa.eu/xml/EUROPASS_ISOCountries_V1.1.xsd
+ * List of nationalities  http://europass.cedefop.europa.eu/TechnicalResources/XML/xsd/included_schemas/EUROPASS_Nationalities_V1.0.xsd
  *(based on ISO 3166-1)
  */
 
@@ -57,6 +60,17 @@ $string['languagedeleted'] = 'Se borró el lenguaje con éxito';
 
 $string['moveup'] = 'Mover hacia arriba';
 $string['movedown'] = 'Mover hacia abajo';
+
+$string['languagediploma'] = 'Certificado de idioma';
+$string['languageexperience'] = 'Experiencia lingüística';
+$string['languagediplomadeleteconfirm'] = '¿Está seguro de que desea borrar este certificado de idioma?';
+$string['languageexperiencedeleteconfirm'] = '¿Está seguro de que desea borrar esta experiencia lingüística?';
+$string['languagediplomadeleted'] = 'Certificado de idioma borrado con éxito.';
+$string['languageexperiencedeleted'] = 'Experiencia lingüística borrada con éxito.';
+$string['languagediplomasaved'] = 'Certificado de idioma guardado con éxito.';
+$string['languagediplomasavefailed'] = 'No se pudo guardar el certificado de idioma.';
+$string['languageexperiencesaved'] = 'Experiencia lingüística guardada con éxito.';
+$string['languageexperiencesavefailed'] = 'No se pudo guardar la experiencia lingüística.';
 
 // Export data from Mahara to Europass form...
 $string['exporteuropass'] = 'Exportar Europass';
@@ -101,13 +115,42 @@ $string['externaldate-numeric-long'] = 'dd/mm/aaaa';
 $string['externaldate-text-long'] = 'dd. mes aaaa';
 $string['exportfile'] = 'Fichero';
 $string['pdf'] = 'Adobe® PDF + XML';
+$string['pdfhrxml'] = 'Adobe® PDF + HR-XML';
 $string['doc'] = 'Microsoft® Word';
 $string['odt'] = 'OpenDocument';
 $string['html'] = 'HTML';
+$string['json'] = 'Europass JSON';
 $string['xml'] = 'Europass XML';
+$string['hrxml'] = 'HR-XML';
 $string['exportstep3'] = '3 - Exportar';
 $string['generate'] = 'Generar exportación';
 $string['generateexport'] = 'Exportar';
+
+// Import data from Europass XML to Mahara...
+$string['importeuropass'] = 'Importar Europass';
+$string['importstep1'] = '1 - Fichero de importación y opciones';
+$string['selectfile&options'] = 'Subir fichero Europass XML y seleccionar opciones de importación';
+$string['importstep2'] = '2 - Importar';
+$string['execute'] = 'Ejecutar importación';
+$string['executeimport'] = 'Importar';
+$string['importfile'] = 'Fichero Europass XML';
+$string['importfiledesc'] = 'Seleccionar un fichero Europass XML válido para importar a Mahara';
+$string['notvalidxmlfile'] = 'El fichero subido no es un fichero XML válido.';
+$string['importoptions'] = '¿Qué importar?';
+$string['importoptionsdesc'] = 'Los campos bloqueados del perfil no se cambiarán/actualizarán.';
+$string['nocheckedoptions'] = 'Debe marcar al menos una opción de importación.';
+$string['fieldnotimported'] = 'Campo "%s" no importado.';
+$string['lockedfieldnotimported'] = 'Campo bloqueado "%s" no importado.';
+$string['languagecodemissing'] = 'Campo "%s" no importado. Falta el código de idioma.';
+$string['importdate'] = 'Importar fechas como';
+$string['europassimportexecuted'] = 'Los datos de Europass XML se han importado con éxito en Mahara.';
+
+// Europass GUI form tabs
+$string['application-tab'] = 'Solicitud';
+$string['workexperience-tab'] = 'Experiencia laboral';
+$string['education-tab'] = 'Educación';
+$string['languages-tab'] = 'Idiomas';
+$string['skills-tab'] = 'Aptitudes';
 
 // Europass CV - STEP 1
 $string['identification'] = 'Información personal';

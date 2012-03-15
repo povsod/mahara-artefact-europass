@@ -8,23 +8,21 @@
 {/foreach}
 </ul>
 {else}
+<link rel="stylesheet" type="text/css" href="{$WWWROOT}artefact/europass/europass.css">
 <div id="europasswrap">
+{include file="buttons.tpl"}
 
 {if $mahararelease}<div id="messages"><div class="info">
 {str tag='newerversionforcompatibility' section='artefact.europass'}
 </div></div>{/if}
+
 <div style="background:#0373B5;"><img src="{$topbanner}"></div>
 
 <fieldset>{if !$hidetitle}<legend class="europassh3">{str tag='identification' section='artefact.europass'}
 </legend>{/if}
 {$profileaboutform|safe}
 {$profilepersonalform|safe}
-{$europassform|safe}
 </fieldset>
-{include file="artefact:europass:fragments/workexperience.tpl"}
-{include file="artefact:europass:fragments/educationandtraining.tpl"}
-{include file="artefact:europass:fragments/mothertongue.tpl" controls="true"}
-{include file="artefact:europass:fragments/otherlanguage.tpl" controls="true"}
 
 <div><img src="{$rightlogo}" align="right"></div>
 </div>

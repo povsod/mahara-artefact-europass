@@ -1,7 +1,7 @@
 <?php
 /**
  * Mahara: Electronic portfolio, weblog, resume builder and social networking
- * Copyright (C) 2006-2010 Catalyst IT Ltd and others; see:
+ * Copyright (C) 2006-2012 Catalyst IT Ltd and others; see:
  *                         http://wiki.mahara.org/Contributors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -17,24 +17,26 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * @package	mahara
- * @subpackage	artefact-europass
- * @author		Gregor Anželj
- * @license		http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @copyright	(C) 2009-2010 Gregor Anzelj, gregor.anzelj@gmail.com
+ * @package    mahara
+ * @subpackage artefact-europass
+ * @author     Gregor Anzelj
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL
+ * @copyright  (C) 2009-2012 Gregor Anzelj, gregor.anzelj@gmail.com
  *
- * @package	Europass Online Tools Labels and Help texts
- * @purpose	Provides the labels and help texts used in the Europass Online Tools.
- * @author(s)	Europass team
- * @copyright	(C) European Communities, 2002-2009 http://europass.cedefop.europa.eu
- * @license		http://europass.cedefop.europa.eu/europass/home/botnav/LegalNotice.csp
- * @version		20090407
- * @URL		http://europass.cedefop.europa.eu/TechnicalResources/EuropassLabels/xforms/europass-labels-xforms-20090407/cv_el_GR.xhtml
- * @URL		http://europass.cedefop.europa.eu/TechnicalResources/EuropassLabels/xforms/europass-labels-xforms-20090407/lp_el_GR.xhtml
+ * @translator Yannis Kaskamanidis
  *
- * ISO 639-1		http://europass.cedefop.europa.eu/xml/EUROPASS_ISOLanguages_V1.1.xsd
- * ISO 3166-1		http://europass.cedefop.europa.eu/xml/EUROPASS_ISOCountries_V1.1.xsd
- * List of nationalities	http://europass.cedefop.europa.eu/TechnicalResources/XML/xsd/included_schemas/EUROPASS_Nationalities_V1.0.xsd
+ * @package    Europass Online Tools Labels and Help texts
+ * @purpose    Provides the labels and help texts used in the Europass Online Tools.
+ * @author(s)  Europass team
+ * @copyright  (C) European Communities, 2002-2011 http://europass.cedefop.europa.eu
+ * @license    http://europass.cedefop.europa.eu/europass/home/botnav/LegalNotice.csp
+ * @version    20110907
+ * @URL        http://europass.cedefop.europa.eu/TechnicalResources/EuropassLabels/xforms/europass-labels-xforms-20110907/cv_en_GB.xhtml
+ * @URL        http://europass.cedefop.europa.eu/TechnicalResources/EuropassLabels/xforms/europass-labels-xforms-20110907/lp_en_GB.xhtml
+ *
+ * ISO 639-1   http://europass.cedefop.europa.eu/xml/EUROPASS_ISOLanguages_V1.1.xsd
+ * ISO 3166-1  http://europass.cedefop.europa.eu/xml/EUROPASS_ISOCountries_V1.1.xsd
+ * List of nationalities  http://europass.cedefop.europa.eu/TechnicalResources/XML/xsd/included_schemas/EUROPASS_Nationalities_V1.0.xsd
  *(based on ISO 3166-1)
  */
 
@@ -43,38 +45,49 @@ defined('INTERNAL') || die();
 $string['pluginname'] = 'Europass';
 
 $string['europass'] = 'Europass';
-/**/$string['europassartefactsaved'] = 'Europass curriculum vitae saved sucessfully';
-/**/$string['europassexportgenerated'] = 'Please wait while your export is being generated...';
-/**/$string['europassexportnoconncetion'] = 'There was an error with connection to WSDL server. Please try again later.';
-/**/$string['europassexportservererror'] = 'There was an error on WSDL server. Please try again later.';
-/**/$string['europassextensionmissing'] = 'Sorry, you cannot use Europass plugin because your PHP installation is missing required extension:';
-/**/$string['newerversionforcompatibility'] = 'For better performance and compatibility you should upgrade to Mahara version 1.3.0 or newer.';
+$string['europassartefactsaved'] = 'Το βιογραφικό Europass αποθηκεύτηκε με επιτυχία';
+$string['europassexportgenerated'] = 'Παρακαλώ περιμένετε καθώς δημιουργείται το αρχείο εξαγωγής...';
+$string['europassexportnoconncetion'] = 'Υπήρξε ένα σφάλμα σύνδεσης με τον διακομιστή WSDL. Παρακαλώ δοκιμάστε πάλι αργότερα.';
+$string['europassexportservererror'] = 'Υπήρξε ένα σφάλμα στον διακομιστή WSDL. Παρακαλώ δοκιμάστε πάλι αργότερα.';
+$string['europassextensionmissing'] = 'Συγνώμη, αλλά δεν μπορείτε να χρησιμοποιήσετε το πρόσθετο Europass επειδή η εγκατάσταση PHP δεν διαθέτει την απαραίτητη επέκταση:';
+$string['newerversionforcompatibility'] = 'Για καλύτερη απόδοση και συμβατότητα, θα πρέπει να αναβαθμίσετε το Mahara στην έκδοση 1.3.0 ή νεώτερη.';
 
-/**/$string['languagesaved'] = 'Language saved sucessfully';
-/**/$string['languagesavefailed'] = 'Failed to save language';
-/**/$string['languagedeleteconfirm'] = 'Are you sure you want to delete this language?';
-/**/$string['languagedeleted'] = 'Language deleted sucessfully';
+$string['languagesaved'] = 'Η γλώσσα αποθηκεύτηκε με επιτυχία';
+$string['languagesavefailed'] = 'Αποτυχία αποθήκευσης της γλώσσας';
+$string['languagedeleteconfirm'] = 'Είστε σίγουρος ότι θέλετε να διαγράψετε αυτή τη γλώσσα;';
+$string['languagedeleted'] = 'Η γλώσσα διαγράφηκε με επιτυχία';
 
-/**/$string['moveup'] = 'Move up';
-/**/$string['movedown'] = 'Move down';
+$string['moveup'] = 'Μετακίνηση επάνω';
+$string['movedown'] = 'Μετακίνηση κάτω';
+
+$string['languagediploma'] = 'Πτυχίο γλώσσας';
+$string['languageexperience'] = 'Γλωσσική εμπειρία';
+$string['languagediplomadeleteconfirm'] = 'Είστε σίγουρος ότι θέλετε να διαγράψετε αυτό το πτυχίο γλώσσας;';
+$string['languageexperiencedeleteconfirm'] = 'Είστε σίγουρος ότι θέλετε να διαγράψετε αυτή τη γλωσσική εμπειρία;';
+$string['languagediplomadeleted'] = 'Το πτυχίο γλώσσας διαγράφηκε με επιτυχία';
+$string['languageexperiencedeleted'] = 'Η γλωσσική εμπειρία διαγράφηκε με επιτυχία';
+$string['languagediplomasaved'] = 'Το πτυχίο γλώσσας αποθηκεύτηκε με επιτυχία';
+$string['languagediplomasavefailed'] = 'Αποτυχία αποθήκευσης του πτυχίου της γλώσσας';
+$string['languageexperiencesaved'] = 'Η γλωσσική εμπειρία αποθηκεύτηκε με επιτυχία';
+$string['languageexperiencesavefailed'] = 'Αποτυχία αποθήκευσης της γλωσσικής εμπειρίας';
 
 // Export data from Mahara to Europass form...
-/**/$string['exporteuropass'] = 'Export Europass';
-/**/$string['exportstep1'] = '1 - Document language and type';
-/**/$string['selectlocale&type'] = 'Select document language and type';
-/**/$string['selectlocale'] = 'Language';
-/**/$string['selectlocaledesc'] = 'Europass document language';
-/**/$string['selectdocumenttype'] = 'Document';
-$string['europassCV'] = 'βιογραφικό σημείωμα Europass (CV)';
-$string['europassLP'] = 'Διαβατήριο Γλωσσών Europass';
+$string['exporteuropass'] = 'Εξαγωγή Europass';
+$string['exportstep1'] = '1 - Έγγραφο γλώσσας και είδος';
+$string['selectlocale&type'] = 'Επιλέξτε έγγραφο γλώσσας και είδος';
+$string['selectlocale'] = 'Γλώσσα';
+$string['selectlocaledesc'] = 'Έγγραφο γλώσσας Europasse';
+$string['selectdocumenttype'] = 'Έγγραφο';
+$string['europassCV'] = 'Βιογραφικό σημείωμα Europass (CV)';
+$string['europassLP'] = 'Διαβατήριο γλωσσών Europass';
 $string['photograph'] = 'Φωτογραφία';
-/**/$string['photographdesc'] = 'Photo will be embeded in Europass XML';
-/**/$string['phototoolarge'] = 'File too big. Filesize must not exceed 100 kB.';
-/**/$string['exportstep2'] = '2 - Document format';
-/**/$string['selectfiletype'] = 'Select file and date format';
-/**/$string['exportdate'] = 'Date';
-/**/$string['internaldateformat'] = 'Internal Date Format';
-/**/$string['selectinternaldatedesc'] = 'Date format used in Mahara';
+$string['photographdesc'] = 'Η φωτογραφία θα ενσωματωθεί στο αρχείο XML του Europass';
+$string['phototoolarge'] = 'Το αρχείο είναι πολύ μεγάλο. Το μέγεθος δεν θα πρέπει να ξεπερνά τα 100 kB.';
+$string['exportstep2'] = '2 - Μορφή εγγράφου';
+$string['selectfiletype'] = 'Επιλέξτε μορφή αρχείου και ημερομηνίας';
+$string['exportdate'] = 'Ημερομηνία';
+$string['internaldateformat'] = 'Εσωτερική  μορφή ημερομηνίας';
+$string['selectinternaldatedesc'] = 'Μορφή ημερομηνίας που χρησιμοποιείται στο Mahara';
 $string['internaldate-dmy11'] = 'ηη/μμ/εεεε';
 $string['internaldate-dmy12'] = 'ηη.μμ.εεεε';
 $string['internaldate-dmy13'] = 'ηη-μμ-εεεε';
@@ -94,40 +107,69 @@ $string['internaldate-ymd21'] = 'εε/μμ/ηη';
 $string['internaldate-ymd22'] = 'εε.μμ.ηη';
 $string['internaldate-ymd23'] = 'εε-μμ-ηη';
 $string['internaldate-yonly'] = 'εεεε';
-/**/$string['internaldate-other'] = 'other';
-/**/$string['externaldateformat'] = 'External Date Format';
-/**/$string['selectexternaldatedesc'] = 'Date format used in export';
+$string['internaldate-other'] = 'other';
+$string['externaldateformat'] = 'Εξωτερική  μορφή ημερομηνίας';
+$string['selectexternaldatedesc'] = 'Μορφή ημερομηνίας που χρησιμοποιείται κατά την εξαγωγή';
 $string['externaldate-numeric-long'] = 'ηη/μμ/εεεε';
 $string['externaldate-text-long'] = 'ηη. μήνας εεεε';
-/**/$string['exportfile'] = 'File';
+$string['exportfile'] = 'Αρχείο';
 $string['pdf'] = 'Adobe® PDF + XML';
+$string['pdfhrxml'] = 'Adobe® PDF + HR-XML';
 $string['doc'] = 'Microsoft® Word';
 $string['odt'] = 'OpenDocument';
 $string['html'] = 'HTML';
+$string['json'] = 'Europass JSON';
 $string['xml'] = 'Europass XML';
-/**/$string['exportstep3'] = '3 - Export';
-/**/$string['generate'] = 'Generate export';
-/**/$string['generateexport'] = 'Export';
+$string['hrxml'] = 'HR-XML';
+$string['exportstep3'] = '3 - Εξαγωγή';
+$string['generate'] = 'Δημιουργία αρχείου εξαγωγής';
+$string['generateexport'] = 'Εξαγωγή';
+
+// Import data from Europass XML to Mahara...
+$string['importeuropass'] = 'Εισαγωγή Europass';
+$string['importstep1'] = '1 - Εισαγωγή αρχείου και επιλογών';
+$string['selectfile&options'] = 'Φόρτωση αρχείου XML του Europass και ρύθμιση επιλογών εισαγωγής';
+$string['importstep2'] = '2 - Εισαγωγή';
+$string['execute'] = 'Εκτέλεση εισαγωγής';
+$string['executeimport'] = 'Εισαγωγή';
+$string['importfile'] = 'Αρχείο XML του Europass';
+$string['importfiledesc'] = 'Επιλέξτε ένα έγκυρο αρχείο XML του Europass  για εισαγωγή στο Mahara';
+$string['notvalidxmlfile'] = 'Το αρχείο που φορτώθηκε δεν είναι ένα έγκυρο αρχειο XML.';
+$string['importoptions'] = 'Τι να εισάγω;';
+$string['importoptionsdesc'] = 'Τα κλειδωμένα πεδία του προφίλ δεν θα αλλάξουν/ενημερωθούν';
+$string['nocheckedoptions'] = 'Θα πρέπει να τσεκάρετε τουλάχιστον μια επιλογή για εισαγωγή.';
+$string['fieldnotimported'] = 'Το πεδίο "%s" δεν εισήχθη.';
+$string['lockedfieldnotimported'] = 'Το κλειδωμένο πεδίο "%s" δεν εισήχθη.';
+$string['languagecodemissing'] = 'Το πεδίο "%s" δεν εισήχθη. Λείπει ο κωδικός της γλώσσας.';
+$string['importdate'] = 'Εισαγωγή ημερομηνιών ως';
+$string['europassimportexecuted'] = 'Τα δεδομένα από το αρχείο XML του Europass  εισήχθησαν με επιτυχία στο Mahara.';
+
+// Europass GUI form tabs
+$string['application-tab'] = 'Αίτηση';
+$string['workexperience-tab'] = 'Εργασία/Απασχόληση';
+$string['education-tab'] = 'Εκπαίδευση';
+$string['languages-tab'] = 'Γλώσσες';
+$string['skills-tab'] = 'Δεξιότητες';
 
 // Europass CV - STEP 1
 $string['identification'] = 'Προσωπικές πληροφορίες';
 $string['identification-birthdate'] = 'Ημερομηνία γέννησης';
-/**/$string['identification-birthplace'] = 'Τόπος γέννησης';
-$string['identification-lastname'] = 'Επώνυμο (-α)';
-$string['identification-firstname'] = 'Όνομα (-τα)';
-$string['identification-addressLine'] = 'Οδός / αριθμός';
+$string['identification-birthplace'] = 'Τόπος γέννησης';
+$string['identification-lastname'] = 'Επώνυμο';
+$string['identification-firstname'] = 'Όνομα';
+$string['identification-addressLine'] = 'Οδός/αριθμός';
 $string['identification-municipality'] = 'Πόλη';
 $string['identification-postalCode'] = 'Ταχυδρομικός κώδικας';
 $string['identification-country'] = 'Χώρα';
-$string['identification-contactinfo-telephone'] = 'Τηλέφωνο (-α)';
+$string['identification-contactinfo-telephone'] = 'Τηλέφωνο';
 $string['identification-contactinfo-mobile'] = 'Κινητό τηλέφωνο';
 $string['identification-contactinfo-fax'] = 'Φαξ';
-$string['identification-contactinfo-email'] = 'Διεύθυνση (-εις) ηλεκτρονικού ταχυδρομείου';
+$string['identification-contactinfo-email'] = 'Διεύθυνση email';
 $string['identification-nationality'] = 'Υπηκοότητα';
 $string['identification-gender'] = 'Φύλο';
 
 // Europass CV - STEP 2
-$string['application'] = 'Επιθυμητή θέση εργασίας / τομέας απασχόλησης';
+$string['application'] = 'Επιθυμητή θέση εργασίας/απασχόλησης';
 
 // Europass CV - STEP 3
 $string['workexperience'] = 'Επαγγελματική πείρα';
@@ -136,20 +178,20 @@ $string['workexperience'] = 'Επαγγελματική πείρα';
 $string['education'] = 'Εκπαίδευση και κατάρτιση';
 
 // Europass CV - STEP 5
-$string['mothertongue'] = 'Μητρική (-ες) γλώσσα (-ες)';
-$string['otherlanguage'] = 'Άλλη (-ες) γλώσσα (-ες)';
+$string['mothertongue'] = 'Μητρική γλώσσα ή γλώσσες';
+$string['otherlanguage'] = 'Άλλη γλώσσα ή γλώσσες';
 
-$string['language-foreign-listening'] = 'Προφορική';
-$string['language-foreign-listening-th'] = 'Προφορική';
-$string['language-foreign-reading'] = 'Γραπτή (ανάγνωση)';
-$string['language-foreign-reading-th'] = 'Γραπτή<br>(ανάγνωση)';
-$string['language-foreign-spokeninteraction'] = 'Επικοινωνία';
-$string['language-foreign-spokeninteraction-th'] = 'Επικοινωνία';
-$string['language-foreign-spokenproduction'] = 'Προφορική έκφραση';
-$string['language-foreign-spokenproduction-th'] = 'Προφορική<br>έκφραση';
-$string['language-foreign-writing'] = 'Γραφή';
-$string['language-foreign-writing-th'] = 'Γραφή';
-$string['language-foreign-CEF-level'] = 'βαθμίδες του κοινού ευρωπαϊκού πλαισίου αναφοράς';
+$string['language-foreign-listening'] = 'Κατανόηση προφορικού λόγου';
+$string['language-foreign-listening-th'] = 'Κατανόηση προφορικού λόγου';
+$string['language-foreign-reading'] = 'Κατανόηση γραπτού λόγου';
+$string['language-foreign-reading-th'] = 'Κατανόηση γραπτού λόγου';
+$string['language-foreign-spokeninteraction'] = 'Παραγωγή προφορικού λόγου για επικοινωνία';
+$string['language-foreign-spokeninteraction-th'] = 'Παραγωγή προφορικού λόγου για επικοινωνία';
+$string['language-foreign-spokenproduction'] = 'Παραγωγή προφορικού λόγου - έκφραση';
+$string['language-foreign-spokenproduction-th'] = 'Παραγωγή προφορικού λόγου - έκφραση';
+$string['language-foreign-writing'] = 'Παραγωγή γραπτού λόγου';
+$string['language-foreign-writing-th'] = 'Παραγωγή γραπτού λόγου';
+$string['language-foreign-CEF-level'] = 'Βαθμίδες του κοινού ευρωπαϊκού πλαισίου αναφοράς';
 
 $string['language-foreign-level.A1'] = 'Βασικός χρήστης (A1)';
 $string['language-foreign-level.A2'] = 'Βασικός χρήστης (A2)';
@@ -171,12 +213,12 @@ $string['additionalinfo'] = 'Πρόσθετες πληροφορίες';
 $string['annexes'] = 'Παραρτήματα';
 
 // Europass LP - STEP 2
-$string['language-certificates'] = 'Δίπλωμα (-τα) ή πιστοποιητικό (-ά)';
-$string['diploma-title'] = 'Τίτλος διπλώματος (-ων) ή Πιστοποιητικού (-ών)';
+$string['language-certificates'] = 'Δίπλωμα ή πιστοποιητικό';
+$string['diploma-title'] = 'Τίτλος διπλώματος ή πιστοποιητικού';
 $string['diploma-awardingBody'] = 'Φορέας χορήγησης';
 $string['diploma-date'] = 'Ημερομηνία';
-$string['diploma-level'] = 'Ευρωπ. επίπεδο';
-$string['language-experiences'] = 'Γλωσσική/ές εμπειρία/ες';
+$string['diploma-level'] = 'Ευρωπαϊκό επίπεδο';
+$string['language-experiences'] = 'Γλωσσική εμπειρία';
 $string['experiences-period-from'] = 'Από';
 $string['experiences-period-to'] = 'Έως';
 
@@ -212,11 +254,11 @@ $string['locale.tr_TR'] = 'Türkçe – (tr)';
 // ISO 639-1:2002 filtered by Europass, including the languages considered as "dead"
 // (http://www.iso.org/iso/catalogue_detail?csnumber=22109)
 $string['language.ab'] = 'αμπχαζικά';
-$string['language.af'] = 'αφρικάνς';
-$string['language.an'] = 'γλώσσα της Aragon';
+$string['language.af'] = 'αφρικάανς';
+$string['language.an'] = 'αραγωνέζικη';
 $string['language.ar'] = 'αραβικά';
 $string['language.as'] = 'ασαμέζικα';
-$string['language.az'] = 'Αζερικά';
+$string['language.az'] = 'αζερικά';
 $string['language.be'] = 'λευκορωσικά';
 $string['language.bg'] = 'βουλγαρικά';
 $string['language.bn'] = 'μπενγκάλι';
@@ -226,13 +268,13 @@ $string['language.bs'] = 'βοσνιακά';
 $string['language.ca'] = 'καταλανικά';
 $string['language.ce'] = 'τσετσενικά';
 $string['language.co'] = 'κορσικανικά';
-$string['language.cs'] = 'τσεχικά';
+$string['language.cs'] = 'τσέχικα';
 $string['language.cy'] = 'ουαλικά';
 $string['language.da'] = 'δανικά';
 $string['language.de'] = 'γερμανικά';
 $string['language.el'] = 'ελληνικά';
 $string['language.en'] = 'αγγλικά';
-$string['language.es'] = 'ισπανικά / καστιλιάνικα';
+$string['language.es'] = 'ισπανικά';
 $string['language.et'] = 'εσθονικά';
 $string['language.eu'] = 'βασκικά';
 $string['language.fa'] = 'περσικά';
@@ -240,7 +282,7 @@ $string['language.fi'] = 'φινλανδικά';
 $string['language.fj'] = 'γλώσσα νησιών Φίτζι';
 $string['language.fo'] = 'φαροεζικά';
 $string['language.fr'] = 'γαλλικά';
-$string['language.fy'] = 'φριζικά ((Δυτική Φριζία)';
+$string['language.fy'] = 'φριζικά';
 $string['language.ga'] = 'ιρλανδικά';
 $string['language.gd'] = 'σκωτικά';
 $string['language.gl'] = 'γαλικιανά';
@@ -248,8 +290,8 @@ $string['language.gv'] = 'γλώσσα Νήσου Μαν';
 $string['language.he'] = 'εβραϊκά';
 $string['language.hi'] = 'χίντι';
 $string['language.hr'] = 'κροατικά';
-$string['language.ht'] = 'Κρεολή Αϊτής+G94';
-$string['language.hu'] = 'ουγρικά';
+$string['language.ht'] = 'κρεολή Αϊτής';
+$string['language.hu'] = 'ουγγρικά';
 $string['language.hy'] = 'αρμενικά';
 $string['language.id'] = 'ινδονησιακά';
 $string['language.is'] = 'ισλανδικά';
@@ -257,25 +299,25 @@ $string['language.it'] = 'ιταλικά';
 $string['language.ja'] = 'ιαπωνικά';
 $string['language.jv'] = 'ιαβανικά';
 $string['language.ka'] = 'γεωργιανά';
-$string['language.kg'] = 'Κονγκό';
+$string['language.kg'] = 'κογκολέζικα';
 $string['language.ko'] = 'κορεατικά';
 $string['language.ku'] = 'κουρδικά';
 $string['language.kw'] = 'κορνουαλικά';
 $string['language.ky'] = 'κιργιζικά';
 $string['language.lb'] = 'λουξεμβουργιανά';
-$string['language.li'] = 'γλώσσα Λιμβούργου';
+$string['language.li'] = 'φλαμανδικά Βελγίου';
 $string['language.ln'] = 'λινγκάλα';
 $string['language.lt'] = 'λιθουανικά';
 $string['language.lv'] = 'λεττονικά';
 $string['language.mg'] = 'μαλγασικά';
-$string['language.mk'] = 'μακεδονικά';
+$string['language.mk'] = 'σλαβομακεδονικά';
 $string['language.mn'] = 'μογγολικά';
 $string['language.mo'] = 'μολδαβικά';
 $string['language.ms'] = 'μαλαισιανά';
-$string['language.mt'] = 'Μαλτεζικά';
+$string['language.mt'] = 'μαλτεζικά';
 $string['language.my'] = 'βιρμανικά';
 $string['language.nb'] = 'νορβηγικά (μπόκμωλ)';
-$string['language.ne'] = 'γλώσσα του Νεπάλ';
+$string['language.ne'] = 'νεπαλέζικα';
 $string['language.nl'] = 'ολλανδικά';
 $string['language.nn'] = 'νορβηγικά (νίνορσκ)';
 $string['language.no'] = 'νορβηγικά';
@@ -284,7 +326,7 @@ $string['language.pt'] = 'πορτογαλικά';
 $string['language.rm'] = 'ρετο-ρωμανικά';
 $string['language.ro'] = 'ρουμανικά';
 $string['language.ru'] = 'ρωσικά';
-/**/$string['language.r0'] = 'Romany'; // doesn't really have an ISO 369-1 code...
+$string['language.r0'] = 'τσιγγάνικα'; // doesn't really have an ISO 369-1 code...
 $string['language.sc'] = 'σαρδηνιακά';
 $string['language.se'] = 'βορειολαπωνικά';
 $string['language.sk'] = 'σλοβακικά';
@@ -295,112 +337,112 @@ $string['language.sr'] = 'σερβικά';
 $string['language.sv'] = 'Σουηδικά';
 $string['language.sw'] = 'σουαχίλι';
 $string['language.tk'] = 'τουρκμενικά';
-$string['language.tr'] = 'Tουρκικά';
-$string['language.ty'] = 'γλώσσα Ταϊτής';
+$string['language.tr'] = 'τουρκικά';
+$string['language.ty'] = 'ταϊτιανά';
 $string['language.uk'] = 'ουκρανικά';
 $string['language.ur'] = 'ούρντου';
 $string['language.uz'] = 'ουζμπέκ';
 $string['language.vi'] = 'βιετναμεζικά';
-$string['language.yi'] = 'Γίντις';
+$string['language.yi'] = 'γίντις';
 $string['language.zh'] = 'κινεζικά';
-$string['language.cu'] = 'εκκλησιαστική σλαβική';
+$string['language.cu'] = 'σλαβονικά';
 $string['language.eo'] = 'εσπεράντο';
 $string['language.la'] = 'λατινικά';
-$string['language.oc'] = 'οξιτανικά (μετά το 1500)';
+$string['language.oc'] = 'οξιτανικά';
 $string['language.vo'] = 'βόλαπουκ';
 // ISO 639-1:2002 languages that had been left out by Europass
-/**/$string['language.aa'] = 'Afar';
-/**/$string['language.ae'] = 'Avestan';
-/**/$string['language.ak'] = 'Akan';
-/**/$string['language.am'] = 'Amharic';
-/**/$string['language.av'] = 'Avaric';
-/**/$string['language.ay'] = 'Aymara';
-/**/$string['language.ba'] = 'Bashkir';
-/**/$string['language.bh'] = 'Bihari languages';
-/**/$string['language.bi'] = 'Bislama';
-/**/$string['language.bm'] = 'Bambara';
-/**/$string['language.ch'] = 'Chamorro';
-/**/$string['language.cr'] = 'Cree';
-/**/$string['language.cv'] = 'Chuvash';
-/**/$string['language.dv'] = 'Divehi; Dhivehi; Maldivian';
-/**/$string['language.dz'] = 'Dzongkha';
-/**/$string['language.ee'] = 'Ewe';
-/**/$string['language.ff'] = 'Fulah';
-/**/$string['language.gn'] = 'Guarani';
-/**/$string['language.gu'] = 'Gujarati';
-/**/$string['language.ha'] = 'Hausa';
-/**/$string['language.ho'] = 'Hiri Motu';
-/**/$string['language.hz'] = 'Herero';
-/**/$string['language.ia'] = 'Interlingua (International Auxiliary Language Association)';
-/**/$string['language.ig'] = 'Igbo';
-/**/$string['language.ii'] = 'Sichuan Yi; Nuosu';
-/**/$string['language.ik'] = 'Inupiaq';
-/**/$string['language.io'] = 'Ido';
-/**/$string['language.iu'] = 'Inuktitut';
-/**/$string['language.ki'] = 'Kikuyu; Gikuyu';
-/**/$string['language.kj'] = 'Kuanyama; Kwanyama';
-/**/$string['language.kk'] = 'Kazakh';
-/**/$string['language.kl'] = 'Kalaallisut; Greenlandic';
-/**/$string['language.km'] = 'Khmer';
-/**/$string['language.kn'] = 'Kannada';
-/**/$string['language.kr'] = 'Kanuri';
-/**/$string['language.ks'] = 'Kashmiri';
-/**/$string['language.kv'] = 'Komi';
-/**/$string['language.lg'] = 'Ganda';
-/**/$string['language.lo'] = 'Lao';
-/**/$string['language.lu'] = 'Luba-Katanga';
-/**/$string['language.mh'] = 'Marshallese';
-/**/$string['language.mi'] = 'Maori';
-/**/$string['language.ml'] = 'Malayalam';
-/**/$string['language.mr'] = 'Marathi';
-/**/$string['language.na'] = 'Nauru';
-/**/$string['language.nd'] = 'Ndebele, North';
-/**/$string['language.ng'] = 'Ndonga';
-/**/$string['language.nr'] = 'Ndebele, South';
-/**/$string['language.nv'] = 'Navajo; Navaho';
-/**/$string['language.ny'] = 'Chichewa; Chewa; Nyanja';
-/**/$string['language.oj'] = 'Ojibwa';
-/**/$string['language.om'] = 'Oromo';
-/**/$string['language.or'] = 'Oriya';
-/**/$string['language.os'] = 'Ossetian; Ossetic';
-/**/$string['language.pa'] = 'Panjabi; Punjabi';
-/**/$string['language.pi'] = 'Pali';
-/**/$string['language.ps'] = 'Pushto; Pashto';
-/**/$string['language.qu'] = 'Quechua';
-/**/$string['language.rn'] = 'Rundi';
-/**/$string['language.rw'] = 'Kinyarwanda';
-/**/$string['language.sa'] = 'Sanskrit';
-/**/$string['language.sd'] = 'Sindhi';
-/**/$string['language.sg'] = 'Sango';
-/**/$string['language.si'] = 'Sinhala; Sinhalese';
-/**/$string['language.sm'] = 'Samoan';
-/**/$string['language.sn'] = 'Shona';
-/**/$string['language.ss'] = 'Swati';
-/**/$string['language.st'] = 'Sotho, Southern';
-/**/$string['language.su'] = 'Sundanese';
-/**/$string['language.ta'] = 'Tamil';
-/**/$string['language.te'] = 'Telugu';
-/**/$string['language.tg'] = 'Tajik';
-/**/$string['language.th'] = 'Thai';
-/**/$string['language.ti'] = 'Tigrinya';
-/**/$string['language.tl'] = 'Tagalog';
-/**/$string['language.tn'] = 'Tswana';
-/**/$string['language.to'] = 'Tonga (Tonga Islands)';
-/**/$string['language.ts'] = 'Tsonga';
-/**/$string['language.tt'] = 'Tatar';
-/**/$string['language.tw'] = 'Twi';
-/**/$string['language.ug'] = 'Uighur; Uyghur';
-/**/$string['language.ve'] = 'Venda';
-/**/$string['language.wa'] = 'Walloon';
-/**/$string['language.wo'] = 'Wolof';
-/**/$string['language.xh'] = 'Xhosa';
-/**/$string['language.yo'] = 'Yoruba';
-/**/$string['language.za'] = 'Zhuang; Chuang';
-/**/$string['language.zu'] = 'Zulu';
+$string['language.aa'] = 'Afar';
+$string['language.ae'] = 'Avestan';
+$string['language.ak'] = 'Akan';
+$string['language.am'] = 'Amharic';
+$string['language.av'] = 'Avaric';
+$string['language.ay'] = 'Aymara';
+$string['language.ba'] = 'Bashkir';
+$string['language.bh'] = 'Bihari languages';
+$string['language.bi'] = 'Bislama';
+$string['language.bm'] = 'Bambara';
+$string['language.ch'] = 'Chamorro';
+$string['language.cr'] = 'Cree';
+$string['language.cv'] = 'Chuvash';
+$string['language.dv'] = 'Divehi; Dhivehi; Maldivian';
+$string['language.dz'] = 'Dzongkha';
+$string['language.ee'] = 'Ewe';
+$string['language.ff'] = 'Fulah';
+$string['language.gn'] = 'Guarani';
+$string['language.gu'] = 'Gujarati';
+$string['language.ha'] = 'Hausa';
+$string['language.ho'] = 'Hiri Motu';
+$string['language.hz'] = 'Herero';
+$string['language.ia'] = 'Interlingua (International Auxiliary Language Association)';
+$string['language.ig'] = 'Igbo';
+$string['language.ii'] = 'Sichuan Yi; Nuosu';
+$string['language.ik'] = 'Inupiaq';
+$string['language.io'] = 'Ido';
+$string['language.iu'] = 'Inuktitut';
+$string['language.ki'] = 'Kikuyu; Gikuyu';
+$string['language.kj'] = 'Kuanyama; Kwanyama';
+$string['language.kk'] = 'Kazakh';
+$string['language.kl'] = 'Kalaallisut; Greenlandic';
+$string['language.km'] = 'Khmer';
+$string['language.kn'] = 'Kannada';
+$string['language.kr'] = 'Kanuri';
+$string['language.ks'] = 'Kashmiri';
+$string['language.kv'] = 'Komi';
+$string['language.lg'] = 'Ganda';
+$string['language.lo'] = 'Lao';
+$string['language.lu'] = 'Luba-Katanga';
+$string['language.mh'] = 'Marshallese';
+$string['language.mi'] = 'Maori';
+$string['language.ml'] = 'Malayalam';
+$string['language.mr'] = 'Marathi';
+$string['language.na'] = 'Nauru';
+$string['language.nd'] = 'Ndebele, North';
+$string['language.ng'] = 'Ndonga';
+$string['language.nr'] = 'Ndebele, South';
+$string['language.nv'] = 'Navajo; Navaho';
+$string['language.ny'] = 'Chichewa; Chewa; Nyanja';
+$string['language.oj'] = 'Ojibwa';
+$string['language.om'] = 'Oromo';
+$string['language.or'] = 'Oriya';
+$string['language.os'] = 'Ossetian; Ossetic';
+$string['language.pa'] = 'Panjabi; Punjabi';
+$string['language.pi'] = 'Pali';
+$string['language.ps'] = 'Pushto; Pashto';
+$string['language.qu'] = 'Quechua';
+$string['language.rn'] = 'Rundi';
+$string['language.rw'] = 'Kinyarwanda';
+$string['language.sa'] = 'Sanskrit';
+$string['language.sd'] = 'Sindhi';
+$string['language.sg'] = 'Sango';
+$string['language.si'] = 'Sinhala; Sinhalese';
+$string['language.sm'] = 'Samoan';
+$string['language.sn'] = 'Shona';
+$string['language.ss'] = 'Swati';
+$string['language.st'] = 'Sotho, Southern';
+$string['language.su'] = 'Sundanese';
+$string['language.ta'] = 'Tamil';
+$string['language.te'] = 'Telugu';
+$string['language.tg'] = 'Tajik';
+$string['language.th'] = 'Thai';
+$string['language.ti'] = 'Tigrinya';
+$string['language.tl'] = 'Tagalog';
+$string['language.tn'] = 'Tswana';
+$string['language.to'] = 'Tonga (Tonga Islands)';
+$string['language.ts'] = 'Tsonga';
+$string['language.tt'] = 'Tatar';
+$string['language.tw'] = 'Twi';
+$string['language.ug'] = 'Uighur; Uyghur';
+$string['language.ve'] = 'Venda';
+$string['language.wa'] = 'Walloon';
+$string['language.wo'] = 'Wolof';
+$string['language.xh'] = 'Xhosa';
+$string['language.yo'] = 'Yoruba';
+$string['language.za'] = 'Zhuang; Chuang';
+$string['language.zu'] = 'Zulu';
 
 // ISO 3166-1-alpha-2 filtered by Europass 
 // (http://www.iso.org/iso/country_codes/iso_3166_code_lists/english_country_names_and_code_elements.htm)
-$string['country.ad'] = 'Ανδόρρα';
+$string['country.ad'] = 'Ανδόρα';
 $string['country.ae'] = 'Ηνωμένα Αραβικά Εμιράτα';
 $string['country.af'] = 'Αφγανιστάν';
 $string['country.ag'] = 'Αντίγκουα και Μπαρμπούντα';
@@ -415,7 +457,7 @@ $string['country.ba'] = 'Βοσνία-Ερζεγοβίνη';
 $string['country.bb'] = 'Μπαρμπέιντος (Νήσοι)';
 $string['country.bd'] = 'Μπανγκλαντές';
 $string['country.be'] = 'Βέλγιο';
-$string['country.bf'] = 'Μπουρκίνα';
+$string['country.bf'] = 'Μπουρκίνα Φάσο';
 $string['country.bg'] = 'Βουλγαρία';
 $string['country.bh'] = 'Μπαχρέιν';
 $string['country.bi'] = 'Μπουρούντι';
@@ -429,9 +471,9 @@ $string['country.bw'] = 'Μποτσουάνα';
 $string['country.by'] = 'Λευκορωσία';
 $string['country.bz'] = 'Μπελίζε';
 $string['country.ca'] = 'Καναδάς';
-$string['country.cd'] = 'Λαϊκή Δημοκρατία του Κονγκό';
+$string['country.cd'] = 'Λαϊκή Δημοκρατία του Κογκό';
 $string['country.cf'] = 'Κεντροαφρικανική Δημοκρατία';
-$string['country.cg'] = 'Δημοκρατία του Κονγκό';
+$string['country.cg'] = 'Δημοκρατία του Κογκό';
 $string['country.ch'] = 'Ελβετία';
 $string['country.ci'] = 'Ακτή Ελεφαντοστού';
 $string['country.cl'] = 'Χιλή';
@@ -442,7 +484,7 @@ $string['country.cr'] = 'Κόστα Ρίκα';
 $string['country.cu'] = 'Κούβα';
 $string['country.cv'] = 'Πράσινο Ακρωτήριο';
 $string['country.cy'] = 'Κύπρος';
-$string['country.cz'] = 'Τσεχική Δημοκρατία';
+$string['country.cz'] = 'Δημοκρατία της Τσεχίας';
 $string['country.de'] = 'Γερμανία';
 $string['country.dj'] = 'Τζιμπουτί';
 $string['country.dk'] = 'Δανία';
@@ -587,7 +629,7 @@ $string['country.ug'] = 'Ουγκάντα';
 $string['country.us'] = 'Ηνωμένες Πολιτείες';
 $string['country.uy'] = 'Ουρουγουάη';
 $string['country.uz'] = 'Ουζμπεκιστάν';
-$string['country.va'] = 'Αγία Έδρα (το Κράτος της Πόλεως του Βατικανού)';
+$string['country.va'] = 'Βατικανό';
 $string['country.vc'] = 'Άγιος Βικέντιος και Γρεναδίνες';
 $string['country.ve'] = 'Βενεζουέλα';
 $string['country.vn'] = 'Βιετνάμ';
@@ -600,7 +642,7 @@ $string['country.zw'] = 'Ζιμπάμπουε';
 
 // List of nationalities based on the ISO 3166-1-alpha-2 filtered by Europass country list
 // (http://europass.cedefop.europa.eu/TechnicalResources/XML/xsd/included_schemas/EUROPASS_Nationalities_V1.0.xsd)
-$string['nationality.ad'] = 'Ανδόρρας';
+$string['nationality.ad'] = 'Ανδόρας';
 $string['nationality.ae'] = 'Ηνωμένων Αραβικών Εμιράτων';
 $string['nationality.af'] = 'Αφγανική';
 $string['nationality.ag'] = 'από την Αντίγκουα και Μπαρμπούντα';
@@ -714,7 +756,7 @@ $string['nationality.md'] = 'Μολδαβική';
 $string['nationality.me'] = 'Μαυροβουνιακή';
 $string['nationality.mg'] = 'Μαδαγασκάρης';
 $string['nationality.mh'] = 'Νήσων Μάρσαλ';
-$string['nationality.mk'] = 'από την Πρώην Γιουγκοσλαβική Δημοκρατία της Μακεδονίας';
+$string['nationality.mk'] = 'Σλαβομακεδονική';
 $string['nationality.ml'] = 'από το Μάλι';
 $string['nationality.mm'] = 'Βιρμανική (από Μιανμάρ)';
 $string['nationality.mn'] = 'Μογγολική';
@@ -739,7 +781,7 @@ $string['nationality.nz'] = 'Νεοζηλανδική';
 $string['nationality.om'] = 'από το Ομάν';
 $string['nationality.pa'] = 'Παναμαΐκή';
 $string['nationality.pe'] = 'Περουβιανή';
-$string['nationality.pg'] = 'από Παπουασία-Νέα Γουινέα';
+$string['nationality.pg'] = 'από Παπούα-Νέα Γουινέα';
 $string['nationality.ph'] = 'Φιλιππινέζικη';
 $string['nationality.pk'] = 'Πακιστανική';
 $string['nationality.pl'] = 'Πολωνική';

@@ -114,4 +114,53 @@ function get_lang_from_locale($l) {
 	return $locale;
 }
 
+/*
+ Function that returns the description of occupation in selected locale
+ or in English, if the description doesn't exist or isn't translated.
+ 
+ The description of occupation is based on occupation code and can be gender specific.
+*/
+function get_occupation($code, $locale='en_GB', $gender=null) {
+	$docroot = get_config('docroot') . 'artefact/europass/';
+	include_once($docroot . 'occupation/occupations_en_GB.php');
+	switch ($gender) {
+		case 'female':
+			$occupation_list = isco88com_occupations_list_F_en_GB();
+			if ($locale != 'en_GB') {
+				if (file_exists($docroot . 'occupation/occupations_' . $locale . '.php')) {
+					include_once($docroot . 'occupation/occupations_' . $locale . '.php');
+					$locale_occupation_list = call_user_func('isco88com_occupations_list_F_' . $locale);
+					$occupation_list = array_merge($occupation_list, $locale_occupation_list);
+				}
+			}
+			break;
+		case 'male':
+			$occupation_list = isco88com_occupations_list_M_en_GB();
+			if ($locale != 'en_GB') {
+				if (file_exists($docroot . 'occupation/occupations_' . $locale . '.php')) {
+					include_once($docroot . 'occupation/occupations_' . $locale . '.php');
+					$locale_occupation_list = call_user_func('isco88com_occupations_list_M_' . $locale);
+					$occupation_list = array_merge($occupation_list, $locale_occupation_list);
+				}
+			}
+			break;
+		default:
+			$occupation_list = isco88com_occupations_list_NA_en_GB();
+			if ($locale != 'en_GB') {
+				if (file_exists($docroot . 'occupation/occupations_' . $locale . '.php')) {
+					include_once($docroot . 'occupation/occupations_' . $locale . '.php');
+					$locale_occupation_list = call_user_func('isco88com_occupations_list_NA_' . $locale);
+					$occupation_list = array_merge($occupation_list, $locale_occupation_list);
+				}
+			}
+	}
+	
+	$return['code']  = ltrim($code, 'i');  // Trim character i from beginning of code...
+	$return['label'] = null;
+	if (array_key_exists($code, $occupation_list)) {
+		$return['label'] = $occupation_list[$code];
+	}
+	return $return;
+}
+
 ?>

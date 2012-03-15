@@ -36,8 +36,8 @@
 </table>
 {if $controls}
 <div>
-    <div id="otherlanguageform" class="hidden">{$languageforms.otherlanguage|safe}</div>
-    <button id="addotherlanguagebutton" onclick="toggleLanguageForm('otherlanguage');">{str tag='add'}</button>
+    <div id="otherlanguageform" class="hidden">{$compositeforms.otherlanguage|safe}</div>
+    <button id="addotherlanguagebutton" onclick="toggleCompositeForm('otherlanguage');">{str tag='add'}</button>
 </div>
 {/if}
 

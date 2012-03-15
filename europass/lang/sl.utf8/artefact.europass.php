@@ -1,7 +1,7 @@
 <?php
 /**
  * Mahara: Electronic portfolio, weblog, resume builder and social networking
- * Copyright (C) 2006-2010 Catalyst IT Ltd and others; see:
+ * Copyright (C) 2006-2012 Catalyst IT Ltd and others; see:
  *                         http://wiki.mahara.org/Contributors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -17,24 +17,26 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * @package	mahara
- * @subpackage	artefact-europass
- * @author		Gregor Anželj
- * @license		http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @copyright	(C) 2009-2010 Gregor Anzelj, gregor.anzelj@gmail.com
+ * @package    mahara
+ * @subpackage artefact-europass
+ * @author     Gregor Anzelj
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL
+ * @copyright  (C) 2009-2012 Gregor Anzelj, gregor.anzelj@gmail.com
  *
- * @package	Europass Online Tools Labels and Help texts
- * @purpose	Provides the labels and help texts used in the Europass Online Tools.
- * @author(s)	Europass team
- * @copyright	(C) European Communities, 2002-2009 http://europass.cedefop.europa.eu
- * @license		http://europass.cedefop.europa.eu/europass/home/botnav/LegalNotice.csp
- * @version		20090407
- * @URL		http://europass.cedefop.europa.eu/TechnicalResources/EuropassLabels/xforms/europass-labels-xforms-20090407/cv_sl_SI.xhtml
- * @URL		http://europass.cedefop.europa.eu/TechnicalResources/EuropassLabels/xforms/europass-labels-xforms-20090407/lp_sl_SI.xhtml
+ * @translator Gregor Anzelj
  *
- * ISO 639-1		http://europass.cedefop.europa.eu/xml/EUROPASS_ISOLanguages_V1.1.xsd
- * ISO 3166-1		http://europass.cedefop.europa.eu/xml/EUROPASS_ISOCountries_V1.1.xsd
- * List of nationalities	http://europass.cedefop.europa.eu/TechnicalResources/XML/xsd/included_schemas/EUROPASS_Nationalities_V1.0.xsd
+ * @package    Europass Online Tools Labels and Help texts
+ * @purpose    Provides the labels and help texts used in the Europass Online Tools.
+ * @author(s)  Europass team
+ * @copyright  (C) European Communities, 2002-2011 http://europass.cedefop.europa.eu
+ * @license    http://europass.cedefop.europa.eu/europass/home/botnav/LegalNotice.csp
+ * @version    20110907
+ * @URL        http://europass.cedefop.europa.eu/TechnicalResources/EuropassLabels/xforms/europass-labels-xforms-20110907/cv_en_GB.xhtml
+ * @URL        http://europass.cedefop.europa.eu/TechnicalResources/EuropassLabels/xforms/europass-labels-xforms-20110907/lp_en_GB.xhtml
+ *
+ * ISO 639-1   http://europass.cedefop.europa.eu/xml/EUROPASS_ISOLanguages_V1.1.xsd
+ * ISO 3166-1  http://europass.cedefop.europa.eu/xml/EUROPASS_ISOCountries_V1.1.xsd
+ * List of nationalities  http://europass.cedefop.europa.eu/TechnicalResources/XML/xsd/included_schemas/EUROPASS_Nationalities_V1.0.xsd
  *(based on ISO 3166-1)
  */
 
@@ -57,6 +59,17 @@ $string['languagedeleted'] = 'Jezik uspešno izbrisan';
 
 $string['moveup'] = 'Premakni gor';
 $string['movedown'] = 'Premakni dol';
+
+$string['languagediploma'] = 'Jezikovna diploma';
+$string['languageexperience'] = 'Jezikovna izkušnja';
+$string['languagediplomadeleteconfirm'] = 'Ali res želite izbrisati jezikovno diplomo?';
+$string['languageexperiencedeleteconfirm'] = 'Ali res želite izbrisati jezikovno izkušnjo?';
+$string['languagediplomadeleted'] = 'Jezikovna diploma uspešno izbrisana';
+$string['languageexperiencedeleted'] = 'Jezikovna izkušnja uspešno izbrisana';
+$string['languagediplomasaved'] = 'Jezikovna diploma uspešno shranjena';
+$string['languagediplomasavefailed'] = 'Neuspešno shranjevanje jezikovne diplome';
+$string['languageexperiencesaved'] = 'Jezikovna izkušnja uspešno shranjena';
+$string['languageexperiencesavefailed'] = 'Neuspešno shranjevanje jezikovne izkušnje';
 
 // Export data from Mahara to Europass form...
 $string['exporteuropass'] = 'Europass izvoz';
@@ -101,13 +114,42 @@ $string['externaldate-numeric-long'] = 'dd/mm/llll';
 $string['externaldate-text-long'] = 'dd. mesec llll';
 $string['exportfile'] = 'Datoteka';
 $string['pdf'] = 'Adobe® PDF + XML';
+$string['pdfhrxml'] = 'Adobe® PDF + HR-XML';
 $string['doc'] = 'Microsoft® Word';
 $string['odt'] = 'OpenDocument';
 $string['html'] = 'HTML';
+$string['json'] = 'Europass JSON';
 $string['xml'] = 'Europass XML';
+$string['hrxml'] = 'HR-XML';
 $string['exportstep3'] = '3 - Izvoz';
 $string['generate'] = 'Ustvarite izvoz';
 $string['generateexport'] = 'Izvozi';
+
+// Import data from Europass XML to Mahara...
+$string['importeuropass'] = 'Europass uvoz';
+$string['importstep1'] = '1 - Datoteka uvoza in možnosti';
+$string['selectfile&options'] = 'Naložite Europass XML datoteko in izberite možnosti uvoza';
+$string['importstep2'] = '2 - Uvoz';
+$string['execute'] = 'Izvedite uvoz';
+$string['executeimport'] = 'Uvozi';
+$string['importfile'] = 'Europass XML datoteka';
+$string['importfiledesc'] = 'Izberite veljavno Europass XML datoteko za uvoz v Maharo';
+$string['notvalidxmlfile'] = 'Naložena datoteka ni veljavna XML datoteka.';
+$string['importoptions'] = 'Kaj uvozim?';
+$string['importoptionsdesc'] = 'Zaklenjena polja profila ne bodo spremenjena/posodobljena';
+$string['nocheckedoptions'] = 'Izbrati morate vsaj eno možnost za uvoz.';
+$string['fieldnotimported'] = 'Polje "%s" ni uvoženo.';
+$string['lockedfieldnotimported'] = 'Zaklenjeno polje "%s" ni uvoženo.';
+$string['languagecodemissing'] = 'Polje "%s" ni uvoženo. Manjka koda jezika.';
+$string['importdate'] = 'Uvozi datume kot';
+$string['europassimportexecuted'] = 'Podatki iz Europass XML datoteke uspešno uvoženi v Maharo.';
+
+// Europass GUI form tabs
+$string['application-tab'] = 'Prijava';
+$string['workexperience-tab'] = 'Zaposlitev';
+$string['education-tab'] = 'Izobrazba';
+$string['languages-tab'] = 'Jeziki';
+$string['skills-tab'] = 'Spretnosti';
 
 // Europass CV - STEP 1
 $string['identification'] = 'Osebni podatki';

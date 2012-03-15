@@ -1,7 +1,7 @@
 <?php
 /**
  * Mahara: Electronic portfolio, weblog, resume builder and social networking
- * Copyright (C) 2006-2010 Catalyst IT Ltd and others; see:
+ * Copyright (C) 2006-2012 Catalyst IT Ltd and others; see:
  *                         http://wiki.mahara.org/Contributors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -19,33 +19,67 @@
  *
  * @package    mahara
  * @subpackage artefact-europass
- * @author     Gregor Anželj
+ * @author     Gregor Anzelj
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @copyright  (C) 2009-2010 Gregor Anzelj, gregor.anzelj@gmail.com
+ * @copyright  (C) 2009-2012 Gregor Anzelj, gregor.anzelj@gmail.com
  *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  
-	Instruments Web Services
-	========================
-	
-	In order to accommodate the remote generation of CV and LP documents two web services methods are implemented. 
-	
-	Both of them have common behavior that is the following: 
-	•	They expect three parameters: 
-		o	document : This is a String parameter, containing a valid XML file (CV or LP depending on the case)
-		o	filetype: This is a String parameter, that can take one of the following values: doc, pdf, odt, 
-			to produce MS Office Doc file, PDF file or OpenDocument file.
-		o	locale: This is a String parameter, containing the name of a locale, in which the document generation will occur.
-			If it is left blank, or if it is invalid, the locale that is contained in the XML file will be used for document generation.
-	•	Both methods return a byte array containing the document generated. 
-	
-	These two methods are:
-		byte[] getDocumentFromCV(String document, String filetype, String locale)
-		byte[] getDocumentFromLP(String document, String filetype, String locale)
-	
-	Clients can be constructed automatically by several tools, just by pointing them to the correct WSDL file:
-	http://europass.cedefop.europa.eu/instrumentssrv/services/Instruments?wsdl
-	
+   The Europass API currently consists of five services that provide conversion methods between
+   the various file formats supported by Europass. The services accept a machine-interpretable
+   representation of an individual’s personal data (eg ECV, ELP) and return the same data in a
+   different file format.
+   
+   The file formats used as input are the Europass XML (EXML), the HR-XML (HR-XML), the Adobe PDF
+   with Europass XML attachment (PDF+EXML), the Adobe PDF with HR-XML attachment (PDF+HR-XML) and
+   the Europass JSON (EJSON).
+   
+   The returned file formats are –apart from those used as input- the Microsoft Word 97-2003 (DOC),
+   the OpenDocument ver 2 Text (ODT), and the HTML.
+   
+   The conversion services methods support conversions for both ECV and ELP data, since both data
+   can be represented in EXML, HR-XML or JSON formats.
+
+   Currently the conversion services are offered as SOAP web services. Data from Mahara is returned
+   in Europass XML, thus the EuropassXMLConversionService is used for conversion into other formats.
+   
+   For conversion into HR-XML HRXMLConversionService is used and for conversion into JSON
+   JSONConversionService is used.
+   
+   In order to accommodate the remote generation of CV and LP documents several web services methods
+   are implemented. Clients can be constructed automatically by several tools, just by pointing them
+   to the correct WSDL file:
+
+   SERVICE: EuropassXMLConversionService
+  =======================================
+   https://europass.cedefop.europa.eu/soapws/services/EuropassXMLConversionService?wsdl
+   
+   INPUT                ENDPOINT (Methods)                                  OUTPUT
+  -----------------------------------------------------------------------------------------------
+   Europass XML 2.0	    convertToPDFwithXMLCV / convertToPDFwithXMLLP       PDF+Europass XML 2.0
+   Europass XML 2.0	    convertToPDFwithHRXMLCV / convertToPDFwithHRXMLLP   PDF+HR-XML 2.5
+   Europass XML 2.0	    convertToMSWordCV / convertToMSWordLP               MS WORD 97-2003
+   Europass XML 2.0	    convertToODTCV / convertToODTLP                     ODT ver.2 Text
+   Europass XML 2.0	    convertToHTMLCV / convertToHTMLLP                   HTML
+   
+   
+   SERVICE: HRXMLConversionService
+  =================================
+   https://europass.cedefop.europa.eu/soapws/services/HRXMLConversionService?wsdl
+   
+   INPUT                ENDPOINT (Methods)                                  OUTPUT
+  -----------------------------------------------------------------------------------------------
+   Europass XML 2.0     convertToHRXML                                      HR-XML 2.5
+   
+   
+   SERVICE: JSONConversionService
+  ================================
+   https://europass.cedefop.europa.eu/soapws/services/JSONConversionService?wsdl
+   
+   INPUT                ENDPOINT (Methods)                                  OUTPUT
+  -----------------------------------------------------------------------------------------------
+   Europass XML 2.0     convertFromXMLCV / convertFromXMLLP                 Europass JSON 2.0
+   
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 */
  
@@ -57,7 +91,6 @@ require_once(get_config('docroot') . 'artefact/lib.php');
 require_once(get_config('docroot') . 'artefact/europass/lib/locale.php');
 require_once(get_config('docroot') . 'artefact/europass/lib/europassxml.php');
 
-
 global $SESSION;
 global $USER;
 
@@ -68,14 +101,27 @@ $photograph = $SESSION->get('photograph');
 $internaldate = $SESSION->get('internaldate');
 $externaldate = $SESSION->get('externaldate');
 
+// If converstion format is NOT supported!
+if (!in_array($fileformat, array('pdf', 'pdfhrxml', 'doc', 'odt', 'html', 'json', 'xml', 'hrxml'))) {
+	// Unset SESSION values   
+	$SESSION->set('locale', '');
+	$SESSION->set('documenttype', '');
+	$SESSION->set('fileformat', '');
+	$SESSION->set('photograph', '');
+	$SESSION->set('internaldate', '');
+	$SESSION->set('externaldate', '');
+	// Stop processing the page
+	exit;
+}
+
 if ($locale <> '' and $documenttype <> '' and $fileformat <> '' and $internaldate <> '' and $externaldate <> '') {
 
-	if ($fileformat == 'pdf' or $fileformat == 'doc' or $fileformat == 'odt') {
+	if (in_array($fileformat, array('pdf', 'pdfhrxml', 'doc', 'odt', 'html'))) {
 		// Pull in the NuSOAP code
-		require_once('lib/nusoap.php');
+		require_once('lib/nusoap/nusoap.php'); // NuSOAP 0.9.5 (http://sourceforge.net/projects/nusoap/)
 		// Create the client instance
 		// Force use of SSL, so the communication between the client and the server is encrypted and can be authenticated.
-		$client = new nusoap_client('https://europass.cedefop.europa.eu/instrumentssrv/services/Instruments?wsdl', 'wsdl');
+		$client = new nusoap_client('http://europass.cedefop.europa.eu/soapws/services/EuropassXMLConversionService?wsdl', 'wsdl');
 		// Check for an error
 		$err = $client->getError();
 		if ($err) {
@@ -95,8 +141,18 @@ if ($locale <> '' and $documenttype <> '' and $fileformat <> '' and $internaldat
 		if ($documenttype == 'europasscv') {
 			$document = generate_europasscv_xml($USER->get('id'), false, $locale, $internaldate, $externaldate, $photograph);
 			// Call the SOAP method
-			$result = $client->call('getDocumentFromCV', array('document' => $document, 'filetype' => $fileformat, 'locale' => $locale));
-			$content = pack("H*", $result);
+			switch ($fileformat) {
+				case 'pdf': $result = $client->call('convertToPDFwithXMLCV', array('xml' => $document, 'locale' => $locale)); break;
+				case 'pdfhrxml': $result = $client->call('convertToPDFwithHRXMLCV', array('xml' => $document, 'locale' => $locale)); break;
+				case 'doc': $result = $client->call('convertToMSWordCV', array('xml' => $document, 'locale' => $locale)); break;
+				case 'odt': $result = $client->call('convertToODTCV', array('xml' => $document, 'locale' => $locale)); break;
+				case 'html': $result = $client->call('convertToHTMLCV', array('xml' => $document, 'locale' => $locale)); break;
+			}
+			if ($fileformat == 'html') {
+				$content = $result['html'];
+			} else {
+				$content = base64_decode($result['file']);
+			}
 			// Set default filename
 			$filename = 'cv';
 		}
@@ -104,55 +160,131 @@ if ($locale <> '' and $documenttype <> '' and $fileformat <> '' and $internaldat
 		if ($documenttype == 'europasslp') {
 			$document = generate_europasslp_xml($USER->get('id'), false, $locale, $internaldate, $externaldate);
 			// Call the SOAP method
-			$result = $client->call('getDocumentFromLP', array('document' => $document, 'filetype' => $fileformat, 'locale' => $locale));
-			$content = pack("H*", $result);
+			switch ($fileformat) {
+				case 'pdf': $result = $client->call('convertToPDFwithXMLLP', array('xml' => $document, 'locale' => $locale)); break;
+				case 'pdfhrxml': $result = $client->call('convertToPDFwithHRXMLLP', array('xml' => $document, 'locale' => $locale)); break;
+				case 'doc': $result = $client->call('convertToMSWordLP', array('xml' => $document, 'locale' => $locale)); break;
+				case 'odt': $result = $client->call('convertToODTLP', array('xml' => $document, 'locale' => $locale)); break;
+				case 'html': $result = $client->call('convertToHTMLLP', array('xml' => $document, 'locale' => $locale)); break;
+			}
+			if ($fileformat == 'html') {
+				$content = $result['html'];
+			} else {
+				$content = base64_decode($result['file']);
+			}
 			// Set default filename
 			$filename = 'lp';
 		}
 	
 	}
+
 	
-	if ($fileformat == 'html') {
+	if ($fileformat == 'json') {
+		// Pull in the NuSOAP code
+		require_once('lib/nusoap/nusoap.php'); // NuSOAP 0.9.5 (http://sourceforge.net/projects/nusoap/)
+		// Create the client instance
+		// Force use of SSL, so the communication between the client and the server is encrypted and can be authenticated.
+		$client = new nusoap_client('http://europass.cedefop.europa.eu/soapws/services/JSONConversionService?wsdl', 'wsdl');
+		// Check for an error
+		$err = $client->getError();
+		if ($err) {
+			// Display the error
+			//$SESSION->add_info_msg('Constructor error: ' . $err);
+			$message = '<div style="color: #dd0221; background: #ffd3d9; padding: 0.2em 0.7em; font-family: sans-serif; font-size: 0.8em;">' . get_string('europassexportnoconncetion','artefact.europass') . '</div>';
+			print_r($message);
+			// At this point, you know the call that follows will fail
+		}
+	
+		// NuSOAP always uses ISO-8859-1 for the WSDL.
+		// The client sends a UTF-8 encoded string to the server.
+		// The client disable the built-in UTF-8 decoding, so that it could handle UTF-8 strings that do not convert to Latin-1.
+		$client->soap_defencoding = 'UTF-8';
+		$client->decode_utf8 = false;
+	
 		if ($documenttype == 'europasscv') {
-			// Load up the Europass CV generated XML string
-			$xmlDoc = new DOMDocument;
-			$xmlDoc->loadXML(generate_europasscv_xml($USER->get('id'), true, $locale, $internaldate, $externaldate, $photograph));
-			// Load up the appropriate XSL file, according to selected locale
-			$xslDoc = new DOMDocument;
-			$xslDoc->load(get_config('docroot') . 'artefact/europass/blocktype/europasscv/xsl/cv_' . $locale . '_V2.0.xsl');
-			$xslt = new XSLTProcessor;
-			$xslt->importStyleSheet($xslDoc);
-			// Apply the transformation
-			$content = $xslt->transformToXml($xmlDoc);
-			$content = html_entity_decode($content);
+			$document = generate_europasscv_xml($USER->get('id'), false, $locale, $internaldate, $externaldate, $photograph);
+			// Call the SOAP method
+			switch ($fileformat) {
+				case 'json': $result = $client->call('convertFromXMLCV', array('xml' => $document, 'locale' => $locale)); break;
+			}
+			$content = $result['json'];
 			// Set default filename
 			$filename = 'cv';
 		}
+
 		if ($documenttype == 'europasslp') {
-			// Load up the Europass CV generated XML string
-			$xmlDoc = new DOMDocument;
-			$xmlDoc->loadXML(generate_europasslp_xml($USER->get('id'), true, $locale, $internaldate, $externaldate));
-			// Load up the appropriate XSL file, according to selected locale
-			$xslDoc = new DOMDocument;
-			$xslDoc->load(get_config('docroot') . 'artefact/europass/blocktype/europasslp/xsl/lp_' . $locale . '_V2.0.xsl');
-			$xslt = new XSLTProcessor;
-			$xslt->importStyleSheet($xslDoc);
-			// Apply the transformation
-			$content = $xslt->transformToXml($xmlDoc);
-			$content = html_entity_decode($content);
+			$document = generate_europasslp_xml($USER->get('id'), false, $locale, $internaldate, $externaldate);
+			// Call the SOAP method
+			switch ($fileformat) {
+				case 'json': $result = $client->call('convertFromXMLLP', array('xml' => $document, 'locale' => $locale)); break;
+			}
+			$content = $result['json'];
 			// Set default filename
 			$filename = 'lp';
 		}
+	
 	}
+
+
+	if ($fileformat == 'hrxml') {
+		// Pull in the NuSOAP code
+		require_once('lib/nusoap/nusoap.php'); // NuSOAP 0.9.5 (http://sourceforge.net/projects/nusoap/)
+		// Create the client instance
+		// Force use of SSL, so the communication between the client and the server is encrypted and can be authenticated.
+		$client = new nusoap_client('http://europass.cedefop.europa.eu/soapws/services/HRXMLConversionService?wsdl', 'wsdl');
+		// Check for an error
+		$err = $client->getError();
+		if ($err) {
+			// Display the error
+			//$SESSION->add_info_msg('Constructor error: ' . $err);
+			$message = '<div style="color: #dd0221; background: #ffd3d9; padding: 0.2em 0.7em; font-family: sans-serif; font-size: 0.8em;">' . get_string('europassexportnoconncetion','artefact.europass') . '</div>';
+			print_r($message);
+			// At this point, you know the call that follows will fail
+		}
+	
+		// NuSOAP always uses ISO-8859-1 for the WSDL.
+		// The client sends a UTF-8 encoded string to the server.
+		// The client disable the built-in UTF-8 decoding, so that it could handle UTF-8 strings that do not convert to Latin-1.
+		$client->soap_defencoding = 'UTF-8';
+		$client->decode_utf8 = false;
+	
+		if ($documenttype == 'europasscv') {
+			$document = generate_europasscv_xml($USER->get('id'), false, $locale, $internaldate, $externaldate, $photograph);
+			// Call the SOAP method
+			switch ($fileformat) {
+				case 'hrxml': $result = $client->call('convertToHRXML', array('xml' => $document, 'locale' => $locale)); break;
+			}
+			$content = $result['xml'];
+			$content = indentXML($content);
+			// Set default filename
+			$filename = 'cv';
+		}
+
+		if ($documenttype == 'europasslp') {
+			$document = generate_europasslp_xml($USER->get('id'), false, $locale, $internaldate, $externaldate);
+			// Call the SOAP method
+			switch ($fileformat) {
+				case 'hrxml': $result = $client->call('convertToHRXML', array('xml' => $document, 'locale' => $locale)); break;
+			}
+			$content = $result['xml'];
+			$content = indentXML($content);
+			// Set default filename
+			$filename = 'lp';
+		}
+	
+	}
+
 
 	if ($fileformat == 'xml') {
 		if ($documenttype == 'europasscv') {
 			$content = generate_europasscv_xml($USER->get('id'), false, $locale, $internaldate, $externaldate, $photograph);
+			$content = indentXML($content);
 			// Set default filename
 			$filename = 'cv';
 		}
 		if ($documenttype == 'europasslp') {
 			$content = generate_europasslp_xml($USER->get('id'), false, $locale, $internaldate, $externaldate);
+			$content = indentXML($content);
 			// Set default filename
 			$filename = 'lp';
 		}
@@ -168,6 +300,10 @@ if ($locale <> '' and $documenttype <> '' and $fileformat <> '' and $internaldat
 				header('Content-Type: application/pdf');		
 				header('Content-Disposition: attachment; filename=' . $filename . '.pdf');
 				break;
+			case 'pdfhrxml':
+				header('Content-Type: application/pdf');		
+				header('Content-Disposition: attachment; filename=' . $filename . '-hr.pdf');
+				break;
 			case 'doc':
 				header('Content-Type: application/msword');		
 				header('Content-Disposition: attachment; filename=' . $filename . '.doc');
@@ -179,6 +315,14 @@ if ($locale <> '' and $documenttype <> '' and $fileformat <> '' and $internaldat
 			case 'html':
 				header('Content-Type: text/html');		
 				header('Content-Disposition: attachment; filename=' . $filename . '.html');
+				break;
+			case 'hrxml':
+				header('Content-Type: text/xml; charset=utf-8');		
+				header('Content-Disposition: attachment; filename=' . $filename . '-hr.xml');
+				break;
+			case 'json':
+				header('Content-Type: application/json');		
+				header('Content-Disposition: attachment; filename=' . $filename . '.json');
 				break;
 			default:
 				header('Content-Type: text/xml; charset=utf-8');		

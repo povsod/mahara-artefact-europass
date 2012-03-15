@@ -5,7 +5,7 @@
  * This file is distributed under the same terms as Mahara itself
  */
 
-/* EUROPASS > EUROPASS EXPORT */
+/* EUROPASS > EUROPASS EXPORT/IMPORT */
 #exporteuropass-t {
     margin: 0 auto;
     min-width: 700px;
@@ -13,7 +13,15 @@
     width: 800px;
 	/*background: #aabbcc;*/
 }
-#exporteuropass-t thead th {
+#importeuropass-t {
+    margin: 0 auto;
+    min-width: 500px;
+    max-width: 700px;
+    width: 600px;
+	/*background: #aabbcc;*/
+}
+#exporteuropass-t thead th,
+#importeuropass-t thead th {
     text-align: left;
     font-size: 1.3em;
     border-bottom: none !important;
@@ -24,7 +32,14 @@
     width: 39%;
 	padding: 1em .5em;
 }
-#exporteuropass-t td.step1 td {
+#importeuropass-t td.step1 {
+	background: #f6f6f6;
+	border: 1px solid #ccc;
+    width: 69%;
+	padding: 1em .5em;
+}
+#exporteuropass-t td.step1 td,
+#importeuropass-t td.step1 td {
 	white-space: nowrap;
 	text-align: left;
 }
@@ -35,7 +50,16 @@
 	padding: 1em .5em;
 	text-align: center;
 }
-#exporteuropass-t td.step2 td {
+#importeuropass-t td.step2 {
+	background: #f6f6f6;
+	border: 1px solid #ccc;
+    width: 30%;
+	padding: 1em .5em;
+	text-align: center;
+	vertical-align: middle;
+}
+#exporteuropass-t td.step2 td,
+#importeuropass-t td.step2 td {
 	white-space: nowrap;
 	text-align: left;
 }
@@ -47,20 +71,26 @@
 	padding: 1em .5em;
 	vertical-align: middle;
 }
-#exporteuropass-t #exporteuropassform_generate {
+#exporteuropass-t #exporteuropassform_generate,
+#importeuropass-t #importeuropassform_submit {
 	font-size: 1.6em;
 	font-weight: bold;
 }
-#exporteuropass-t #step3info {
+/*
+#exporteuropass-t #step3info,
+#importeuropass-t #step2info {
 	margin-top: 2em;
 }
-#exporteuropass-t td.filler {
+*/
+#exporteuropass-t td.filler,
+#importeuropass-t td.filler {
     padding: 0 .25em 0 .25em;
     font-size: 3.8em;
     width: 3%;
 	color: #8d8d8d;
 	vertical-align: middle;
 }
-#exporteuropass-t table table label {
+#exporteuropass-t table table label,
+#importeuropass-t table table label {
     font-size: .9em;
 }

@@ -32,13 +32,15 @@ echo $form_tag;
 						<th></th>
 						<td class="description"><?php echo get_string('selectlocaledesc', 'artefact.europass'); ?></td>
                     </tr>
+					<tr><td colspan="2">&nbsp;</td></tr>
                     <tr>
-                        <th><br><?php echo get_string('selectdocumenttype', 'artefact.europass'); ?></th>
-                        <td><br><?php echo $elements['documenttype']['html']; ?></td>
+                        <th><?php echo get_string('selectdocumenttype', 'artefact.europass'); ?></th>
+                        <td><?php echo $elements['documenttype']['html']; ?></td>
                     </tr>
+					<tr><td colspan="2">&nbsp;</td></tr>
                     <tr>
-                        <th><br><?php echo get_string('photograph', 'artefact.europass'); ?></th>
-                        <td><br><?php echo $elements['photograph']['html']; ?></td>
+                        <th><?php echo get_string('photograph', 'artefact.europass'); ?></th>
+                        <td><?php echo $elements['photograph']['html']; ?></td>
                     </tr>
 					<tr>
 						<th></th>
@@ -57,9 +59,10 @@ echo $form_tag;
                         <th><?php echo get_string('exportfile', 'artefact.europass'); ?></th>
                         <td><?php echo $elements['fileformat']['html']; ?></td>
                     </tr>
+					<tr><td colspan="2">&nbsp;</td></tr>
                     <tr>
-                        <th><br><?php echo get_string('exportdate', 'artefact.europass'); ?></th>
-                        <td><br><?php echo $elements['internaldate']['html']; ?></td>
+                        <th><?php echo get_string('exportdate', 'artefact.europass'); ?></th>
+                        <td><?php echo $elements['internaldate']['html']; ?></td>
 					</tr>
 					<tr>
 						<th></th>
@@ -77,7 +80,8 @@ echo $form_tag;
             </td>
             <td class="filler">&raquo;</td>
             <td class="step step3">
-<?php echo $elements['generate']['html']; ?>
+				<img src="<?php echo get_config('wwwroot') . 'artefact/europass/images/europass-man.png'; ?>" border="0"><br />
+				<?php echo $elements['generate']['html']; ?>
             </td>
         </tr>
     </tbody>

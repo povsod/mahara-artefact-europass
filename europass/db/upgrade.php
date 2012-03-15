@@ -1,7 +1,7 @@
 <?php
 /**
  * Mahara: Electronic portfolio, weblog, resume builder and social networking
- * Copyright (C) 2006-2010 Catalyst IT Ltd and others; see:
+ * Copyright (C) 2006-2012 Catalyst IT Ltd and others; see:
  *                         http://wiki.mahara.org/Contributors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -19,9 +19,9 @@
  *
  * @package    mahara
  * @subpackage artefact-europass
- * @author     Gregor Anželj
+ * @author     Gregor Anzelj
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @copyright  (C) 2009-2010 Gregor Anzelj, gregor.anzelj@gmail.com
+ * @copyright  (C) 2009-2012 Gregor Anzelj, gregor.anzelj@gmail.com
  *
  */
 
@@ -87,6 +87,76 @@ function xmldb_artefact_europass_upgrade($oldversion=0) {
         }
     }
 
+    if ($oldversion < 2012030200) {
+		// Create 'artefact_europass_otherlanguage_diploma' table...
+        $table = new XMLDBTable('artefact_europass_languagediploma');
+        $table->addFieldInfo('id', XMLDB_TYPE_INTEGER, 10, null, XMLDB_NOTNULL, XMLDB_SEQUENCE);
+        $table->addFieldInfo('artefact', XMLDB_TYPE_INTEGER, 10, null, XMLDB_NOTNULL);
+        $table->addFieldInfo('languageid', XMLDB_TYPE_INTEGER, 10, null, XMLDB_NOTNULL);
+        $table->addFieldInfo('certificate', XMLDB_TYPE_TEXT, null, null, XMLDB_NOTNULL);
+        $table->addFieldInfo('awardingbody', XMLDB_TYPE_TEXT, null, null, XMLDB_NOTNULL);
+        $table->addFieldInfo('certificatedate', XMLDB_TYPE_TEXT, null, null, XMLDB_NOTNULL);
+        $table->addFieldInfo('europeanlevel', XMLDB_TYPE_CHAR, 2);
+        $table->addFieldInfo('displayorder', XMLDB_TYPE_INTEGER, 10, null, XMLDB_NOTNULL);
+        $table->addKeyInfo('primary', XMLDB_KEY_PRIMARY, array('id'));
+        $table->addKeyInfo('artefactfk', XMLDB_KEY_FOREIGN, array('artefact'), 'artefact', array('id'));
+        $table->addKeyInfo('languagefk', XMLDB_KEY_FOREIGN, array('languageid'), 'artefact_europass_otherlanguage', array('id'));
+        create_table($table);
+
+		// Create 'artefact_europass_otherlanguage_experience' table...
+        $table = new XMLDBTable('artefact_europass_languageexperience');
+        $table->addFieldInfo('id', XMLDB_TYPE_INTEGER, 10, null, XMLDB_NOTNULL, XMLDB_SEQUENCE);
+        $table->addFieldInfo('artefact', XMLDB_TYPE_INTEGER, 10, null, XMLDB_NOTNULL);
+        $table->addFieldInfo('languageid', XMLDB_TYPE_INTEGER, 10, null, XMLDB_NOTNULL);
+        $table->addFieldInfo('startdate', XMLDB_TYPE_TEXT, null, null, XMLDB_NOTNULL);
+        $table->addFieldInfo('enddate', XMLDB_TYPE_TEXT, null);
+        $table->addFieldInfo('description', XMLDB_TYPE_TEXT, null, null, XMLDB_NOTNULL);
+        $table->addFieldInfo('displayorder', XMLDB_TYPE_INTEGER, 10, null, XMLDB_NOTNULL);
+        $table->addKeyInfo('primary', XMLDB_KEY_PRIMARY, array('id'));
+        $table->addKeyInfo('artefactfk', XMLDB_KEY_FOREIGN, array('artefact'), 'artefact', array('id'));
+        $table->addKeyInfo('languagefk', XMLDB_KEY_FOREIGN, array('languageid'), 'artefact_europass_otherlanguage', array('id'));
+        create_table($table);
+
+		// Write values from 'artefact_europass_otherlanguage' to 'artefact_europass_otherlanguage_diploma'...
+		// Write values from 'artefact_europass_otherlanguage' to 'artefact_europass_otherlanguage_experience'...
+		$sql = "SELECT * FROM {artefact_europass_otherlanguage} l";
+		if ($records = get_records_sql_array($sql, array())) {
+			foreach ($records as $r) {
+				if (empty($r->certificate) && empty($r->awardingbody) && empty($r->certificatedate) && empty($r->europeanlevel)) {
+					// Do nothing...
+				} else {
+					$diploma = new StdClass;
+					$diploma->languageid      = $r->id;
+					$diploma->certificate     = $r->certificate;
+					$diploma->awardingbody    = $r->awardingbody;
+					$diploma->certificatedate = $r->certificatedate;
+					$diploma->europeanlevel   = $r->europeanlevel;
+					insert_record('artefact_europass_languagediploma', $diploma);
+				}
+				
+				if (empty($r->experiencestartdate) && empty($r->experienceenddate) && empty($r->experiencedescription)) {
+					// Do nothing...
+				} else {
+					$experience = new StdClass;
+					$experience->languageid  = $r->id;
+					$experience->startdate   = $r->experiencestartdate;
+					$experience->enddate     = $r->experienceenddate;
+					$experience->description = $r->experiencedescription;
+					insert_record('artefact_europass_languageexperience', $experience);
+				}
+			}
+        }
+		
+		// Remove unused fields from 'artefact_europass_otherlanguage'...
+		execute_sql('ALTER TABLE {artefact_europass_otherlanguage} DROP COLUMN certificate');
+		execute_sql('ALTER TABLE {artefact_europass_otherlanguage} DROP COLUMN awardingbody');
+		execute_sql('ALTER TABLE {artefact_europass_otherlanguage} DROP COLUMN certificatedate');
+		execute_sql('ALTER TABLE {artefact_europass_otherlanguage} DROP COLUMN europeanlevel');
+		execute_sql('ALTER TABLE {artefact_europass_otherlanguage} DROP COLUMN experiencestartdate');
+		execute_sql('ALTER TABLE {artefact_europass_otherlanguage} DROP COLUMN experienceenddate');
+		execute_sql('ALTER TABLE {artefact_europass_otherlanguage} DROP COLUMN experiencedescription');
+	}
+	
     return $status;
 }
 

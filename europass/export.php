@@ -1,7 +1,7 @@
 <?php
 /**
  * Mahara: Electronic portfolio, weblog, resume builder and social networking
- * Copyright (C) 2006-2010 Catalyst IT Ltd and others; see:
+ * Copyright (C) 2006-2012 Catalyst IT Ltd and others; see:
  *                         http://wiki.mahara.org/Contributors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -19,14 +19,14 @@
  *
  * @package    mahara
  * @subpackage artefact-europass
- * @author     Gregor Anželj
+ * @author     Gregor Anzelj
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @copyright  (C) 2009-2010 Gregor Anzelj, gregor.anzelj@gmail.com
+ * @copyright  (C) 2009-2012 Gregor Anzelj, gregor.anzelj@gmail.com
  *
  */
  
 define('INTERNAL', true);
-define('MENUITEM', 'myportfolio/exporteuropass');
+define('MENUITEM', 'content/europass');
 define('SECTION_PLUGINTYPE', 'artefact');
 define('SECTION_PLUGINNAME', 'europass');
 define('SECTION_PAGE', 'export');
@@ -54,7 +54,6 @@ $eform = array(
     'name' => 'exporteuropassform',
     'jsform' => false,
 	'method' => 'post',
-	//'action' => 'download.php',
     'plugintype' => 'artefact',
     'pluginname' => 'europass',
 	'template'   => 'exportform.php',
@@ -88,11 +87,14 @@ $eform = array(
 			'type' => 'radio', 
 			'defaultvalue' => 'xml',
 			'options' => array(
-				'pdf'   => get_string('pdf', 'artefact.europass'),
-				'doc' => get_string('doc', 'artefact.europass'),
-				'odt'   => get_string('odt', 'artefact.europass'),
-				'html'   => get_string('html', 'artefact.europass'),
-				'xml'   => get_string('xml', 'artefact.europass'),
+				'pdf'      => get_string('pdf', 'artefact.europass'),
+				'pdfhrxml' => get_string('pdfhrxml', 'artefact.europass'),
+				'doc'      => get_string('doc', 'artefact.europass'),
+				'odt'      => get_string('odt', 'artefact.europass'),
+				'html'     => get_string('html', 'artefact.europass'),
+				'json'      => get_string('json', 'artefact.europass'),
+				'xml'      => get_string('xml', 'artefact.europass'),
+				'hrxml'    => get_string('hrxml', 'artefact.europass'),
 			),
 			'title' => get_string('filetype', 'artefact.europass'),
 			'separator' => '<br />',
@@ -123,7 +125,7 @@ $eform = array(
 				'other' => get_string('internaldate-other', 'artefact.europass'),
 			),
 			'description' => get_string('selectinternaldatedesc', 'artefact.europass'),
-			'defaultvalue' => 'dmy11',
+			'defaultvalue' => 'ymd11',
 		),
 		'externaldate' => array(
 			'type' => 'select',
@@ -136,10 +138,8 @@ $eform = array(
 			'defaultvalue' => '/numeric/long',
 		),
 		'generate' => array(
-			//'type' => 'cancel',
 			'type' => 'submit',
 			'value' => get_string('generateexport', 'artefact.europass'),
-			//'goto' => 'download.php',
 		),
 	),
 );

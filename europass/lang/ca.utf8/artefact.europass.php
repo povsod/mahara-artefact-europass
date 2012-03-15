@@ -1,7 +1,7 @@
 <?php
 /**
  * Mahara: Electronic portfolio, weblog, resume builder and social networking
- * Copyright (C) 2006-2010 Catalyst IT Ltd and others; see:
+ * Copyright (C) 2006-2012 Catalyst IT Ltd and others; see:
  *                         http://wiki.mahara.org/Contributors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -17,26 +17,26 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * @package	mahara
- * @subpackage	artefact-europass
- * @author		Gregor Anželj
- * @license		http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @copyright	(C) 2009-2010 Gregor Anzelj, gregor.anzelj@gmail.com
+ * @package    mahara
+ * @subpackage artefact-europass
+ * @author     Gregor Anzelj
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL
+ * @copyright  (C) 2009-2012 Gregor Anzelj, gregor.anzelj@gmail.com
  *
- * @traducció catalana: Joan Queralt Gil:  jqueralt a gmail.com
+ * @translator Joan Queralt
  *
- * @package	Europass Online Tools Labels and Help texts
- * @purpose	Provides the labels and help texts used in the Europass Online Tools.
- * @author(s)	Europass team
- * @copyright	(C) European Communities, 2002-2009 http://europass.cedefop.europa.eu
- * @license		http://europass.cedefop.europa.eu/europass/home/botnav/LegalNotice.csp
- * @version		20090407
- * @URL		http://europass.cedefop.europa.eu/TechnicalResources/EuropassLabels/xforms/europass-labels-xforms-20090407/cv_en_GB.xhtml
- * @URL		http://europass.cedefop.europa.eu/TechnicalResources/EuropassLabels/xforms/europass-labels-xforms-20090407/lp_en_GB.xhtml
+ * @package    Europass Online Tools Labels and Help texts
+ * @purpose    Provides the labels and help texts used in the Europass Online Tools.
+ * @author(s)  Europass team
+ * @copyright  (C) European Communities, 2002-2011 http://europass.cedefop.europa.eu
+ * @license    http://europass.cedefop.europa.eu/europass/home/botnav/LegalNotice.csp
+ * @version    20110907
+ * @URL        http://europass.cedefop.europa.eu/TechnicalResources/EuropassLabels/xforms/europass-labels-xforms-20110907/cv_en_GB.xhtml
+ * @URL        http://europass.cedefop.europa.eu/TechnicalResources/EuropassLabels/xforms/europass-labels-xforms-20110907/lp_en_GB.xhtml
  *
- * ISO 639-1		http://europass.cedefop.europa.eu/xml/EUROPASS_ISOLanguages_V1.1.xsd
- * ISO 3166-1		http://europass.cedefop.europa.eu/xml/EUROPASS_ISOCountries_V1.1.xsd
- * List of nationalities	http://europass.cedefop.europa.eu/TechnicalResources/XML/xsd/included_schemas/EUROPASS_Nationalities_V1.0.xsd
+ * ISO 639-1   http://europass.cedefop.europa.eu/xml/EUROPASS_ISOLanguages_V1.1.xsd
+ * ISO 3166-1  http://europass.cedefop.europa.eu/xml/EUROPASS_ISOCountries_V1.1.xsd
+ * List of nationalities  http://europass.cedefop.europa.eu/TechnicalResources/XML/xsd/included_schemas/EUROPASS_Nationalities_V1.0.xsd
  *(based on ISO 3166-1)
  */
 
@@ -59,6 +59,17 @@ $string['languagedeleted'] = 'S\'ha eliminat correctament la llengua';
 
 $string['moveup'] = 'Puja';
 $string['movedown'] = 'Baixa';
+
+$string['languagediploma'] = 'Diploma d\'idioma';
+$string['languageexperience'] = 'Experiència lingüística';
+$string['languagediplomadeleteconfirm'] = 'Esteu segur que voleu esborrar aquest Diploma d\'idioma?';
+$string['languageexperiencedeleteconfirm'] = 'Esteu segur que voleu esborrar aquesta Experiència lingüística?';
+$string['languagediplomadeleted'] = 'S\'ha esborrat correctament el Diploma d\'idioma';
+$string['languageexperiencedeleted'] = 'S\'ha esborrat correctament l\'Experiència lingüística';
+$string['languagediplomasaved'] = 'S\'ha desat correctament el Diploma d\'idioma';
+$string['languagediplomasavefailed'] = 'No s\'ha pogut desar el Diploma d\'idioma';
+$string['languageexperiencesaved'] = 'S\'ha desat correctament l\'Experiència lingüística';
+$string['languageexperiencesavefailed'] = 'No s\'ha pogut desar l\'Experiència lingüística';
 
 // Export data from Mahara to Europass form...
 $string['exporteuropass'] = 'Exporta Europass';
@@ -102,17 +113,46 @@ $string['selectexternaldatedesc'] = 'Format de data usat a l\'exportació';
 $string['externaldate-numeric-long'] = 'dd/mm/aaaa';
 $string['externaldate-text-long'] = 'dd. mes aaaa';
 $string['exportfile'] = 'Fitxer';
-$string['pdf'] = 'PDF + XML';
+$string['pdf'] = 'Adobe® PDF + XML';
+$string['pdfhrxml'] = 'Adobe® PDF + HR-XML';
 $string['doc'] = 'Microsoft® Word';
 $string['odt'] = 'OpenDocument';
 $string['html'] = 'HTML';
+$string['json'] = 'Europass JSON';
 $string['xml'] = 'Europass XML';
+$string['hrxml'] = 'HR-XML';
 $string['exportstep3'] = '3 - Exporta';
 $string['generate'] = 'Genera l\'exportació';
 $string['generateexport'] = 'Exporta';
 
+// Import data from Europass XML to Mahara...
+$string['importeuropass'] = 'Importa Europass';
+$string['importstep1'] = '1 - Importa fitxer i opcions';
+$string['selectfile&options'] = 'Carregueu el fitxer XML Europass i seleccioneu les opcions d\'importació';
+$string['importstep2'] = '2 - Importa';
+$string['execute'] = 'Executa la importació';
+$string['executeimport'] = 'Importa';
+$string['importfile'] = 'Fitxer XML Europass';
+$string['importfiledesc'] = 'Seleccioneu el fitxer XML Europass vàlid per importar a Mahara';
+$string['notvalidxmlfile'] = 'El fitxer que heu carregat no és un fitxer XML vàlid.';
+$string['importoptions'] = 'Què voleu importar?';
+$string['importoptionsdesc'] = 'Els camps tancats del perfil no s\'actualitzaran ni canviaran';
+$string['nocheckedoptions'] = 'Com a mínim heu de marcar una opció d\'importació.';
+$string['fieldnotimported'] = 'No s\'ha importat el camp "%s" .';
+$string['lockedfieldnotimported'] = 'No s\'ha importat el camp tancat "%s".';
+$string['languagecodemissing'] = 'No s\'ha importat el camp "%s". S\'ha perdut el codi d\'idioma.';
+$string['importdate'] = 'Importeu dates en format';
+$string['europassimportexecuted'] = 'S\'han importat satisfactòriament a Mahara les dades d\'Europass XML.';
+
+// Europass GUI form tabs
+$string['application-tab'] = 'Sol·licitud';
+$string['workexperience-tab'] = 'Experiència';
+$string['education-tab'] = 'Formació';
+$string['languages-tab'] = 'Idiomes';
+$string['skills-tab'] = 'Habilitats';
+
 // Europass CV - STEP 1
-$string['identification'] = 'Informació personal '; // Glej CV STEP 1, vrstica 29!
+$string['identification'] = 'Informació personal';
 $string['identification-birthdate'] = 'Data de naixement';
 $string['identification-birthplace'] = 'Lloc de naixement';
 $string['identification-lastname'] = 'Cognom(s)';
@@ -132,14 +172,14 @@ $string['identification-gender'] = 'Gènere';
 $string['application'] = 'Ocupació desitjada';
 
 // Europass CV - STEP 3
-$string['workexperience'] = 'Experiència laboral'; // Glej CV STEP 3!
+$string['workexperience'] = 'Experiència laboral';
 
 // Europass CV - STEP 4
-$string['education'] = 'Historial acadèmic'; // Glej CV STEP 4, vrstica 273!
+$string['education'] = 'Historial acadèmic';
 
 // Europass CV - STEP 5
-$string['mothertongue'] = 'Llengua materna'; // Glej CV STEP 5, vrstica 386!
-$string['otherlanguage'] = 'Altres llengües'; // Glej CV STEP 5, vrstica 397!
+$string['mothertongue'] = 'Llengua materna';
+$string['otherlanguage'] = 'Altres llengües';
 
 $string['language-foreign-listening'] = 'Comprensió oral';
 $string['language-foreign-listening-th'] = 'Comprensió oral';
@@ -162,7 +202,7 @@ $string['language-foreign-level.C2'] = 'Usuari competent (C2)';
 
 // Europass CV - STEP 6
 $string['drivinglicence'] = 'Carnet de conduir';
-$string['skills-and-competences'] = 'Habilitats i competències personals'; // Glej CV STEP 6, vrstica 637!
+$string['skills-and-competences'] = 'Habilitats i competències personals';
 $string['socialskill'] = 'Habilitats i competències socials';
 $string['organisationalskill'] = 'Habilitats i competències organitzatives';
 $string['technicalskill'] = 'Habilitats i competències tècniques';
@@ -173,14 +213,14 @@ $string['additionalinfo'] = 'Informació addicional';
 $string['annexes'] = 'Annexos';
 
 // Europass LP - STEP 2
-$string['language-certificates'] = 'Diplomes o certificats'; // Glej LP STEP 2, vrstica 349!
+$string['language-certificates'] = 'Diplomes o certificats';
 $string['diploma-title'] = 'Títol';
 $string['diploma-awardingBody'] = 'Organització acreditadora';
-$string['diploma-date'] = 'Data'; // Glej LP STEP 2, vrstica 371!
+$string['diploma-date'] = 'Data';
 $string['diploma-level'] = 'Nivell europeu';
-$string['language-experiences'] = 'Experiència(es) lingüística(ques)'; // Glej LP STEP 2, vrstica 424!
-$string['experiences-period-from'] = 'De'; // Glej LP STEP 2, vrstica 428!
-$string['experiences-period-to'] = 'Fins a'; // Glej LP STEP 2, vrstica 435!
+$string['language-experiences'] = 'Experiència(es) lingüística(ques)';
+$string['experiences-period-from'] = 'De';
+$string['experiences-period-to'] = 'Fins a';
 
 // List of supported locales in which Europass can be exported...
 // The names of languages are localized - there's no need for translation!

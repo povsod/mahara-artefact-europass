@@ -6,3 +6,12 @@
     visibility: hidden;
     height: 0;
 }
+
+.subpage {
+	padding-bottom: 120px !important; /* for bottom right europass logo */
+}
+
+.textarea,
+.resizable-textarea textarea {
+	font-size: small;
+}

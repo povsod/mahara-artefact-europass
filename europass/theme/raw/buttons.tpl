@@ -1,0 +1,1 @@
+<div style="position:absolute;right:15px;top:22px">    <a class="btn" href="{$WWWROOT}artefact/europass/import.php">{str tag="executeimport" section="artefact.europass"}</a>    <a class="btn" href="{$WWWROOT}artefact/europass/export.php">{str tag="generateexport" section="artefact.europass"}</a></div>
