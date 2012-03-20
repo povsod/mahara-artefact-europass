@@ -23,7 +23,9 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL
  * @copyright  (C) 2009-2012 Gregor Anzelj, gregor.anzelj@gmail.com
  *
- * @translator 
+ * @translator Direcção de Serviços de Tecnologias Educativas
+ * @translator Emanuel Garcês
+ * @translator Rosa Silva
  *
  * @package    Europass Online Tools Labels and Help texts
  * @purpose    Provides the labels and help texts used in the Europass Online Tools.
@@ -45,49 +47,49 @@ defined('INTERNAL') || die();
 $string['pluginname'] = 'Europass';
 
 $string['europass'] = 'Europass';
-$string['europassartefactsaved'] = 'Europass curriculum vitae saved sucessfully';
-$string['europassexportgenerated'] = 'Please wait while your export is being generated...';
-$string['europassexportnoconncetion'] = 'There was an error with connection to WSDL server. Please try again later.';
-$string['europassexportservererror'] = 'There was an error on WSDL server. Please try again later.';
-$string['europassextensionmissing'] = 'Sorry, you cannot use Europass plugin because your PHP installation is missing required extension:';
-$string['newerversionforcompatibility'] = 'For better performance and compatibility you should upgrade to Mahara version 1.3.0 or newer.';
+$string['europassartefactsaved'] = 'O curriculum vitae Europass foi guardado com sucesso';
+$string['europassexportgenerated'] = 'Por favor aguarde enquanto a exportação está a ser gerada...';
+$string['europassexportnoconncetion'] = 'Ocorreu um erro na conecção ao servidor WSDL. Por favor tente novamente mais tarde.';
+$string['europassexportservererror'] = 'Ocorreu um erro no servidor WSDL. Por favor tente novamente mais tarde.';
+$string['europassextensionmissing'] = 'Desculpe, não pode o plugin Europass porque na sua instalação do PHP está em falta a seguinte extensão:';
+$string['newerversionforcompatibility'] = 'Para melhor performance e compatibilidade deverá actualizar o Mahara para a versão 1.3.0 ou mais recente.';
 
-$string['languagesaved'] = 'Language saved sucessfully';
-$string['languagesavefailed'] = 'Failed to save language';
-$string['languagedeleteconfirm'] = 'Are you sure you want to delete this language?';
-$string['languagedeleted'] = 'Language deleted sucessfully';
+$string['languagesaved'] = 'Língua guardada com sucesso';
+$string['languagesavefailed'] = 'Ocorreu um erro ao guardar a língua';
+$string['languagedeleteconfirm'] = 'Tem a certeza que deseja eliminar esta língua?';
+$string['languagedeleted'] = 'Língua eliminada com sucesso';
 
-$string['moveup'] = 'Move up';
-$string['movedown'] = 'Move down';
+$string['moveup'] = 'Mover para cima';
+$string['movedown'] = 'Mover para baixo';
 
-$string['languagediploma'] = 'Language diploma';
-$string['languageexperience'] = 'Linguistic experience';
-$string['languagediplomadeleteconfirm'] = 'Are you sure you want to delete this language diploma?';
-$string['languageexperiencedeleteconfirm'] = 'Are you sure you want to delete this linguistic experience?';
-$string['languagediplomadeleted'] = 'Language diploma deleted sucessfully';
-$string['languageexperiencedeleted'] = 'Linguistic experience deleted sucessfully';
-$string['languagediplomasaved'] = 'Language diploma saved sucessfully';
-$string['languagediplomasavefailed'] = 'Failed to save language diploma';
-$string['languageexperiencesaved'] = 'Linguistic experience saved sucessfully';
-$string['languageexperiencesavefailed'] = 'Failed to save linguistic experience';
+$string['languagediploma'] = 'Diploma de línguas'; 
+$string['languageexperience'] = 'Experiência linguística'; 
+$string['languagediplomadeleteconfirm'] = 'Tem a certeza que deseja eliminar este diploma de línguas?'; 
+$string['languageexperiencedeleteconfirm'] = 'Tem a certeza que deseja eliminar esta experiência línguística?'; 
+$string['languagediplomadeleted'] = 'Diploma de línguas eliminado com sucesso'; 
+$string['languageexperiencedeleted'] = 'Experiência linguística eliminada com sucesso'; 
+$string['languagediplomasaved'] = 'Diploma de línguas salvo com sucesso';  
+$string['languagediplomasavefailed'] = 'Ocorreu um erro ao salvar o diploma de línguas'; 
+$string['languageexperiencesaved'] = 'Experiência linguística salva com sucesso'; 
+$string['languageexperiencesavefailed'] = 'Ocorreu um erro ao salvar o diploma de línguas';  
 
 // Export data from Mahara to Europass form...
-$string['exporteuropass'] = 'Export Europass';
-$string['exportstep1'] = '1 - Document language and type';
-$string['selectlocale&type'] = 'Select document language and type';
-$string['selectlocale'] = 'Language';
-$string['selectlocaledesc'] = 'Europass document language';
-$string['selectdocumenttype'] = 'Document';
+$string['exporteuropass'] = 'Exportar Europass';
+$string['exportstep1'] = '1 - Língua do documento e o tipo';
+$string['selectlocale&type'] = 'Seleccione a língua do documento e o tipo';
+$string['selectlocale'] = 'Língua';
+$string['selectlocaledesc'] = 'Língua do documento Europass';
+$string['selectdocumenttype'] = 'Documento';
 $string['europassCV'] = 'Curriculum Vitae (CV) Europass';
 $string['europassLP'] = 'Passaporte de Línguas Europass';
 $string['photograph'] = 'Fotografia';
-$string['photographdesc'] = 'Photo will be embeded in Europass XML';
-$string['phototoolarge'] = 'File too big. Filesize must not exceed 100 kB.';
-$string['exportstep2'] = '2 - Document format';
-$string['selectfiletype'] = 'Select file and date format';
-$string['exportdate'] = 'Date';
-$string['internaldateformat'] = 'Internal Date Format';
-$string['selectinternaldatedesc'] = 'Date format used in Mahara';
+$string['photographdesc'] = 'A fotografia será embebida no Europass XML';
+$string['phototoolarge'] = 'Ficheiro muito grande. O tamanho do ficheiro não pode exceder os 100 kB.';
+$string['exportstep2'] = '2 - Formato do documento';
+$string['selectfiletype'] = 'Selecione o formato do ficheiro e da data';
+$string['exportdate'] = 'Data';
+$string['internaldateformat'] = 'Formato de Data Interno';
+$string['selectinternaldatedesc'] = 'Formato de data utilizado pelo Mahara';
 $string['internaldate-dmy11'] = 'dd/mm/aaaa';
 $string['internaldate-dmy12'] = 'dd.mm.aaaa';
 $string['internaldate-dmy13'] = 'dd-mm-aaaa';
@@ -107,12 +109,12 @@ $string['internaldate-ymd21'] = 'aa/mm/dd';
 $string['internaldate-ymd22'] = 'aa.mm.dd';
 $string['internaldate-ymd23'] = 'aa-mm-dd';
 $string['internaldate-yonly'] = 'aaaa';
-$string['internaldate-other'] = 'other';
-$string['externaldateformat'] = 'External Date Format';
-$string['selectexternaldatedesc'] = 'Date format used in export';
+$string['internaldate-other'] = 'outro';
+$string['externaldateformat'] = 'Formato de Data Externo';
+$string['selectexternaldatedesc'] = 'Formato de data usado na exportação';
 $string['externaldate-numeric-long'] = 'dd/mm/aaaa';
 $string['externaldate-text-long'] = 'dd. mês aaaa';
-$string['exportfile'] = 'File';
+$string['exportfile'] = 'Ficheiro';
 $string['pdf'] = 'Adobe® PDF + XML';
 $string['pdfhrxml'] = 'Adobe® PDF + HR-XML';
 $string['doc'] = 'Microsoft® Word';
@@ -121,40 +123,40 @@ $string['html'] = 'HTML';
 $string['json'] = 'Europass JSON';
 $string['xml'] = 'Europass XML';
 $string['hrxml'] = 'HR-XML';
-$string['exportstep3'] = '3 - Export';
-$string['generate'] = 'Generate export';
-$string['generateexport'] = 'Export';
+$string['exportstep3'] = '3 - Exportar';
+$string['generate'] = 'Gerar exportação';
+$string['generateexport'] = 'Exportar';
 
 // Import data from Europass XML to Mahara...
-$string['importeuropass'] = 'Import Europass';
-$string['importstep1'] = '1 - Import file and options';
-$string['selectfile&options'] = 'Upload Europass XML file and select import options';
-$string['importstep2'] = '2 - Import';
-$string['execute'] = 'Execute import';
-$string['executeimport'] = 'Import';
-$string['importfile'] = 'Europass XML file';
-$string['importfiledesc'] = 'Select valid Europass XML file to import to Mahara';
-$string['notvalidxmlfile'] = 'The uploaded file is not a valid XML file.';
-$string['importoptions'] = 'What to import?';
-$string['importoptionsdesc'] = 'Locked profile fields will not be changed/updated';
-$string['nocheckedoptions'] = 'You have to check at least one option to import.';
-$string['fieldnotimported'] = 'Field "%s" not imported.';
-$string['lockedfieldnotimported'] = 'Locked field "%s" not imported.';
-$string['languagecodemissing'] = 'Field "%s" not imported. Language code is missing.';
-$string['importdate'] = 'Import dates as';
-$string['europassimportexecuted'] = 'The data from Europass XML successfully imported into Mahara.';
+$string['importeuropass'] = 'Importar Europass'; 
+$string['importstep1'] = '1 - Importar ficheiros e opções'; 
+$string['selectfile&options'] = 'Enviar ficheiro Europass XML e selecionar opções de importação'; 
+$string['importstep2'] = '2 - Importar'; 
+$string['execute'] = 'Realizar importação'; 
+$string['executeimport'] = 'Importar'; 
+$string['importfile'] = 'Ficheiro Europass XML';
+$string['importfiledesc'] = 'Selecione um ficheiro Europass XML válido para importar para o Mahara'; 
+$string['notvalidxmlfile'] = 'O ficheiro enviado não é um ficheiro XML válio.'; 
+$string['importoptions'] = 'O que importar?'; 
+$string['importoptionsdesc'] = 'Locked profile fields will not be changed/updated'; 
+$string['nocheckedoptions'] = 'Os campos de perfil bloqueados não serão alterados/atualizados.';
+$string['fieldnotimported'] = 'O campo "%s" não foi importado.';
+$string['lockedfieldnotimported'] = 'O campo bloqueado "%s" não foi importado.';
+$string['languagecodemissing'] = 'O campo "%s" não foi importado. O código de língua está em falta.'; 
+$string['importdate'] = 'Importar datas como'; 
+$string['europassimportexecuted'] = 'O dados do Europass XML foram importados com sucesso no Mahara.'; 
 
 // Europass GUI form tabs
-$string['application-tab'] = 'Application';
-$string['workexperience-tab'] = 'Employment';
-$string['education-tab'] = 'Education';
-$string['languages-tab'] = 'Languages';
-$string['skills-tab'] = 'Skills';
+$string['application-tab'] = 'Aplicação';
+$string['workexperience-tab'] = 'Emprego';
+$string['education-tab'] = 'Educação'; 
+$string['languages-tab'] = 'Línguas'; 
+$string['skills-tab'] = 'Aptidões'; 
 
 // Europass CV - STEP 1
 $string['identification'] = 'Informação pessoal';
 $string['identification-birthdate'] = 'Data de nascimento';
-$string['identification-birthplace'] = 'Local de nascimento';
+$string['identification-birthplace'] = 'Naturalidade';
 $string['identification-lastname'] = 'Apelido(s)';
 $string['identification-firstname'] = 'Nome(s) próprio(s)';
 $string['identification-addressLine'] = 'Rua / Número';
