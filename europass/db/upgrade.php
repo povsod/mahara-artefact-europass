@@ -131,6 +131,7 @@ function xmldb_artefact_europass_upgrade($oldversion=0) {
 					$diploma->awardingbody    = $r->awardingbody;
 					$diploma->certificatedate = $r->certificatedate;
 					$diploma->europeanlevel   = $r->europeanlevel;
+					$diploma->artefact        = $r->artefact;
 					insert_record('artefact_europass_languagediploma', $diploma);
 				}
 				
@@ -142,6 +143,7 @@ function xmldb_artefact_europass_upgrade($oldversion=0) {
 					$experience->startdate   = $r->experiencestartdate;
 					$experience->enddate     = $r->experienceenddate;
 					$experience->description = $r->experiencedescription;
+					$expericene->artefact    = $r->artefact;
 					insert_record('artefact_europass_languageexperience', $experience);
 				}
 			}
