@@ -15,15 +15,10 @@
     </thead>
     <tbody>
         {foreach from=$rows item=row}
-        <tr class="{cycle values='r0,r0,r1,r1'} expandable-head">
+        <tr class="{cycle values='r0,r1'}">
             {if $controls}<td class="buttonscell"></td>{/if}
             <td>{str tag='language.$row->language|escape' section='artefact.europass'}</td>
             <td>{$row->language|escape}</td>
-            {if $controls}<td class="buttonscell"></td>{/if}
-        </tr>
-        <tr class="{cycle values='r0,r0,r1,r1'} expandable-body">
-            {if $controls}<td class="buttonscell"></td>{/if}
-        	<td colspan="2">{$row->description}</td>
             {if $controls}<td class="buttonscell"></td>{/if}
         </tr>
         {/foreach}

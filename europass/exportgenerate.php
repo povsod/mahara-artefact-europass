@@ -127,7 +127,7 @@ if ($locale <> '' and $documenttype <> '' and $fileformat <> '' and $internaldat
 		if ($err) {
 			// Display the error
 			//$SESSION->add_info_msg('Constructor error: ' . $err);
-			$message = '<div style="color: #dd0221; background: #ffd3d9; padding: 0.2em 0.7em; font-family: sans-serif; font-size: 0.8em;">' . get_string('europassexportnoconncetion','artefact.europass') . '</div>';
+			$message = '<div style="color: #dd0221; background: #ffd3d9; padding: 0.2em 0.7em; font-family: sans-serif; font-size: 0.8em;">' . get_string('europassexportnoconncetion','artefact.europass') . '<br>Error: ' . $err . '</div>';
 			print_r($message);
 			// At this point, you know the call that follows will fail
 		}
@@ -142,16 +142,25 @@ if ($locale <> '' and $documenttype <> '' and $fileformat <> '' and $internaldat
 			$document = generate_europasscv_xml($USER->get('id'), false, $locale, $internaldate, $externaldate, $photograph);
 			// Call the SOAP method
 			switch ($fileformat) {
-				case 'pdf': $result = $client->call('convertToPDFwithXMLCV', array('xml' => $document, 'locale' => $locale)); break;
+				case 'pdf':      $result = $client->call('convertToPDFwithXMLCV', array('xml' => $document, 'locale' => $locale)); break;
 				case 'pdfhrxml': $result = $client->call('convertToPDFwithHRXMLCV', array('xml' => $document, 'locale' => $locale)); break;
-				case 'doc': $result = $client->call('convertToMSWordCV', array('xml' => $document, 'locale' => $locale)); break;
-				case 'odt': $result = $client->call('convertToODTCV', array('xml' => $document, 'locale' => $locale)); break;
-				case 'html': $result = $client->call('convertToHTMLCV', array('xml' => $document, 'locale' => $locale)); break;
+				case 'doc':      $result = $client->call('convertToMSWordCV', array('xml' => $document, 'locale' => $locale)); break;
+				case 'odt':      $result = $client->call('convertToODTCV', array('xml' => $document, 'locale' => $locale)); break;
+				case 'html':     $result = $client->call('convertToHTMLCV', array('xml' => $document, 'locale' => $locale)); break;
 			}
+			$wsdl_error = $client->getError();
 			if ($fileformat == 'html') {
-				$content = $result['html'];
+				if (array_key_exists('html', $result)) {
+					$content = $result['html'];
+				} else {
+					$content = '';
+				}
 			} else {
-				$content = base64_decode($result['file']);
+				if (array_key_exists('file', $result)) {
+					$content = base64_decode($result['file']);
+				} else {
+					$content = '';
+				}
 			}
 			// Set default filename
 			$filename = 'cv';
@@ -167,10 +176,19 @@ if ($locale <> '' and $documenttype <> '' and $fileformat <> '' and $internaldat
 				case 'odt': $result = $client->call('convertToODTLP', array('xml' => $document, 'locale' => $locale)); break;
 				case 'html': $result = $client->call('convertToHTMLLP', array('xml' => $document, 'locale' => $locale)); break;
 			}
+			$wsdl_error = $client->getError();
 			if ($fileformat == 'html') {
-				$content = $result['html'];
+				if (array_key_exists('html', $result)) {
+					$content = $result['html'];
+				} else {
+					$content = '';
+				}
 			} else {
-				$content = base64_decode($result['file']);
+				if (array_key_exists('file', $result)) {
+					$content = base64_decode($result['file']);
+				} else {
+					$content = '';
+				}
 			}
 			// Set default filename
 			$filename = 'lp';
@@ -207,7 +225,12 @@ if ($locale <> '' and $documenttype <> '' and $fileformat <> '' and $internaldat
 			switch ($fileformat) {
 				case 'json': $result = $client->call('convertFromXMLCV', array('xml' => $document, 'locale' => $locale)); break;
 			}
-			$content = $result['json'];
+			$wsdl_error = $client->getError();
+			if (array_key_exists('json', $result)) {
+				$content = $result['json'];
+			} else {
+				$content = '';
+			}
 			// Set default filename
 			$filename = 'cv';
 		}
@@ -218,7 +241,12 @@ if ($locale <> '' and $documenttype <> '' and $fileformat <> '' and $internaldat
 			switch ($fileformat) {
 				case 'json': $result = $client->call('convertFromXMLLP', array('xml' => $document, 'locale' => $locale)); break;
 			}
-			$content = $result['json'];
+			$wsdl_error = $client->getError();
+			if (array_key_exists('json', $result)) {
+				$content = $result['json'];
+			} else {
+				$content = '';
+			}
 			// Set default filename
 			$filename = 'lp';
 		}
@@ -254,8 +282,13 @@ if ($locale <> '' and $documenttype <> '' and $fileformat <> '' and $internaldat
 			switch ($fileformat) {
 				case 'hrxml': $result = $client->call('convertToHRXML', array('xml' => $document, 'locale' => $locale)); break;
 			}
-			$content = $result['xml'];
-			$content = indentXML($content);
+			$wsdl_error = $client->getError();
+			if (array_key_exists('xml', $result)) {
+				$content = $result['xml'];
+				$content = indentXML($content);
+			} else {
+				$content = '';
+			}
 			// Set default filename
 			$filename = 'cv';
 		}
@@ -266,8 +299,13 @@ if ($locale <> '' and $documenttype <> '' and $fileformat <> '' and $internaldat
 			switch ($fileformat) {
 				case 'hrxml': $result = $client->call('convertToHRXML', array('xml' => $document, 'locale' => $locale)); break;
 			}
-			$content = $result['xml'];
-			$content = indentXML($content);
+			$wsdl_error = $client->getError();
+			if (array_key_exists('xml', $result)) {
+				$content = $result['xml'];
+				$content = indentXML($content);
+			} else {
+				$content = '';
+			}
 			// Set default filename
 			$filename = 'lp';
 		}
@@ -291,7 +329,11 @@ if ($locale <> '' and $documenttype <> '' and $fileformat <> '' and $internaldat
 	}
 
 	if ($content == '') {
-		$message = '<div style="color: #dd0221; background: #ffd3d9; padding: 0.2em 0.7em; font-family: sans-serif; font-size: 0.8em;">' . get_string('europassexportservererror','artefact.europass') . '</div>';
+		if ($wsdl_error != '') {
+			$message = '<div style="color: #dd0221; background: #ffd3d9; padding: 0.2em 0.7em; font-family: sans-serif; font-size: 0.8em;">' . $wsdl_error . '</div>';
+		} else {
+			$message = '<div style="color: #dd0221; background: #ffd3d9; padding: 0.2em 0.7em; font-family: sans-serif; font-size: 0.8em;">' . get_string('europassexportservererror','artefact.europass') . '</div>';
+		}
 		print_r($message);
 	} else {
 		// Send the header here - download generated file

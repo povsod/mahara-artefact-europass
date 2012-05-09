@@ -117,33 +117,63 @@ function xmldb_artefact_europass_upgrade($oldversion=0) {
         $table->addKeyInfo('languagefk', XMLDB_KEY_FOREIGN, array('languageid'), 'artefact_europass_otherlanguage', array('id'));
         create_table($table);
 
+		// Install new artefact types (not previously installed!)
+		ensure_record_exists('artefact_installed_type',
+			array('name' => 'languagediploma', 'plugin' => 'europass'),
+			array('name' => 'languagediploma', 'plugin' => 'europass')
+		);
+		ensure_record_exists('artefact_installed_type',
+			array('name' => 'languageexperience', 'plugin' => 'europass'),
+			array('name' => 'languageexperience', 'plugin' => 'europass')
+		);
+		
 		// Write values from 'artefact_europass_otherlanguage' to 'artefact_europass_otherlanguage_diploma'...
 		// Write values from 'artefact_europass_otherlanguage' to 'artefact_europass_otherlanguage_experience'...
 		$sql = "SELECT * FROM {artefact_europass_otherlanguage} l";
 		if ($records = get_records_sql_array($sql, array())) {
 			foreach ($records as $r) {
+				$owner = get_field('artefact', 'owner', 'id', $r->artefact);
+				
+				$artefact = get_field('artefact', 'id', 'artefacttype', 'languagediploma', 'owner', $owner);
 				if (empty($r->certificate) && empty($r->awardingbody) && empty($r->certificatedate) && empty($r->europeanlevel)) {
 					// Do nothing...
 				} else {
+					if ($artefact == false) {
+						$insert = new StdClass;
+						$insert->artefacttype = 'languagediploma';
+						$insert->owner        = $owner;
+						$insert->ctime        = db_format_timestamp(time());
+						$artefact = insert_record('artefact', $insert, false, true);
+					}
+					
 					$diploma = new StdClass;
+					$diploma->artefact        = $artefact;
 					$diploma->languageid      = $r->id;
 					$diploma->certificate     = $r->certificate;
 					$diploma->awardingbody    = $r->awardingbody;
 					$diploma->certificatedate = $r->certificatedate;
 					$diploma->europeanlevel   = $r->europeanlevel;
-					$diploma->artefact        = $r->artefact;
 					insert_record('artefact_europass_languagediploma', $diploma);
 				}
 				
+				$artefact = get_field('artefact', 'id', 'artefacttype', 'languageexperience', 'owner', $owner);
 				if (empty($r->experiencestartdate) && empty($r->experienceenddate) && empty($r->experiencedescription)) {
 					// Do nothing...
 				} else {
+					if ($artefact == false) {
+						$insert = new StdClass;
+						$insert->artefacttype = 'languageexperience';
+						$insert->owner        = $owner;
+						$insert->ctime        = db_format_timestamp(time());
+						$artefact = insert_record('artefact', $insert, false, true);
+					}
+					
 					$experience = new StdClass;
+					$experience->artefact    = $artefact;
 					$experience->languageid  = $r->id;
 					$experience->startdate   = $r->experiencestartdate;
 					$experience->enddate     = $r->experienceenddate;
 					$experience->description = $r->experiencedescription;
-					$expericene->artefact    = $r->artefact;
 					insert_record('artefact_europass_languageexperience', $experience);
 				}
 			}
@@ -157,6 +187,49 @@ function xmldb_artefact_europass_upgrade($oldversion=0) {
 		execute_sql('ALTER TABLE {artefact_europass_otherlanguage} DROP COLUMN experiencestartdate');
 		execute_sql('ALTER TABLE {artefact_europass_otherlanguage} DROP COLUMN experienceenddate');
 		execute_sql('ALTER TABLE {artefact_europass_otherlanguage} DROP COLUMN experiencedescription');
+	}
+	
+    if ($oldversion < 2012042000) {
+		// Somehow dates on previous upgrade got converted into Unix timestamp.
+		// Convert them back, if the timestamp is greater than 86399 = 01 Jan 1970 23:59:59 GMT
+		// Since the date related fields are of TEXT type, we evaluate them and leave out
+		// from upgrade all records which contain date fields with values smaller than 86933!
+		// e.g.:
+		//        intval(31.12.2009) = 31
+		//        intval(2009/08/23) = 2009
+		//        intval(04.28.1999) = intval(04/28/1999) = 4
+		//        etc.
+		
+		// 86933 is the number of seconds from 01 Jan 1970 (start of day == start of Unix Epoch)
+		
+		// Fix dates in artefact_europass_languagediploma table...
+		$sql = "SELECT * FROM {artefact_europass_languagediploma} l";
+		if ($records = get_records_sql_array($sql, array())) {
+			foreach ($records as $r) {
+				if (intval($r->certificatedate) > 86933) {
+                    set_field('artefact_europass_languagediploma', 'certificatedate', 
+                              format_date($r->certificatedate, 'strfdaymonthyearshort'),
+                              'id', $r->id);
+				}
+			}
+		}
+		
+		// Fix dates in artefact_europass_languageexperience table...
+		$sql = "SELECT * FROM {artefact_europass_languageexperience} l";
+		if ($records = get_records_sql_array($sql, array())) {
+			foreach ($records as $r) {
+				if (intval($r->startdate) > 86933) {
+                    set_field('artefact_europass_languageexperience', 'startdate', 
+                              format_date($r->startdate, 'strfdaymonthyearshort'),
+                              'id', $r->id);
+				}
+				if (intval($r->enddate) > 86933) {
+                    set_field('artefact_europass_languageexperience', 'enddate', 
+                              format_date($r->enddate, 'strfdaymonthyearshort'),
+                              'id', $r->id);
+				}
+			}
+		}
 	}
 	
     return $status;

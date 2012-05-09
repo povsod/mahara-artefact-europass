@@ -376,12 +376,14 @@ abstract class ArtefactTypeEuropassComposite extends ArtefactTypeEuropass {
 		if (!empty($options['compact']) and $options['compact'] == true and $type == 'otherlanguage') {
 			$content = array(
 				'html'         => $smarty->fetch('artefact:europass:fragments/otherlanguagecompact.tpl'),
-				'javascript'   => $this->get_showhide_language_js()
+				//'javascript'   => $this->get_showhide_language_js()
+				'javascript'   => $this->get_showhide_composite_js()
 			);
 		} else {
 			$content = array(
 				'html'         => $smarty->fetch('artefact:europass:fragments/' . $type . '.tpl'),
-				'javascript'   => $this->get_showhide_language_js()
+				//'javascript'   => $this->get_showhide_language_js()
+				'javascript'   => $this->get_showhide_composite_js()
 			);
 		}
         return $content;
@@ -943,9 +945,11 @@ class ArtefactTypeDrivinglicence extends ArtefactTypeEuropassArtefacts {
 		$renderhtml = '';
 		foreach ($drivinglicence as $licence => $value) {
 			if ($value <> null) {
-				$renderhtml .= '<div style="padding:2px 0px"><img src="' . get_config('wwwroot') . '/artefact/europass/images/' . strtolower($licence) . '.png" width="98" height="20" align="top"> (' . strftime(get_string('strftimedate'), $value) . ')</div>';
+				$renderhtml .= strtoupper($licence) . ', ';
 			}
 		}
+		// Remove last comma and space (2 characters) from the string...
+		$renderhtml = substr($renderhtml, 0, -2);
 		return array('html' => $renderhtml);
     }
 
@@ -1051,12 +1055,13 @@ function europassform_submit(Pieform $form, $values) {
         else {
             insert_record('artefact', (object) array(
                 'artefacttype' => $key,
-                'owner' => $USER->get('id'),
-                'title' => get_string($key),
-				'description' => $value,
-                'ctime' => $dbnow,
-                'mtime' => $dbnow,
-                'atime' => $dbnow,
+                'owner'        => $USER->get('id'),
+                'author'       => $USER->get('id'), // PostgreSQL won't work without it, MySQL will...
+                'title'        => get_string($key),
+				'description'  => $value,
+                'ctime'        => $dbnow,
+                'mtime'        => $dbnow,
+                'atime'        => $dbnow,
             ));
         }
     }

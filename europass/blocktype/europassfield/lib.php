@@ -49,9 +49,8 @@ class PluginBlocktypeEuropassfield extends PluginBlocktype {
         $configdata = $bi->get('configdata');
 
         if (!empty($configdata['artefactid'])) {
-            require_once(get_config('docroot') . 'artefact/lib.php');
-            $europassfield = artefact_instance_from_id($configdata['artefactid']);
-            return $europassfield->get('title');
+            $artefacttype = $bi->get_artefact_instance($configdata['artefactid'])->get('artefacttype');
+			return get_string($artefacttype, 'artefact.europass');
         }
         return '';
     }
@@ -92,7 +91,12 @@ class PluginBlocktypeEuropassfield extends PluginBlocktype {
 				$personalinformation = null;
 				try { $personalinformation = artefact_instance_from_type('personalinformation'); }
 				catch (Exception $e) { }
-				$occupation = get_occupation($europassfield->get('description'), get_config('lang'), $personalinformation->get_composite('gender'));
+				if (!empty($personalinformation)) {
+					$gender = $personalinformation->get_composite('gender');
+				} else {
+					$gender = null;
+				}
+				$occupation = get_occupation($europassfield->get('description'), get_config('lang'), $gender);
 				$result = $occupation['label'];
 			}
             return $result;
@@ -150,6 +154,7 @@ class PluginBlocktypeEuropassfield extends PluginBlocktype {
         return '';
     }
 
+	/*
     public static function rewrite_resume_config(View $view, $configdata) {
         $artefactid = null;
         if ($view->get('owner') !== null) {
@@ -165,6 +170,7 @@ class PluginBlocktypeEuropassfield extends PluginBlocktype {
         $configdata['artefactid'] = $artefactid;
         return $configdata;
     }
+	*/
 
     public static function default_copy_type() {
         return 'shallow';

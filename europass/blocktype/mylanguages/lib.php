@@ -50,9 +50,8 @@ class PluginBlocktypeMyLanguages extends PluginBlocktype {
         $configdata = $bi->get('configdata');
 
         if (!empty($configdata['artefactid'])) {
-            require_once(get_config('docroot') . 'artefact/lib.php');
-            $mylanguages = artefact_instance_from_id($configdata['artefactid']);
-            return $mylanguages->get('title');
+            $artefacttype = $bi->get_artefact_instance($configdata['artefactid'])->get('artefacttype');
+			return get_string($artefacttype, 'artefact.europass');
         }
         return '';
     }
@@ -154,6 +153,7 @@ class PluginBlocktypeMyLanguages extends PluginBlocktype {
     }
 
 	// Ali je pravilno rewrite_language_config ali rewrite_europass_config?
+	/*
     public static function rewrite_language_config(View $view, $configdata) {
         $artefactid = null;
         if ($view->get('owner') !== null) {
@@ -169,6 +169,7 @@ class PluginBlocktypeMyLanguages extends PluginBlocktype {
         $configdata['artefactid'] = $artefactid;
         return $configdata;
     }
+	*/
 
     public static function default_copy_type() {
         return 'shallow';

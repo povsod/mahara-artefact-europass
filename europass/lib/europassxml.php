@@ -282,7 +282,12 @@ function generate_europasscv_xml($userid, $showHTML=false, $locale='en_GB', $int
 	if ($application == array()) $application_data = null;
 	else {
 		if ($application->get('description') == null) $application_data = null;
-		else $application_data = get_occupation($application->get('description'), $locale, $demographics->get_composite('gender'));
+		else {
+			//log_debug($demographics);
+			if ($demographics == null) $gender = null;
+			else $gender = $demographics->get_composite('gender');
+			$application_data = get_occupation($application->get('description'), $locale, $gender);
+		}
 	}
 	
 	// load user's existing workexperience

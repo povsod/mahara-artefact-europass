@@ -44,27 +44,30 @@ $othertable = 'artefact_europass_' . $type;
 $owner = $USER->get('id');
 $langid = $SESSION->get('languageid');
 
+$data = array();
 if ($type == 'mothertongue' || $type == 'otherlanguage') {
     $sql = 'SELECT ar.*, a.owner
         FROM {artefact} a 
         JOIN {' . $othertable . '} ar ON ar.artefact = a.id
         WHERE a.owner = ? AND a.artefacttype = ?
         ORDER BY ar.displayorder';
+	$data = get_records_sql_array($sql, array($owner, $type));
 } else {
     $sql = 'SELECT ar.*, a.owner
         FROM {artefact} a 
         JOIN {' . $othertable . '} ar ON ar.artefact = a.id
         WHERE a.owner = ? AND a.artefacttype = ? AND ar.languageid = ?
         ORDER BY ar.displayorder';
+	$data = get_records_sql_array($sql, array($owner, $type, $langid));
 }
 
-if (!$data = get_records_sql_array($sql, array($owner, $type, $langid))) {
-    $data = array();
-}
+
 // Dinamically add language name from language ISO code in Mahara default language...
-foreach ($data as &$row) {
-	if (!empty($row->language)) {
-		$row->languagename = get_string('language.'.$row->language, 'artefact.europass');
+if (!empty($data)) {
+	foreach ($data as &$row) {
+		if (!empty($row->language)) {
+			$row->languagename = get_string('language.'.$row->language, 'artefact.europass');
+		}
 	}
 }
 
