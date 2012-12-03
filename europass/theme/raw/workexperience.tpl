@@ -33,7 +33,7 @@
         <tr class="{cycle values='r0,r1'}">
             <td>{$employment->startdate|escape}</td>
             <td>{$employment->enddate|escape}</td>
-            <td>{$employment->jobtitle|escape} : {$employment->employer|escape}</td>
+            <td>{$employment->jobtitle} : {$employment->employer}</td>
         </tr>
         {/foreach}
 	</tbody>

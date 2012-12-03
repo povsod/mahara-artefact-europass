@@ -33,7 +33,7 @@
         <tr class="{cycle values='r0,r1'}">
             <td>{$education->startdate|escape}</td>
             <td>{$education->enddate|escape}</td>
-            <td>{$education->qualname|escape} ({$education->qualtype|escape}) {str tag='at' section='mahara'} {$education->institution|escape}</td>
+            <td>{$education->qualname} ({$education->qualtype}) {str tag='at' section='mahara'} {$education->institution}</td>
         </tr>
         {/foreach}
     </tbody>

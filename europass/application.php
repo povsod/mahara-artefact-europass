@@ -85,7 +85,8 @@ switch ($gender) {
 				$locale_occupation_list = call_user_func('isco88com_occupations_list_F_' . $locale);
 				$occupation_list = array_merge($occupation_list, $locale_occupation_list);
 				setlocale(LC_ALL, $locale);
-				sort($occupation_list);
+				// Sort an array and maintain index association
+				asort($occupation_list);
 			}
 		}
 		break;
@@ -97,7 +98,8 @@ switch ($gender) {
 				$locale_occupation_list = call_user_func('isco88com_occupations_list_M_' . $locale);
 				$occupation_list = array_merge($occupation_list, $locale_occupation_list);
 				setlocale(LC_ALL, $locale);
-				sort($occupation_list);
+				// Sort an array and maintain index association
+				asort($occupation_list);
 			}
 		}
 		break;
@@ -109,7 +111,8 @@ switch ($gender) {
 				$locale_occupation_list = call_user_func('isco88com_occupations_list_NA_' . $locale);
 				$occupation_list = array_merge($occupation_list, $locale_occupation_list);
 				setlocale(LC_ALL, $locale);
-				sort($occupation_list);
+				// Sort an array and maintain index association
+				asort($occupation_list);
 			}
 		}
 }

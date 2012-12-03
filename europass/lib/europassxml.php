@@ -7,12 +7,12 @@ require_once('locale.php');
 
 // Converts '<' to &lt; and '>' to &gt;
 function replacehtmlchars($html) {
-	return str_replace(array('<', '>'), array('&lt;', '&gt;'), $html);
+	return str_replace(array('<', '>', '&'), array('&lt;', '&gt;', '&amp;'), $html);
 }
 
 // Converts '<' to &lt; and '>' to &gt;
 function ireplacehtmlchars($html) {
-	return str_replace(array('&lt;', '&gt;'), array('<', '>'), $html);
+	return str_replace(array('&lt;', '&gt;', '&amp;'), array('<', '>', '&'), $html);
 }
 
 // Checks and replaces all html entities, that will otherwise break XML node value.

@@ -29,7 +29,7 @@
 defined('INTERNAL') || die();
 
 $config = new StdClass;
-$config->version = 2012042400;
-$config->release = '2.0.4';
+$config->version = 2012102700;
+$config->release = '2.1.0';
 
 ?>

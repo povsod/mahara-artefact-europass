@@ -87,7 +87,7 @@ function xmldb_artefact_europass_upgrade($oldversion=0) {
         }
     }
 
-    if ($oldversion < 2012030200) {
+    if ($oldversion < 2012051000) {
 		// Create 'artefact_europass_otherlanguage_diploma' table...
         $table = new XMLDBTable('artefact_europass_languagediploma');
         $table->addFieldInfo('id', XMLDB_TYPE_INTEGER, 10, null, XMLDB_NOTNULL, XMLDB_SEQUENCE);
@@ -95,9 +95,9 @@ function xmldb_artefact_europass_upgrade($oldversion=0) {
         $table->addFieldInfo('languageid', XMLDB_TYPE_INTEGER, 10, null, XMLDB_NOTNULL);
         $table->addFieldInfo('certificate', XMLDB_TYPE_TEXT, null, null, XMLDB_NOTNULL);
         $table->addFieldInfo('awardingbody', XMLDB_TYPE_TEXT, null, null, XMLDB_NOTNULL);
-        $table->addFieldInfo('certificatedate', XMLDB_TYPE_TEXT, null, null, XMLDB_NOTNULL);
+        $table->addFieldInfo('certificatedate', XMLDB_TYPE_TEXT, null, null);
         $table->addFieldInfo('europeanlevel', XMLDB_TYPE_CHAR, 2);
-        $table->addFieldInfo('displayorder', XMLDB_TYPE_INTEGER, 10, null, XMLDB_NOTNULL);
+        $table->addFieldInfo('displayorder', XMLDB_TYPE_INTEGER, 10, null);
         $table->addKeyInfo('primary', XMLDB_KEY_PRIMARY, array('id'));
         $table->addKeyInfo('artefactfk', XMLDB_KEY_FOREIGN, array('artefact'), 'artefact', array('id'));
         $table->addKeyInfo('languagefk', XMLDB_KEY_FOREIGN, array('languageid'), 'artefact_europass_otherlanguage', array('id'));
@@ -108,10 +108,10 @@ function xmldb_artefact_europass_upgrade($oldversion=0) {
         $table->addFieldInfo('id', XMLDB_TYPE_INTEGER, 10, null, XMLDB_NOTNULL, XMLDB_SEQUENCE);
         $table->addFieldInfo('artefact', XMLDB_TYPE_INTEGER, 10, null, XMLDB_NOTNULL);
         $table->addFieldInfo('languageid', XMLDB_TYPE_INTEGER, 10, null, XMLDB_NOTNULL);
-        $table->addFieldInfo('startdate', XMLDB_TYPE_TEXT, null, null, XMLDB_NOTNULL);
+        $table->addFieldInfo('startdate', XMLDB_TYPE_TEXT, null, null);
         $table->addFieldInfo('enddate', XMLDB_TYPE_TEXT, null);
         $table->addFieldInfo('description', XMLDB_TYPE_TEXT, null, null, XMLDB_NOTNULL);
-        $table->addFieldInfo('displayorder', XMLDB_TYPE_INTEGER, 10, null, XMLDB_NOTNULL);
+        $table->addFieldInfo('displayorder', XMLDB_TYPE_INTEGER, 10, null);
         $table->addKeyInfo('primary', XMLDB_KEY_PRIMARY, array('id'));
         $table->addKeyInfo('artefactfk', XMLDB_KEY_FOREIGN, array('artefact'), 'artefact', array('id'));
         $table->addKeyInfo('languagefk', XMLDB_KEY_FOREIGN, array('languageid'), 'artefact_europass_otherlanguage', array('id'));
@@ -139,10 +139,15 @@ function xmldb_artefact_europass_upgrade($oldversion=0) {
 					// Do nothing...
 				} else {
 					if ($artefact == false) {
+						$time = time();
 						$insert = new StdClass;
 						$insert->artefacttype = 'languagediploma';
 						$insert->owner        = $owner;
-						$insert->ctime        = db_format_timestamp(time());
+						$insert->author       = $owner;
+						$insert->ctime        = db_format_timestamp($time);
+						$insert->mtime        = db_format_timestamp($time);
+						$insert->atime        = db_format_timestamp($time);
+						$insert->title        = get_string('languagediploma', 'artefact.europass');
 						$artefact = insert_record('artefact', $insert, false, true);
 					}
 					
@@ -161,10 +166,15 @@ function xmldb_artefact_europass_upgrade($oldversion=0) {
 					// Do nothing...
 				} else {
 					if ($artefact == false) {
+						$time = time();
 						$insert = new StdClass;
 						$insert->artefacttype = 'languageexperience';
 						$insert->owner        = $owner;
-						$insert->ctime        = db_format_timestamp(time());
+						$insert->author       = $owner;
+						$insert->ctime        = db_format_timestamp($time);
+						$insert->mtime        = db_format_timestamp($time);
+						$insert->atime        = db_format_timestamp($time);
+						$insert->title        = get_string('languageexperience', 'artefact.europass');
 						$artefact = insert_record('artefact', $insert, false, true);
 					}
 					

@@ -148,7 +148,8 @@ function importeuropassform_validate(Pieform $form, $values) {
 function importeuropassform_submit(Pieform $form, $values) {
     global $SESSION, $USER;
 	$userid = $USER->get('id');
-
+	$dbnow = db_format_timestamp(time());
+	
 	// Get locked fields of the institution that the user belongs to...
 	$lockedfields = array();
 	$records = get_records_sql_array('
@@ -158,15 +159,24 @@ function importeuropassform_submit(Pieform $form, $values) {
 			ON ai.institution = ilpf.name
 		WHERE u.id = ?
 		ORDER BY ilpf.profilefield', array($userid));
-	foreach ($records as $record) {
-		$lockedfields[] = $record->profilefield;
+	if ($records) {
+		foreach ($records as $record) {
+			$lockedfields[] = $record->profilefield;
+		}
 	}
-
 	
 	$filename = $values['file']['tmp_name'];
 	if ($filename <> null) {
-		$xmlDoc =  new DOMDocument('1.0', 'UTF-8');
-		$xmlDoc->load($filename);
+		$xmlDoc = new DOMDocument('1.0', 'UTF-8');
+		//$xmlDoc->load($filename);
+		// Upper line not working, so try another approach...
+		// SEE: http://php.net/manual/en/function.dom-import-simplexml.php
+		//$simplexmlDoc = simplexml_load_file($filename); // not working...
+		$contents = file_get_contents($filename);
+		$simplexmlDoc = simplexml_load_string($contents);
+		$xmlNode = dom_import_simplexml($simplexmlDoc);
+		$xmlNode = $xmlDoc->importNode($xmlNode, true);
+		$xmlDoc->appendChild($xmlNode);
 
 		// ======================================
 		// Step 1: Import personal information...
@@ -177,75 +187,103 @@ function importeuropassform_submit(Pieform $form, $values) {
 			$SESSION->add_info_msg(get_string('fieldnotimported', 'artefact.europass', 'lastname'));
 			// Import address info...
 			if (!in_array('address', $lockedfields)) {
-				$address = $xmlDoc->getElementsByTagName('addressLine')->item(0)->nodeValue;
-				if ($address != null) {
-					ensure_record_exists('artefact',
-						array('artefacttype' => 'address', 'owner' => $userid),
-						array('title' => $address)
-					);
+				// Check if object exists - it only exists in Europass CV XML
+				if (is_object($xmlDoc->getElementsByTagName('addressLine')->item(0))) {
+					$address = $xmlDoc->getElementsByTagName('addressLine')->item(0)->nodeValue;
+					if ($address != null) {
+						$id = get_field('artefact', 'id', 'artefacttype', 'address', 'owner', $userid);
+						if ($id != false) {
+							update_record('artefact', array('title' => $address, 'mtime' => $dbnow, 'atime' => $dbnow), array('id' => $id));
+						} else {
+							insert_record('artefact', array('artefacttype' => 'address', 'owner' => $userid, 'author' => $userid, 'title' => $address, 'mtime' => $dbnow, 'atime' => $dbnow, 'ctime' => $dbnow));
+						}
+					}
 				}
 			} else {
 				$SESSION->add_info_msg(get_string('lockedfieldnotimported', 'artefact.europass', 'address'));
 			}
 			// Import municipality/city...
 			if (!in_array('city', $lockedfields)) {
-				$municipality = $xmlDoc->getElementsByTagName('municipality')->item(0)->nodeValue;
-				if ($municipality != null) {
-					ensure_record_exists('artefact',
-						array('artefacttype' => 'city', 'owner' => $userid),
-						array('title' => $municipality)
-					);
+				// Check if object exists - it only exists in Europass CV XML
+				if (is_object($xmlDoc->getElementsByTagName('municipality')->item(0))) {
+					$municipality = $xmlDoc->getElementsByTagName('municipality')->item(0)->nodeValue;
+					if ($municipality != null) {
+						$id = get_field('artefact', 'id', 'artefacttype', 'city', 'owner', $userid);
+						if ($id != false) {
+							update_record('artefact', array('title' => $municipality, 'mtime' => $dbnow, 'atime' => $dbnow), array('id' => $id));
+						} else {
+							insert_record('artefact', array('artefacttype' => 'city', 'owner' => $userid, 'author' => $userid, 'title' => $municipality, 'mtime' => $dbnow, 'atime' => $dbnow, 'ctime' => $dbnow));
+						}
+					}
 				}
 			} else {
 				$SESSION->add_info_msg(get_string('lockedfieldnotimported', 'artefact.europass', 'municipality'));
 			}
 			// Import (home) telephone number...
 			if (!in_array('homenumber', $lockedfields)) {
-				$telephone = $xmlDoc->getElementsByTagName('telephone')->item(0)->nodeValue;
-				if ($telephone != null) {
-					ensure_record_exists('artefact',
-						array('artefacttype' => 'homenumber', 'owner' => $userid),
-						array('title' => $telephone)
-					);
+				// Check if object exists - it only exists in Europass CV XML
+				if (is_object($xmlDoc->getElementsByTagName('telephone')->item(0))) {
+					$telephone = $xmlDoc->getElementsByTagName('telephone')->item(0)->nodeValue;
+					if ($telephone != null) {
+						$id = get_field('artefact', 'id', 'artefacttype', 'homenumber', 'owner', $userid);
+						if ($id != false) {
+							update_record('artefact', array('title' => $telephone, 'mtime' => $dbnow, 'atime' => $dbnow), array('id' => $id));
+						} else {
+							insert_record('artefact', array('artefacttype' => 'homenumber', 'owner' => $userid, 'author' => $userid, 'title' => $telephone, 'mtime' => $dbnow, 'atime' => $dbnow, 'ctime' => $dbnow));
+						}
+					}
 				}
 			} else {
 				$SESSION->add_info_msg(get_string('lockedfieldnotimported', 'artefact.europass', 'telephone'));
 			}
 			// Import mobile number...
 			if (!in_array('mobilenumber', $lockedfields)) {
-				$mobile = $xmlDoc->getElementsByTagName('mobile')->item(0)->nodeValue;
-				if ($mobile != null) {
-					ensure_record_exists('artefact',
-						array('artefacttype' => 'mobilenumber', 'owner' => $userid),
-						array('title' => $mobile)
-					);
+				// Check if object exists - it only exists in Europass CV XML
+				if (is_object($xmlDoc->getElementsByTagName('mobile')->item(0))) {
+					$mobile = $xmlDoc->getElementsByTagName('mobile')->item(0)->nodeValue;
+					if ($mobile != null) {
+						$id = get_field('artefact', 'id', 'artefacttype', 'mobilenumber', 'owner', $userid);
+						if ($id != false) {
+							update_record('artefact', array('title' => $mobile, 'mtime' => $dbnow, 'atime' => $dbnow), array('id' => $id));
+						} else {
+							insert_record('artefact', array('artefacttype' => 'mobilenumber', 'owner' => $userid, 'author' => $userid, 'title' => $mobile, 'mtime' => $dbnow, 'atime' => $dbnow, 'ctime' => $dbnow));
+						}
+					}
 				}
 			} else {
 				$SESSION->add_info_msg(get_string('lockedfieldnotimported', 'artefact.europass', 'mobile'));
 			}
 			// Import fax number...
 			if (!in_array('faxnumber', $lockedfields)) {
-				$fax = $xmlDoc->getElementsByTagName('fax')->item(0)->nodeValue;
-				if ($fax != null) {
-					ensure_record_exists('artefact',
-						array('artefacttype' => 'faxnumber', 'owner' => $userid),
-						array('title' => $fax)
-					);
+				// Check if object exists - it only exists in Europass CV XML
+				if (is_object($xmlDoc->getElementsByTagName('fax')->item(0))) {
+					$fax = $xmlDoc->getElementsByTagName('fax')->item(0)->nodeValue;
+					if ($fax != null) {
+						$id = get_field('artefact', 'id', 'artefacttype', 'faxnumber', 'owner', $userid);
+						if ($id != false) {
+							update_record('artefact', array('title' => $fax, 'mtime' => $dbnow, 'atime' => $dbnow), array('id' => $id));
+						} else {
+							insert_record('artefact', array('artefacttype' => 'faxnumber', 'owner' => $userid, 'author' => $userid, 'title' => $fax, 'mtime' => $dbnow, 'atime' => $dbnow, 'ctime' => $dbnow));
+						}
+					}
 				}
 			} else {
 				$SESSION->add_info_msg(get_string('lockedfieldnotimported', 'artefact.europass', 'fax'));
 			}
 			// Import country...
-			if (!in_array('country', $lockedfields)) {
+			if (!in_array('country', $lockedfields) && is_object($xmlDoc->getElementsByTagName('country')->item(0))) {
 				$parent = $xmlDoc->getElementsByTagName('country')->item(0);
 				$clone = $parent->cloneNode(true);
+				// Check if object exists - it only exists in Europass CV XML
 				if (is_object($clone->getElementsByTagName('code')->item(0))) {
-					$country = $clone->getElementsByTagName('code')->item(0)->nodeValue;
+					$country = strtolower($clone->getElementsByTagName('code')->item(0)->nodeValue);
 					if ($country != null) {
-						ensure_record_exists('artefact',
-							array('artefacttype' => 'country', 'owner' => $userid),
-							array('title' => strtolower($country))
-						);
+						$id = get_field('artefact', 'id', 'artefacttype', 'country', 'owner', $userid);
+						if ($id != false) {
+							update_record('artefact', array('title' => $country, 'mtime' => $dbnow, 'atime' => $dbnow), array('id' => $id));
+						} else {
+							insert_record('artefact', array('artefacttype' => 'country', 'owner' => $userid, 'author' => $userid, 'title' => $country, 'mtime' => $dbnow, 'atime' => $dbnow, 'ctime' => $dbnow));
+						}
 					}
 				}
 			} else {
@@ -263,9 +301,13 @@ function importeuropassform_submit(Pieform $form, $values) {
 						'owner' => $userid,
 						'title' => get_string('identification', 'artefact.europass'),
 						'author' => $userid,
+						'mtime' => $dbnow,
+						'atime' => $dbnow,
+						'ctime' => $dbnow
 					),
 					'id', true
 				);
+				insert_record('artefact_resume_personal_information', array('artefact' => $artefactid));
 			} else {
 				$artefactid = $personalinfo->id;
 			}
@@ -295,7 +337,7 @@ function importeuropassform_submit(Pieform $form, $values) {
 				$citizenship = substr($citizenship, 0, -2); // Remove ', ' at the end of string.
 			}
 			// Import demographics...
-			$demographics = array('artefact' => $artefactid);
+			$demographics = array();
 			if ($birthdate != null) {
 				$demographics = array_merge($demographics, array('dateofbirth' => $birthdate));
 			}
@@ -305,12 +347,22 @@ function importeuropassform_submit(Pieform $form, $values) {
 			if ($citizenship != null) {
 				$demographics = array_merge($demographics, array('citizenship' => $citizenship));
 			}
-			ensure_record_exists('artefact_resume_personal_information', array('artefact' => $artefactid), $demographics);
+			$id = get_field('artefact_resume_personal_information', 'artefact', 'artefact', $artefactid);
+			if ($id != false) {
+				if (!empty($demographics)) {
+					update_record('artefact_resume_personal_information', $demographics, array('artefact' => $artefactid));
+					update_record('artefact', array('mtime' => $dbnow, 'atime' => $dbnow), array('id' => $artefactid));
+				}
+			} else {
+				insert_record('artefact_resume_personal_information', array_merge($demographics, array('artefact' => $artefactid)));
+				update_record('artefact', array('mtime' => $dbnow, 'atime' => $dbnow), array('id' => $artefactid));
+			}
 		}
 
 		// =============================
 		// Step 2: Import application...
 		// =============================
+		// Check if object exists - it only exists in Europass CV XML
 		if (!empty($values['application']) && is_object($xmlDoc->getElementsByTagName('application')->item(0))) {
 			// Import application code...
 			$parent = $xmlDoc->getElementsByTagName('application')->item(0);
@@ -318,10 +370,12 @@ function importeuropassform_submit(Pieform $form, $values) {
 			if (is_object($clone->getElementsByTagName('code')->item(0))) {
 				$application = $clone->getElementsByTagName('code')->item(0)->nodeValue;
 				if ($application != null) {
-					ensure_record_exists('artefact',
-						array('artefacttype' => 'application', 'owner' => $userid),
-						array('title' => get_string('application', 'artefact.europass'), 'description' => 'i'.$application, 'author' => $userid)
-					);
+					$id = get_field('artefact', 'id', 'artefacttype', 'application', 'owner', $userid);
+					if ($id != false) {
+						update_record('artefact', array('title' => get_string('application', 'artefact.europass'), 'description' => 'i'.$application, 'mtime' => $dbnow, 'atime' => $dbnow), array('id' => $id));
+					} else {
+						insert_record('artefact', array('artefacttype' => 'application', 'owner' => $userid, 'author' => $userid, 'title' => get_string('application', 'artefact.europass'), 'description' => 'i'.$application, 'mtime' => $dbnow, 'atime' => $dbnow, 'ctime' => $dbnow));
+					}
 				}
 			}
 		}
@@ -329,6 +383,7 @@ function importeuropassform_submit(Pieform $form, $values) {
 		// =================================
 		// Step 3: Import work experience...
 		// =================================
+		// Check if object exists - it only exists in Europass CV XML
 		if (!empty($values['workexperience']) && is_object($xmlDoc->getElementsByTagName('workexperiencelist')->item(0))) {
 			$employment = get_record('artefact', 'artefacttype', 'employmenthistory', 'owner', $userid);
 			if (!$employment) {
@@ -338,6 +393,9 @@ function importeuropassform_submit(Pieform $form, $values) {
 						'owner' => $userid,
 						'title' => get_string('employmenthistory', 'artefact.resume'),
 						'author' => $userid,
+						'mtime' => $dbnow,
+						'atime' => $dbnow,
+						'ctime' => $dbnow
 					),
 					'id', true
 				);
@@ -449,12 +507,11 @@ function importeuropassform_submit(Pieform $form, $values) {
 				}
 				
 				// Import employment history...
-				$wheredata = array(
+				$employmentdata = array(
 					'artefact'  => $artefactid,
 					'startdate' => $startdate,
 					'employer'  => $employer,
 				);
-				$employmentdata = $wheredata;
 				if ($enddate != null) {
 					$employmentdata = array_merge($employmentdata, array('enddate' => $enddate));
 				}
@@ -467,13 +524,20 @@ function importeuropassform_submit(Pieform $form, $values) {
 				if ($positiondescription != null) {
 					$employmentdata = array_merge($employmentdata, array('positiondescription' => $positiondescription));
 				}
-				ensure_record_exists('artefact_resume_employmenthistory', $wheredata, $employmentdata);
+				$id = get_field('artefact_resume_employmenthistory', 'id', 'artefact', $artefactid, 'startdate', $startdate, 'employer', $employer);
+				if ($id != false) {
+					update_record('artefact_resume_employmenthistory', $employmentdata, array('id' => $id));
+				} else {
+					insert_record('artefact_resume_employmenthistory', $employmentdata);
+				}
 			}
+			update_record('artefact', array('mtime' => $dbnow, 'atime' => $dbnow), array('id' => $artefactid));
 		}
 
 		// ===========================
 		// Step 4: Import education...
 		// ===========================
+		// Check if object exists - it only exists in Europass CV XML
 		if (!empty($values['education']) && is_object($xmlDoc->getElementsByTagName('educationlist')->item(0))) {
 			$education = get_record('artefact', 'artefacttype', 'educationhistory', 'owner', $userid);
 			if (!$education) {
@@ -483,6 +547,9 @@ function importeuropassform_submit(Pieform $form, $values) {
 						'owner' => $userid,
 						'title' => get_string('educationhistory', 'artefact.resume'),
 						'author' => $userid,
+						'mtime' => $dbnow,
+						'atime' => $dbnow,
+						'ctime' => $dbnow
 					),
 					'id', true
 				);
@@ -589,12 +656,11 @@ function importeuropassform_submit(Pieform $form, $values) {
 				}
 				
 				// Import education history...
-				$wheredata = array(
+				$educationdata = array(
 					'artefact'  => $artefactid,
 					'startdate' => $startdate,
 					'institution'  => $institution,
 				);
-				$educationdata = $wheredata;
 				if ($enddate != null) {
 					$educationdata = array_merge($educationdata, array('enddate' => $enddate));
 				}
@@ -610,8 +676,14 @@ function importeuropassform_submit(Pieform $form, $values) {
 				if ($qualdescription != null) {
 					$educationdata = array_merge($educationdata, array('qualdescription' => $qualdescription));
 				}
-				ensure_record_exists('artefact_resume_educationhistory', $wheredata, $educationdata);
+				$id = get_field('artefact_resume_educationhistory', 'id', 'artefact', $artefactid, 'startdate', $startdate, 'institution', $institution);
+				if ($id != false) {
+					update_record('artefact_resume_educationhistory', $educationdata, array('id' => $id));
+				} else {
+					insert_record('artefact_resume_educationhistory', $educationdata);
+				}
 			}
+			update_record('artefact', array('mtime' => $dbnow, 'atime' => $dbnow), array('id' => $artefactid));
 		}
 
 		// ===========================
@@ -626,6 +698,9 @@ function importeuropassform_submit(Pieform $form, $values) {
 						'owner' => $userid,
 						'title' => get_string('mothertongue', 'artefact.europass'),
 						'author' => $userid,
+						'mtime' => $dbnow,
+						'atime' => $dbnow,
+						'ctime' => $dbnow
 					),
 					'id', true
 				);
@@ -640,6 +715,9 @@ function importeuropassform_submit(Pieform $form, $values) {
 						'owner' => $userid,
 						'title' => get_string('otherlanguage', 'artefact.europass'),
 						'author' => $userid,
+						'mtime' => $dbnow,
+						'atime' => $dbnow,
+						'ctime' => $dbnow
 					),
 					'id', true
 				);
@@ -657,10 +735,13 @@ function importeuropassform_submit(Pieform $form, $values) {
 				if ($child->getAttribute('xsi:type') == 'europass:mother' && $child->hasChildNodes()) {
 					if (is_object($child->getElementsByTagName('code')->item(0))) {
 						$languagecode = strtolower($child->getElementsByTagName('code')->item(0)->nodeValue);
-						ensure_record_exists('artefact_europass_mothertongue',
-							array('artefact' => $mothertongueid, 'language' => $languagecode),
-							array('artefact' => $mothertongueid, 'language' => $languagecode)
-						);
+						$id = get_field('artefact_europass_mothertongue', 'id', 'artefact', $mothertongueid, 'language', $languagecode);
+						if ($id != false) {
+							update_record('artefact_europass_mothertongue', array('artefact' => $mothertongueid, 'language' => $languagecode), array('id' => $id));
+						} else {
+							insert_record('artefact_europass_mothertongue', array('artefact' => $mothertongueid, 'language' => $languagecode));
+						}
+						update_record('artefact', array('mtime' => $dbnow, 'atime' => $dbnow), array('id' => $mothertongueid));
 					} else {
 						if (is_object($child->getElementsByTagName('label')->item(0))) {
 							$SESSION->add_info_msg(get_string('languagecodemissing', 'artefact.europass', 'mothertongue'));
@@ -680,19 +761,22 @@ function importeuropassform_submit(Pieform $form, $values) {
 						$level['spokeninteraction'] = strtoupper($language->getElementsByTagName('spokeninteraction')->item(0)->nodeValue);
 						$level['spokenproduction'] = strtoupper($language->getElementsByTagName('spokenproduction')->item(0)->nodeValue);
 						$level['writing'] = strtoupper($language->getElementsByTagName('writing')->item(0)->nodeValue);
-						$languageid = ensure_record_exists('artefact_europass_otherlanguage',
-							array('artefact' => $otherlanguageid, 'language' => $languagecode),
-							array(
-								'artefact'          => $otherlanguageid,
-								'language'          => $languagecode,
-								'listening'         => $level['listening'],
-								'reading'           => $level['reading'],
-								'spokeninteraction' => $level['spokeninteraction'],
-								'spokenproduction'  => $level['spokenproduction'],
-								'writing'           => $level['writing']
-							), 'id', true // Return primary key 'id' when inserting/updating...
+						$languagedata = array(
+							'artefact'          => $otherlanguageid,
+							'language'          => $languagecode,
+							'listening'         => $level['listening'],
+							'reading'           => $level['reading'],
+							'spokeninteraction' => $level['spokeninteraction'],
+							'spokenproduction'  => $level['spokenproduction'],
+							'writing'           => $level['writing']
 						);
-
+						$languageid = get_field('artefact_europass_otherlanguage', 'id', 'artefact', $otherlanguageid, 'language', $languagecode);
+						if ($languageid != false) {
+							update_record('artefact_europass_otherlanguage', $languagedata, array('id' => $languageid));
+						} else {
+							$languageid = insert_record('artefact_europass_otherlanguage', $languagedata, 'id', true);
+						}
+						
 						// Import language diploma(s)
 						// --------------------------
 						$diplomalist = $language->getElementsByTagName('diploma');
@@ -735,18 +819,36 @@ function importeuropassform_submit(Pieform $form, $values) {
 							
 							// Import language diploma...
 							$artefact = get_field('artefact', 'id', 'artefacttype', 'languagediploma', 'owner', $userid);
-							$wheredata = array(
+							if (!$artefact) {
+								$artefact = insert_record('artefact',
+									array(
+										'artefacttype' => 'languagediploma',
+										'owner' => $userid,
+										'title' => get_string('languagediploma', 'artefact.europass'),
+										'author' => $userid,
+										'mtime' => $dbnow,
+										'atime' => $dbnow,
+										'ctime' => $dbnow
+									),
+									'id', true
+								);
+							}
+							$diplomadata = array(
 								'artefact'        => $artefact,
 								'languageid'      => $languageid,
 								'certificate'     => $certificate,
 								'awardingbody'    => $awardingbody,
 								'certificatedate' => $certificatedate,
 							);
-							$diplomadata = $wheredata;
 							if ($europeanlevel != null) {
 								$diplomadata = array_merge($diplomadata, array('europeanlevel' => $europeanlevel));
 							}
-							ensure_record_exists('artefact_europass_languagediploma', $wheredata, $diplomadata);
+							$id = get_field('artefact_europass_languagediploma', 'id', 'artefact', $otherlanguageid, 'languageid', $languageid);
+							if ($id != false) {
+								update_record('artefact_europass_languagediploma', $diplomadata, array('id' => $id));
+							} else {
+								insert_record('artefact_europass_languagediploma', $diplomadata);
+							}
 						}
 
 						// Import linguistic experience(s)
@@ -801,21 +903,40 @@ function importeuropassform_submit(Pieform $form, $values) {
 							
 							// Import linguistic experience...
 							$artefact = get_field('artefact', 'id', 'artefacttype', 'languageexperience', 'owner', $userid);
-							$wheredata = array(
+							if (!$artefact) {
+								$artefact = insert_record('artefact',
+									array(
+										'artefacttype' => 'languageexperience',
+										'owner' => $userid,
+										'title' => get_string('languageexperience', 'artefact.europass'),
+										'author' => $userid,
+										'mtime' => $dbnow,
+										'atime' => $dbnow,
+										'ctime' => $dbnow
+									),
+									'id', true
+								);
+							}
+							$experiencedata = array(
 								'artefact'    => $artefact,
 								'languageid'  => $languageid,
 								'startdate'   => $startdate,
 								'description' => $description,
 							);
-							$experiencedata = $wheredata;
 							if ($enddate != null) {
 								$experiencedata = array_merge($experiencedata, array('enddate' => $enddate));
 							}
-							ensure_record_exists('artefact_europass_languageexperience', $wheredata, $experiencedata);
+							$id = get_field('artefact_europass_languageexperience', 'id', 'artefact', $otherlanguageid, 'languageid', $languageid);
+							if ($id != false) {
+								update_record('artefact_europass_languageexperience', $experiencedata, array('id' => $id));
+							} else {
+								insert_record('artefact_europass_languageexperience', $experiencedata);
+							}
 						}
+						update_record('artefact', array('mtime' => $dbnow, 'atime' => $dbnow), array('id' => $otherlanguageid));
 					} else {
 						if (is_object($child->getElementsByTagName('label')->item(0))) {
-							$SESSION->add_info_msg(get_string('languagecodemissing', 'artefact.europass', 'mothertongue'));
+							$SESSION->add_info_msg(get_string('languagecodemissing', 'artefact.europass', 'otherlanguage'));
 						}
 					}
 				}
@@ -825,6 +946,7 @@ function importeuropassform_submit(Pieform $form, $values) {
 		// ========================================
 		// Step 6: Import skills and competences...
 		// ========================================
+		// Check if object exists - it only exists in Europass CV XML
 		if (!empty($values['skills']) && is_object($xmlDoc->getElementsByTagName('skilllist')->item(0))) {
 			$parent = $xmlDoc->getElementsByTagName('skilllist')->item(0);
 			$clone = $parent->cloneNode(true);
@@ -832,45 +954,57 @@ function importeuropassform_submit(Pieform $form, $values) {
 			foreach ($children as $child) {
 				// Import social skills...
 				if ($child->getAttribute('type') == 'social' && $child->nodeValue != null) {
-					ensure_record_exists('artefact',
-						array('artefacttype' => 'socialskill', 'owner' => $userid),
-						array('title' => get_string('socialskill', 'artefact.europass'), 'description' => $child->nodeValue, 'author' => $userid)
-					);
+					$id = get_field('artefact', 'id', 'artefacttype', 'socialskill', 'owner', $userid);
+					if ($id != false) {
+						update_record('artefact', array('title' => get_string('socialskill', 'artefact.europass'), 'description' => $child->nodeValue, 'mtime' => $dbnow, 'atime' => $dbnow), array('id' => $id));
+					} else {
+						insert_record('artefact', array('artefacttype' => 'socialskill', 'owner' => $userid, 'author' => $userid, 'title' => get_string('socialskill', 'artefact.europass'), 'description' => $child->nodeValue, 'mtime' => $dbnow, 'atime' => $dbnow, 'ctime' => $dbnow));
+					}
 				}
 				// Import organisatonal skills...
 				if ($child->getAttribute('type') == 'organisational' && $child->nodeValue != null) {
-					ensure_record_exists('artefact',
-						array('artefacttype' => 'organisationalskill', 'owner' => $userid),
-						array('title' => get_string('organisationalskill', 'artefact.europass'), 'description' => $child->nodeValue, 'author' => $userid)
-					);
+					$id = get_field('artefact', 'id', 'artefacttype', 'organisationalskill', 'owner', $userid);
+					if ($id != false) {
+						update_record('artefact', array('title' => get_string('organisationalskill', 'artefact.europass'), 'description' => $child->nodeValue, 'mtime' => $dbnow, 'atime' => $dbnow), array('id' => $id));
+					} else {
+						insert_record('artefact', array('artefacttype' => 'organisationalskill', 'owner' => $userid, 'author' => $userid, 'title' => get_string('organisationalskill', 'artefact.europass'), 'description' => $child->nodeValue, 'mtime' => $dbnow, 'atime' => $dbnow, 'ctime' => $dbnow));
+					}
 				}
 				// Import technical skills...
 				if ($child->getAttribute('type') == 'technical' && $child->nodeValue != null) {
-					ensure_record_exists('artefact',
-						array('artefacttype' => 'technicalskill', 'owner' => $userid),
-						array('title' => get_string('technicalskill', 'artefact.europass'), 'description' => $child->nodeValue, 'author' => $userid)
-					);
+					$id = get_field('artefact', 'id', 'artefacttype', 'technicalskill', 'owner', $userid);
+					if ($id != false) {
+						update_record('artefact', array('title' => get_string('technicalskill', 'artefact.europass'), 'description' => $child->nodeValue, 'mtime' => $dbnow, 'atime' => $dbnow), array('id' => $id));
+					} else {
+						insert_record('artefact', array('artefacttype' => 'technicalskill', 'owner' => $userid, 'author' => $userid, 'title' => get_string('technicalskill', 'artefact.europass'), 'description' => $child->nodeValue, 'mtime' => $dbnow, 'atime' => $dbnow, 'ctime' => $dbnow));
+					}
 				}
 				// Import computer skills...
 				if ($child->getAttribute('type') == 'computer' && $child->nodeValue != null) {
-					ensure_record_exists('artefact',
-						array('artefacttype' => 'computerskill', 'owner' => $userid),
-						array('title' => get_string('computerskill', 'artefact.europass'), 'description' => $child->nodeValue, 'author' => $userid)
-					);
+					$id = get_field('artefact', 'id', 'artefacttype', 'computerskill', 'owner', $userid);
+					if ($id != false) {
+						update_record('artefact', array('title' => get_string('computerskill', 'artefact.europass'), 'description' => $child->nodeValue, 'mtime' => $dbnow, 'atime' => $dbnow), array('id' => $id));
+					} else {
+						insert_record('artefact', array('artefacttype' => 'computerskill', 'owner' => $userid, 'author' => $userid, 'title' => get_string('computerskill', 'artefact.europass'), 'description' => $child->nodeValue, 'mtime' => $dbnow, 'atime' => $dbnow, 'ctime' => $dbnow));
+					}
 				}
 				// Import artistic skills...
 				if ($child->getAttribute('type') == 'artistic' && $child->nodeValue != null) {
-					ensure_record_exists('artefact',
-						array('artefacttype' => 'artisticskill', 'owner' => $userid),
-						array('title' => get_string('artisticskill', 'artefact.europass'), 'description' => $child->nodeValue, 'author' => $userid)
-					);
+					$id = get_field('artefact', 'id', 'artefacttype', 'artisticskill', 'owner', $userid);
+					if ($id != false) {
+						update_record('artefact', array('title' => get_string('artisticskill', 'artefact.europass'), 'description' => $child->nodeValue, 'mtime' => $dbnow, 'atime' => $dbnow), array('id' => $id));
+					} else {
+						insert_record('artefact', array('artefacttype' => 'artisticskill', 'owner' => $userid, 'author' => $userid, 'title' => get_string('artisticskill', 'artefact.europass'), 'description' => $child->nodeValue, 'mtime' => $dbnow, 'atime' => $dbnow, 'ctime' => $dbnow));
+					}
 				}
 				// Import other skills...
 				if ($child->getAttribute('type') == 'other' && $child->nodeValue != null) {
-					ensure_record_exists('artefact',
-						array('artefacttype' => 'otherskill', 'owner' => $userid),
-						array('title' => get_string('otherskill', 'artefact.europass'), 'description' => $child->nodeValue, 'author' => $userid)
-					);
+					$id = get_field('artefact', 'id', 'artefacttype', 'otherskill', 'owner', $userid);
+					if ($id != false) {
+						update_record('artefact', array('title' => get_string('otherskill', 'artefact.europass'), 'description' => $child->nodeValue, 'mtime' => $dbnow, 'atime' => $dbnow), array('id' => $id));
+					} else {
+						insert_record('artefact', array('artefacttype' => 'otherskill', 'owner' => $userid, 'author' => $userid, 'title' => get_string('otherskill', 'artefact.europass'), 'description' => $child->nodeValue, 'mtime' => $dbnow, 'atime' => $dbnow, 'ctime' => $dbnow));
+					}
 				}
 			}
 			// Import driving licences...
@@ -885,15 +1019,18 @@ function importeuropassform_submit(Pieform $form, $values) {
 				$drivinglicence[$licence->nodeValue] = true;
 			}
 			$drivinglicence = serialize($drivinglicence);
-			ensure_record_exists('artefact',
-				array('artefacttype' => 'drivinglicence', 'owner' => $userid),
-				array('title' => get_string('drivinglicence', 'artefact.europass'), 'description' => $drivinglicence, 'author' => $userid)
-			);
+			$id = get_field('artefact', 'id', 'artefacttype', 'drivinglicence', 'owner', $userid);
+			if ($id != false) {
+				update_record('artefact', array('title' => get_string('drivinglicence', 'artefact.europass'), 'description' => $drivinglicence, 'mtime' => $dbnow, 'atime' => $dbnow), array('id' => $id));
+			} else {
+				insert_record('artefact', array('artefacttype' => 'drivinglicence', 'owner' => $userid, 'author' => $userid, 'title' => get_string('drivinglicence', 'artefact.europass'), 'description' => $drivinglicence, 'mtime' => $dbnow, 'atime' => $dbnow, 'ctime' => $dbnow));
+			}
 		}
 
 		// ========================================
 		// Step 7: Import additional information...
 		// ========================================
+		// Check if object exists - it only exists in Europass CV XML
 		if (!empty($values['additionalinfo']) && is_object($xmlDoc->getElementsByTagName('misclist')->item(0))) {
 			$parent = $xmlDoc->getElementsByTagName('misclist')->item(0);
 			$clone = $parent->cloneNode(true);
@@ -901,17 +1038,21 @@ function importeuropassform_submit(Pieform $form, $values) {
 			foreach ($children as $child) {
 				// Import additional information...
 				if ($child->getAttribute('type') == 'additional' && $child->nodeValue != null) {
-					ensure_record_exists('artefact',
-						array('artefacttype' => 'additionalinfo', 'owner' => $userid),
-						array('title' => get_string('additionalinfo', 'artefact.europass'), 'description' => $child->nodeValue)
-					);
+					$id = get_field('artefact', 'id', 'artefacttype', 'additionalinfo', 'owner', $userid);
+					if ($id != false) {
+						update_record('artefact', array('title' => get_string('additionalinfo', 'artefact.europass'), 'description' => $child->nodeValue, 'mtime' => $dbnow, 'atime' => $dbnow), array('id' => $id));
+					} else {
+						insert_record('artefact', array('artefacttype' => 'additionalinfo', 'owner' => $userid, 'author' => $userid, 'title' => get_string('additionalinfo', 'artefact.europass'), 'description' => $child->nodeValue, 'mtime' => $dbnow, 'atime' => $dbnow, 'ctime' => $dbnow));
+					}
 				}
 				// Import annexes...
 				if ($child->getAttribute('type') == 'annexes' && $child->nodeValue != null) {
-					ensure_record_exists('artefact',
-						array('artefacttype' => 'annexes', 'owner' => $userid),
-						array('title' => get_string('annexes', 'artefact.europass'), 'description' => $child->nodeValue)
-					);
+					$id = get_field('artefact', 'id', 'artefacttype', 'annexes', 'owner', $userid);
+					if ($id != false) {
+						update_record('artefact', array('title' => get_string('annexes', 'artefact.europass'), 'description' => $child->nodeValue, 'mtime' => $dbnow, 'atime' => $dbnow), array('id' => $id));
+					} else {
+						insert_record('artefact', array('artefacttype' => 'annexes', 'owner' => $userid, 'author' => $userid, 'title' => get_string('annexes', 'artefact.europass'), 'description' => $child->nodeValue, 'mtime' => $dbnow, 'atime' => $dbnow, 'ctime' => $dbnow));
+					}
 				}
 			}
 		}

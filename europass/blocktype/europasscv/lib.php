@@ -71,12 +71,16 @@ class PluginBlocktypeEuropassCV extends PluginBlocktype {
         $configdata['viewid'] = $instance->get('view');
 
 		// Load up the Europass CV generated XML string
-		$xmlDoc = new DOMDocument;
-		$xmlDoc->loadXML(generate_europasscv_xml((!empty($configdata['userid']) ? $configdata['userid'] : $USER->get('id')), true, $locale, (!empty($configdata['internaldate']) ? $configdata['internaldate'] : 'dmy11'), (!empty($configdata['externaldate']) ? $configdata['externaldate'] : '/numeric/long')));
+		//$xmlDoc = new DOMDocument;
+		//$xmlDoc->loadXML(generate_europasscv_xml((!empty($configdata['userid']) ? $configdata['userid'] : $USER->get('id')), true, $locale, (!empty($configdata['internaldate']) ? $configdata['internaldate'] : 'dmy11'), (!empty($configdata['externaldate']) ? $configdata['externaldate'] : '/numeric/long')));
+		$xmlDoc = simplexml_load_string(generate_europasscv_xml((!empty($configdata['userid']) ? $configdata['userid'] : $USER->get('id')), true, $locale, (!empty($configdata['internaldate']) ? $configdata['internaldate'] : 'dmy11'), (!empty($configdata['externaldate']) ? $configdata['externaldate'] : '/numeric/long')));
 		
 		// Load up the appropriate XSL file, according to selected locale
-		$xslDoc = new DOMDocument;
-		$xslDoc->load(get_config('docroot') . 'artefact/europass/blocktype/europasscv/xsl/cv_' . $locale . '_V2.0.xsl');
+		//$xslDoc = new DOMDocument;
+		//$xslDoc->load(get_config('docroot') . 'artefact/europass/blocktype/europasscv/xsl/cv_' . $locale . '_V2.0.xsl');
+		$xslDoc = simplexml_load_string(file_get_contents(get_config('wwwroot') . 'artefact/europass/blocktype/europasscv/xsl/cv_' . $locale . '_V2.0.xsl'));
+		
+		//Start the XSLT processor and import stylesheet
 		$xslt = new XSLTProcessor;
 		$xslt->importStyleSheet($xslDoc);
 
