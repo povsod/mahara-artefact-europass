@@ -1,27 +1,11 @@
 <?php
 /**
- * Mahara: Electronic portfolio, weblog, resume builder and social networking
- * Copyright (C) 2006-2012 Catalyst IT Ltd and others; see:
- *                         http://wiki.mahara.org/Contributors
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  * @package    mahara
  * @subpackage artefact-europass
  * @author     Gregor Anzelj
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @copyright  (C) 2009-2012 Gregor Anzelj, gregor.anzelj@gmail.com
+ * @copyright  (C) 2009-2015 Gregor Anzelj, gregor.anzelj@gmail.com
  *
  */
  
@@ -66,17 +50,18 @@ $eform = array(
 			'options' => getoptions_locales(),
 			'defaultvalue' => set_default_locale(get_config('lang')),
 		),
-		'documenttype' => array(
+		/*'documenttype' => array(
 			'type' => 'radio', 
 			'defaultvalue' => 'europasscv',
 			'options' => array(
-				'europasscv' => get_string('europassCV', 'artefact.europass'),
-				'europasslp'   => get_string('europassLP', 'artefact.europass'),
+				'europasscv'    => get_string('europassCV', 'artefact.europass'),
+				'europassesp'   => get_string('europassESP', 'artefact.europass'),
+				'europasscvesp' => get_string('europassCVESP', 'artefact.europass'),
 			),
 			'title' => get_string('documenttype', 'artefact.europass'),
 			'separator' => '<br />',
 			'onclick' => 'selectedDocumentType(document.exporteuropassform.documenttype[1].checked)', // if EuropassLP option is checked...
-		),
+		),*/
 		'photograph' => array(
 			'type' => 'file',
 			'labelhtml' => get_string('photograph','artefact.europass'),
@@ -88,13 +73,11 @@ $eform = array(
 			'defaultvalue' => 'xml',
 			'options' => array(
 				'pdf'      => get_string('pdf', 'artefact.europass'),
-				'pdfhrxml' => get_string('pdfhrxml', 'artefact.europass'),
+				//'pdf-cv'   => get_string('pdf-cv', 'artefact.europass'),
+				//'pdf-esp'  => get_string('pdf-esp', 'artefact.europass'),
 				'doc'      => get_string('doc', 'artefact.europass'),
 				'odt'      => get_string('odt', 'artefact.europass'),
-				'html'     => get_string('html', 'artefact.europass'),
-				'json'      => get_string('json', 'artefact.europass'),
 				'xml'      => get_string('xml', 'artefact.europass'),
-				'hrxml'    => get_string('hrxml', 'artefact.europass'),
 			),
 			'title' => get_string('filetype', 'artefact.europass'),
 			'separator' => '<br />',
@@ -197,7 +180,6 @@ function exporteuropassform_submit(Pieform $form, $values) {
 	}
 
 	$SESSION->set('locale', $values['locale']);
-	$SESSION->set('documenttype', $values['documenttype']);
 	$SESSION->set('fileformat', $values['fileformat']);
 	$SESSION->set('photograph', $values['photograph']);
 	$SESSION->set('internaldate', $values['internaldate']);

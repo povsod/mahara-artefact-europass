@@ -1,9 +1,11 @@
 /**
- * TODO
-
- * move javascript into the resume plugin?
- * test in safari and opera
- * implement for employment history
+ *
+ * @package    mahara
+ * @subpackage artefact-europass
+ * @author     Gregor Anzelj
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL
+ * @copyright  (C) 2009-2015 Gregor Anzelj, gregor.anzelj@gmail.com
+ *
  */
 
 addLoadEvent(function() {

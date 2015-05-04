@@ -34,11 +34,6 @@ echo $form_tag;
                     </tr>
 					<tr><td colspan="2">&nbsp;</td></tr>
                     <tr>
-                        <th><?php echo get_string('selectdocumenttype', 'artefact.europass'); ?></th>
-                        <td><?php echo $elements['documenttype']['html']; ?></td>
-                    </tr>
-					<tr><td colspan="2">&nbsp;</td></tr>
-                    <tr>
                         <th><?php echo get_string('photograph', 'artefact.europass'); ?></th>
                         <td><?php echo $elements['photograph']['html']; ?></td>
                     </tr>

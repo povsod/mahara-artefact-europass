@@ -10,7 +10,7 @@
 {else}
 <link rel="stylesheet" type="text/css" href="{$WWWROOT}artefact/europass/europass.css">
 <div id="europasswrap">
-{include file="buttons.tpl"}
+{include file="artefact:europass:buttons.tpl"}
 
 {if $mahararelease}<div id="messages"><div class="info">
 {str tag='newerversionforcompatibility' section='artefact.europass'}
