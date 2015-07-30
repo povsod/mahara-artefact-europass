@@ -25,7 +25,7 @@ class PluginBlocktypeEuropassCV extends PluginBlocktype {
     }
 
     public static function get_categories() {
-        return array('resume');
+        return array('internal' => 60100);
     }
 
     public static function render_instance(BlockInstance $instance, $editing=false) {
@@ -78,6 +78,14 @@ class PluginBlocktypeEuropassCV extends PluginBlocktype {
 		$result .= substr($html, $start + 6, $finish - $start);
 		//$result .= '</table>';
 		$result = html_entity_decode($result);
+
+		// Replace the following reference because it does not exist anymore: 
+		// http://europass.cedefop.europa.eu/instruments/images/logospace.gif
+		$result = str_replace(
+		    'http://europass.cedefop.europa.eu/instruments/images/logospace.gif',
+			get_config('wwwroot') . 'artefact/europass/images/space.png',
+			$result
+		);
 		
 		return $result;	
     }

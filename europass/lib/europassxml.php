@@ -730,7 +730,7 @@ function generate_europasscv_xml($userid, $showHTML=false, $locale='en_GB', $int
 	// Dinamically set each education
 	// ------------------------------
 	$j = 0;
-	if (!empty($workexperience_list)) {
+	if (!empty($education_list)) {
 		foreach ($education_list as $education) {
 			$childRoot = $xmlDoc->getElementsByTagName('prefs')->item(0);
 			// Set education period

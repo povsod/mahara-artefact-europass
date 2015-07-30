@@ -33,35 +33,35 @@ echo $form_tag;
 		<th><?php echo $elements['socialskill']['title']; ?></th>
         <td colspan="4"><div><?php echo $elements['socialskill']['html']; ?></div>
 			<span class="help"><a onclick="contextualHelp('europassform','socialskill','artefact','europass','','',this); return false;" href="">
-			<img title="Help" alt="Help" src="<?php echo get_config('wwwroot') ?>/theme/raw/static/images/icon_help.png"></a></span>
+			<img title="Help" alt="Help" src="<?php echo get_config('wwwroot') ?>/theme/raw/static/images/help.png"></a></span>
 		</td>
     </tr>
     <tr id="europassform_organisationalskill_container" class="textarea">
 		<th><?php echo $elements['organisationalskill']['title']; ?></th>
         <td colspan="4"><div><?php echo $elements['organisationalskill']['html']; ?></div>
 			<span class="help"><a onclick="contextualHelp('europassform','organisationalskill','artefact','europass','','',this); return false;" href="">
-			<img title="Help" alt="Help" src="<?php echo get_config('wwwroot') ?>/theme/raw/static/images/icon_help.png"></a></span>
+			<img title="Help" alt="Help" src="<?php echo get_config('wwwroot') ?>/theme/raw/static/images/help.png"></a></span>
 		</td>
     </tr>
     <tr id="europassform_technicalskill_container" class="textarea">
 		<th><?php echo $elements['technicalskill']['title']; ?></th>
         <td colspan="4"><div><?php echo $elements['technicalskill']['html']; ?></div>
 			<span class="help"><a onclick="contextualHelp('europassform','technicalskill','artefact','europass','','',this); return false;" href="">
-			<img title="Help" alt="Help" src="<?php echo get_config('wwwroot') ?>/theme/raw/static/images/icon_help.png"></a></span>
+			<img title="Help" alt="Help" src="<?php echo get_config('wwwroot') ?>/theme/raw/static/images/help.png"></a></span>
 		</td>
     </tr>
     <tr id="europassform_computerskill_container" class="textarea">
 		<th><?php echo $elements['computerskill']['title']; ?></th>
         <td colspan="4"><div><?php echo $elements['computerskill']['html']; ?></div>
 			<span class="help"><a onclick="contextualHelp('europassform','computerskill','artefact','europass','','',this); return false;" href="">
-			<img title="Help" alt="Help" src="<?php echo get_config('wwwroot') ?>/theme/raw/static/images/icon_help.png"></a></span>
+			<img title="Help" alt="Help" src="<?php echo get_config('wwwroot') ?>/theme/raw/static/images/help.png"></a></span>
 		</td>
     </tr>
     <tr id="europassform_artisticskill_container" class="textarea">
 		<th><?php echo $elements['artisticskill']['title']; ?></th>
         <td colspan="4"><div><?php echo $elements['artisticskill']['html']; ?></div>
 			<span class="help"><a onclick="contextualHelp('europassform','artisticskill','artefact','europass','','',this); return false;" href="">
-			<img title="Help" alt="Help" src="<?php echo get_config('wwwroot') ?>/theme/raw/static/images/icon_help.png"></a></span>
+			<img title="Help" alt="Help" src="<?php echo get_config('wwwroot') ?>/theme/raw/static/images/help.png"></a></span>
 		</td>
     </tr>
     <tr id="europassform_otherskill_container" class="textarea">

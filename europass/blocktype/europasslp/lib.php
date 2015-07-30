@@ -25,7 +25,7 @@ class PluginBlocktypeEuropassLP extends PluginBlocktype {
     }
 
     public static function get_categories() {
-        return array('resume');
+        return array('internal' => 60300);
     }
 
     public static function render_instance(BlockInstance $instance, $editing=false) {

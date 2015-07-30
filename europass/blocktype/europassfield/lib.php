@@ -22,7 +22,7 @@ class PluginBlocktypeEuropassfield extends PluginBlocktype {
     }
 
     public static function get_categories() {
-        return array('resume');
+        return array('internal' => 60200);
     }
 
      /**
