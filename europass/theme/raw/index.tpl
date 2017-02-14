@@ -8,24 +8,20 @@
 {/foreach}
 </ul>
 {else}
-<link rel="stylesheet" type="text/css" href="{$WWWROOT}artefact/europass/europass.css">
-<div id="europasswrap">
-{include file="artefact:europass:buttons.tpl"}
+{include file="artefact:europass:topbanner.tpl"}
 
-{if $mahararelease}<div id="messages"><div class="info">
-{str tag='newerversionforcompatibility' section='artefact.europass'}
-</div></div>{/if}
-
-<div style="background:#0373B5;"><img src="{$topbanner}"></div>
-
-<fieldset>{if !$hidetitle}<legend class="europassh3">{str tag='identification' section='artefact.europass'}
-</legend>{/if}
-{$profileaboutform|safe}
-{$profilepersonalform|safe}
-</fieldset>
+{include file="artefact:europass:fragments/personalinfo.tpl" order=$prefs.personname}
+{if $prefs.learnerinfo == 1234567}
+    {include file="artefact:europass:fragments/workexperience.tpl"}
+    {include file="artefact:europass:fragments/education.tpl"}
+{else}
+    {include file="artefact:europass:fragments/education.tpl"}
+    {include file="artefact:europass:fragments/workexperience.tpl"}
+{/if}
+{include file="artefact:europass:fragments/competences.tpl"}
+{include file="artefact:europass:fragments/additionalinfo.tpl"}
 
 <div><img src="{$rightlogo}" align="right"></div>
-</div>
 {/if}
 
 {include file="footer.tpl"}

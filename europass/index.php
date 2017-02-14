@@ -5,7 +5,7 @@
  * @subpackage artefact-europass
  * @author     Gregor Anzelj
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @copyright  (C) 2009-2015 Gregor Anzelj, gregor.anzelj@gmail.com
+ * @copyright  (C) 2009-2017 Gregor Anzelj, gregor.anzelj@gmail.com
  *
  */
 
@@ -18,206 +18,40 @@ define('EUROPASS_SUBPAGE', 'index');
 
 require_once(dirname(dirname(dirname(__FILE__))) . '/init.php');
 define('TITLE', get_string('europass', 'artefact.europass'));
-require_once('pieforms/pieform.php');
-require_once(get_config('docroot') . 'artefact/lib.php');
+define('SUBSECTIONHEADING', get_string('ecv-tab',  'artefact.europass'));
+safe_require('artefact', 'europass');
 safe_require('artefact', 'internal');
 
-// Check if XSLT extension is loaded properly, because we will need it...
-// The XSL extension implements the XSL standard, performing XSLT transformations using the libxslt library.
-$xslext = extension_loaded('xsl');
-
-if (!$xslext) {
-    $smarty = smarty();
-    $missingextensions = array();
-    !$xslext && $missingextensions[] = 'xsl';
-    $smarty->assign('missingextensions', $missingextensions);
-    $smarty->display('artefact:europass:index.tpl');
-    exit;
+if (!PluginArtefactEuropass::is_active()) {
+    throw new AccessDeniedException(get_string('plugindisableduser', 'mahara', get_string('europass','artefact.europass')));
 }
 
+// Redirect locations
+$location = array(
+    'profile'    => get_config('wwwroot') . 'artefact/internal/index.php?fs=contact',
+    'resume'     => get_config('wwwroot') . 'artefact/resume/',
+    'employment' => get_config('wwwroot') . 'artefact/resume/employment.php',
+    'education'  => get_config('wwwroot') . 'artefact/resume/employment.php',
+    'languages'  => get_config('wwwroot') . 'artefact/europass/languages.php',
+);
 
-// initialize and load existing profile information
-$element_list = call_static_method('ArtefactTypeProfile', 'get_all_fields');
-$profilefields = array('firstname' => null,	'lastname' => null, 'email' => null, 'address' => null,	'city' => null,	'country' => null, 'homenumber' => null, 'mobilenumber' => null, 'faxnumber' => null);
-$profile_data = get_records_select_array('artefact', "owner=? AND artefacttype IN (" . join(",",array_map(create_function('$a','return db_quote($a);'),array_keys($element_list))) . ")", array($USER->get('id')));
+$css = array(
+    '<link rel="stylesheet" type="text/css" href="' . get_config('wwwroot') . 'artefact/europass/theme/raw/static/style/style.css">',
+);
 
-if ($profile_data) {
-    foreach ($profile_data as $field) {
-        $profilefields[$field->artefacttype] = $field->title;
-    }
-}
-
-$profilefields['email'] = array();
-$profilefields['email']['all'] = get_records_array('artefact_internal_profile_email', 'owner', $USER->get('id'));
-$profilefields['email']['validated'] = array();
-$profilefields['email']['unvalidated'] = array();
-if ($profilefields['email']['all']) {
-    foreach ($profilefields['email']['all'] as $email) {
-        if ($email->verified) {
-            $profilefields['email']['validated'][] = $email->email;
-        }
-        else {
-            $profilefields['email']['unvalidated'][] = $email->email;
-        }
-
-        if ($email->principal) {
-            $profilefields['email']['default'] = $email->email;
-        }
-    }
-}
-
-// User's Personal information
-$personalinformation = null;
-try { $personalinformation = artefact_instance_from_type('personalinformation'); }
-catch (Exception $e) { }
-
-// Locations for various buttons and graphics
-$profilelocation = get_config('wwwroot') . 'artefact/internal/index.php?fs=contact';
-$employmentlocation = get_config('wwwroot') . 'artefact/resume/employment.php';
-$topbanner = get_config('wwwroot') . 'artefact/europass/images/topbanner.png';
-$rightlogo = get_config('wwwroot') . 'artefact/europass/images/rightlogo.png';
-
-// Find out, if Mahara Pieforms are updated (newer than Mahara 1.2.0) - if they can handle LABELESCAPED...
-$pieformfile = file_get_contents('../../lib/pieforms/pieform.php');
-if (strpos($pieformfile,'labelescaped') === false) { $labelescapedvalue = false; }
-else { $labelescapedvalue = true; }
-
-
-$profileaboutform = pieform(array(
-    'name'       => 'profileidentification',
-    'plugintype' => 'artefact',
-    'pluginname' => 'europass',
-    'jsform'     => true,
-    'method'     => 'post',
-    'elements'   => array(
-		'blankheaderline' => array(
-			'type' => 'html',
-			'labelhtml' => '<div style="width:180px;">&nbsp;</div>',
-			'value' => '&nbsp;',
-		),
-        'europassheader' => array(
-			'type'  => 'html',
-			'labelhtml' => '<span id="profileicon"><a href="' . get_config('wwwroot') . 'artefact/file/profileicons.php"><img src="' . get_config('wwwroot') . 'thumb.php?type=profileiconbyid&maxsize=100&id=' . intval($USER->get('profileicon')) . '" alt=""></a></span>',
-			'value' => '<img src="' . get_config('wwwroot') . 'artefact/europass/images/logo_europass.png" alt="Europass" style="margin-left:10px; margin-top:15px">',
-		),
-		'firstname' => array(
-			'type' => 'html',
-			'labelhtml' => get_string('identification-firstname','artefact.europass'),
-			'value' => ($profilefields['firstname'] == null ? '' : $profilefields['firstname']),
-			'help' => true,
-		),
-		'lastname' => array(
-			'type' => 'html',
-			'labelhtml' => get_string('identification-lastname','artefact.europass'),
-			'value' => ($profilefields['lastname'] == null ? '' : $profilefields['lastname']),
-			'help' => true,
-		),
-		'email' => array(
-			'type' => 'html',
-			'labelhtml' => get_string('identification-contactinfo-email','artefact.europass'),
-			'value' => ($profilefields['email']['default'] == null ? '' : $profilefields['email']['default']),
-			'help' => true,
-		),
-		'addressLine' => array(
-			'type' => 'html',
-			'labelhtml' => get_string('identification-addressLine','artefact.europass'),
-			'value' => ($profilefields['address'] == null ? '' : nl2br($profilefields['address'])),
-			'help' => true,
-		),
-		'municipality' => array(
-			'type' => 'html',
-			'labelhtml' => get_string('identification-municipality','artefact.europass'),
-			'value' => ($profilefields['city'] == null ? '' : $profilefields['city']),
-			'help' => true,
-		),
-		'country' => array(
-			'type' => 'html',
-			'labelhtml' => get_string('identification-country','artefact.europass'),
-			'value' =>  ($profilefields['country']== null ? '' : get_string('country.'.$profilefields['country'], 'artefact.europass')),
-			'help' => true,
-		),
-		'telephone' => array(
-			'type' => 'html',
-			'labelhtml' => get_string('identification-contactinfo-telephone','artefact.europass'),
-			'value' => ($profilefields['homenumber'] == null ? '' : $profilefields['homenumber']),
-			'help' => true,
-		),
-		'mobile' => array(
-			'type' => 'html',
-			'labelhtml' => get_string('identification-contactinfo-mobile','artefact.europass'),
-			'value' => ($profilefields['mobilenumber'] == null ? '' : $profilefields['mobilenumber']),
-			'help' => true,
-		),
-		'fax' => array(
-			'type' => 'html',
-			'labelhtml' => get_string('identification-contactinfo-fax','artefact.europass'),
-			'value' => ($profilefields['faxnumber'] == null ? '' : $profilefields['faxnumber']),
-			'help' => true,
-		),
-        'edit' => array(
-            'type' => 'cancel',
-            'value' => get_string('edit', 'mahara'),
-			'goto' => get_config('wwwroot') . 'artefact/internal/index.php?fs=contact',
-        ),
-	)
-));
-
-$profilepersonalform = pieform(array(
-    'name'       => 'personalidentification',
-    'plugintype' => 'artefact',
-    'pluginname' => 'europass',
-    'jsform'     => true,
-    'method'     => 'post',
-    'elements'   => array(
-		'blankline1' => array(
-			'type' => 'html',
-			'labelhtml' => '<div style="width:180px;">&nbsp;</div>',
-			'value' => '&nbsp;',
-		),
-        'birthdate' => array(
-            'type' => 'html',
-            'labelhtml' => get_string('identification-birthdate', 'artefact.europass'),
-            'value' => (!empty($personalinformation) ? ($personalinformation->get_composite('dateofbirth') <> null ? strftime('%Y/%m/%d', $personalinformation->get_composite('dateofbirth')+3600) : '') : ''), // See: artefact/resume/index.php about adding 3600 to dateofbirth
-			'help' => true,
-        ),
-        'birthplace' => array(
-            'type' => 'html',
-            'labelhtml' => get_string('identification-birthplace', 'artefact.europass'),
-            'value' => (!empty($personalinformation) ? $personalinformation->get_composite('placeofbirth') : null),
-        ),  
-        'nationality' => array(
-            'type' => 'html',
-            'labelhtml' => get_string('identification-nationality', 'artefact.europass'),
-            'value' => (!empty($personalinformation) ? $personalinformation->get_composite('citizenship') : null),
-			'help' => true,
-        ),
-        'gender' => array(
-            'type' => 'html', 
-            'labelhtml' => get_string('identification-gender', 'artefact.europass'),
-            'value' => (!empty($personalinformation) ? ($personalinformation->get_composite('gender') == 'male' ? get_string('male', 'artefact.resume') : get_string('female', 'artefact.resume')) : null),
-        ),
-        'edit' => array(
-            'type' => 'cancel',
-            'value' => get_string('edit', 'mahara'),
-			'goto' => get_config('wwwroot') . 'artefact/resume/',
-        ),
-	)
-));
-
-
-$smarty = smarty();
-// Check if Mahara release is older than 1.3.0
-if (get_config('version') < 2010083102) {
-	$SESSION->add_info_msg(get_string('newerversionforcompatibility', 'artefact.europass'));
-	$smarty->assign('mahararelease', 1);
-}
-$smarty->assign('topbanner', $topbanner);
-$smarty->assign('rightlogo', $rightlogo);
-$smarty->assign('profileaboutform', $profileaboutform);
-$smarty->assign('profilelocation', $profilelocation);
-$smarty->assign('profilepersonalform', $profilepersonalform);
-$smarty->assign('PAGEHEADING', get_string('europass', 'artefact.europass'));
+$smarty = smarty(array(), $css);
+$smarty->assign('profile_str', mb_strtolower(get_string('pluginname', 'artefact.internal'), 'UTF-8'));
+$smarty->assign('resume_str', mb_strtolower(get_string('pluginname', 'artefact.resume'), 'UTF-8'));
+$smarty->assign('order_str', mb_strtolower(get_string('Order', 'interaction.forum'), 'UTF-8'));
+$smarty->assign('profileicon_id', intval($USER->get('profileicon')));
+$smarty->assign('prefs', unserialize($USER->get_account_preference('europassprefs')));
+$smarty->assign('profilefields', get_personal_information());
+$smarty->assign('education_data', get_education_and_training());
+$smarty->assign('employment_data', get_work_experience());
+$smarty->assign('skills', get_personal_skills());
+$smarty->assign('additionalinfo', get_additional_information());
+$smarty->assign('location', $location);
+$smarty->assign('europasslang', $USER->get_account_preference('europasslang'));
 $smarty->assign('SUBPAGENAV', PluginArtefactEuropass::submenu_items());
+$smarty->assign('rightlogo', $THEME->get_url('static/images/rightlogo.png', false, 'artefact/europass'));
 $smarty->display('artefact:europass:index.tpl');
-
-?>

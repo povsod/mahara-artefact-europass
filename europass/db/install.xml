@@ -1,71 +1,70 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<XMLDB PATH="artefact/europass/db" VERSION="20100107" COMMENT="XMLDB file for europass tables"
+<XMLDB PATH="lib/db" VERSION="2017020107" COMMENT="XMLDB file for Europass tables"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:noNamespaceSchemaLocation="../../lib/xmldb/xmldb.xsd"
+    xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
 >
-    <TABLES>
-        <TABLE NAME="artefact_europass_mothertongue"> 
-            <FIELDS> 
-                <FIELD NAME="id" TYPE="int" LENGTH="10" SEQUENCE="true" NOTNULL="true" />
-                <FIELD NAME="artefact" TYPE="int" LENGTH="10" NOTNULL="true" />
-                <FIELD NAME="language" TYPE="text" NOTNULL="true" />
-                <FIELD NAME="description" TYPE="text" NOTNULL="false" />
-                <FIELD NAME="displayorder" TYPE="int" LENGTH="10" NOTNULL="true" />
-            </FIELDS>
-            <KEYS>
-                <KEY NAME="primary" TYPE="primary" FIELDS="id" />
-                <KEY NAME="artefactfk" TYPE="foreign" FIELDS="artefact" REFTABLE="artefact" REFFIELDS="id" />
-            </KEYS>
-        </TABLE>
-        <TABLE NAME="artefact_europass_otherlanguage"> 
-            <FIELDS> 
-                <FIELD NAME="id" TYPE="int" LENGTH="10" SEQUENCE="true" NOTNULL="true" />
-                <FIELD NAME="artefact" TYPE="int" LENGTH="10" NOTNULL="true" />
-                <FIELD NAME="language" TYPE="text" NOTNULL="true" />
-                <FIELD NAME="listening" TYPE="text" NOTNULL="true" />
-                <FIELD NAME="reading" TYPE="text" NOTNULL="true" />
-                <FIELD NAME="spokeninteraction" TYPE="text" NOTNULL="true" />
-                <FIELD NAME="spokenproduction" TYPE="text" NOTNULL="true" />
-                <FIELD NAME="writing" TYPE="text" NOTNULL="true" />
-                <FIELD NAME="displayorder" TYPE="int" LENGTH="10" NOTNULL="true" />
-            </FIELDS>
-            <KEYS>
-                <KEY NAME="primary" TYPE="primary" FIELDS="id" />
-                <KEY NAME="artefactfk" TYPE="foreign" FIELDS="artefact" REFTABLE="artefact" REFFIELDS="id" />
-            </KEYS>
-        </TABLE>
-        <TABLE NAME="artefact_europass_languagediploma"> 
-            <FIELDS> 
-                <FIELD NAME="id" TYPE="int" LENGTH="10" SEQUENCE="true" NOTNULL="true" />
-                <FIELD NAME="artefact" TYPE="int" LENGTH="10" NOTNULL="true" />
-                <FIELD NAME="languageid" TYPE="int" LENGTH="10" NOTNULL="true" />
-                <FIELD NAME="certificate" TYPE="text" NOTNULL="true" />
-                <FIELD NAME="awardingbody" TYPE="text" NOTNULL="true" />
-                <FIELD NAME="certificatedate" TYPE="text" NOTNULL="true" />
-                <FIELD NAME="europeanlevel" TYPE="char" LENGTH="2" NOTNULL="false" />
-                <FIELD NAME="displayorder" TYPE="int" LENGTH="10" NOTNULL="true" />
-            </FIELDS>
-            <KEYS>
-                <KEY NAME="primary" TYPE="primary" FIELDS="id" />
-                <KEY NAME="artefactfk" TYPE="foreign" FIELDS="artefact" REFTABLE="artefact" REFFIELDS="id" />
-                <KEY NAME="languagefk" TYPE="foreign" FIELDS="languageid" REFTABLE="artefact_europass_otherlanguage" REFFIELDS="id" />
-            </KEYS>
-        </TABLE>
-        <TABLE NAME="artefact_europass_languageexperience"> 
-            <FIELDS> 
-                <FIELD NAME="id" TYPE="int" LENGTH="10" SEQUENCE="true" NOTNULL="true" />
-                <FIELD NAME="artefact" TYPE="int" LENGTH="10" NOTNULL="true" />
-                <FIELD NAME="languageid" TYPE="int" LENGTH="10" NOTNULL="true" />
-                <FIELD NAME="startdate" TYPE="text" NOTNULL="true" />
-                <FIELD NAME="enddate" TYPE="text" NOTNULL="false" />
-                <FIELD NAME="description" TYPE="text" NOTNULL="true" />
-                <FIELD NAME="displayorder" TYPE="int" LENGTH="10" NOTNULL="true" />
-            </FIELDS>
-            <KEYS>
-                <KEY NAME="primary" TYPE="primary" FIELDS="id" />
-                <KEY NAME="artefactfk" TYPE="foreign" FIELDS="artefact" REFTABLE="artefact" REFFIELDS="id" />
-                <KEY NAME="languagefk" TYPE="foreign" FIELDS="languageid" REFTABLE="artefact_europass_otherlanguage" REFFIELDS="id" />
-            </KEYS>
-        </TABLE>
-    </TABLES>
-</XML>
+<TABLES>
+    <TABLE NAME="artefact_europass_otherlanguage"> 
+        <FIELDS> 
+            <FIELD NAME="id" TYPE="int" LENGTH="10" SEQUENCE="true" NOTNULL="true" />
+            <FIELD NAME="artefact" TYPE="int" LENGTH="10" NOTNULL="true" />
+            <FIELD NAME="language" TYPE="text" NOTNULL="true" />
+            <FIELD NAME="listening" TYPE="text" NOTNULL="true" />
+            <FIELD NAME="reading" TYPE="text" NOTNULL="true" />
+            <FIELD NAME="spokeninteraction" TYPE="text" NOTNULL="true" />
+            <FIELD NAME="spokenproduction" TYPE="text" NOTNULL="true" />
+            <FIELD NAME="writing" TYPE="text" NOTNULL="true" />
+            <FIELD NAME="displayorder" TYPE="int" LENGTH="10" NOTNULL="true" />
+        </FIELDS>
+        <KEYS>
+            <KEY NAME="primary" TYPE="primary" FIELDS="id" />
+            <KEY NAME="artefactfk" TYPE="foreign" FIELDS="artefact" REFTABLE="artefact" REFFIELDS="id" />
+        </KEYS>
+    </TABLE>
+    <TABLE NAME="artefact_europass_certificate"> 
+        <FIELDS> 
+            <FIELD NAME="id" TYPE="int" LENGTH="10" SEQUENCE="true" NOTNULL="true" />
+            <FIELD NAME="artefact" TYPE="int" LENGTH="10" NOTNULL="true" />
+            <FIELD NAME="certificate" TYPE="text" NOTNULL="true" />
+            <FIELD NAME="awardingbody" TYPE="text" NOTNULL="true" />
+            <FIELD NAME="certificatedate" TYPE="text" NOTNULL="true" />
+            <FIELD NAME="europeanlevel" TYPE="char" LENGTH="2" NOTNULL="false" />
+            <FIELD NAME="displayorder" TYPE="int" LENGTH="10" NOTNULL="true" />
+        </FIELDS>
+        <KEYS>
+            <KEY NAME="primary" TYPE="primary" FIELDS="id" />
+            <KEY NAME="artefactfk" TYPE="foreign" FIELDS="artefact" REFTABLE="artefact" REFFIELDS="id" />
+        </KEYS>
+    </TABLE>
+    <TABLE NAME="artefact_europass_languageexperience"> 
+        <FIELDS> 
+            <FIELD NAME="id" TYPE="int" LENGTH="10" SEQUENCE="true" NOTNULL="true" />
+            <FIELD NAME="artefact" TYPE="int" LENGTH="10" NOTNULL="true" />
+            <FIELD NAME="startdate" TYPE="text" NOTNULL="true" />
+            <FIELD NAME="enddate" TYPE="text" NOTNULL="false" />
+            <FIELD NAME="experience" TYPE="text" NOTNULL="true" />
+            <FIELD NAME="displayorder" TYPE="int" LENGTH="10" NOTNULL="true" />
+        </FIELDS>
+        <KEYS>
+            <KEY NAME="primary" TYPE="primary" FIELDS="id" />
+            <KEY NAME="artefactfk" TYPE="foreign" FIELDS="artefact" REFTABLE="artefact" REFFIELDS="id" />
+        </KEYS>
+    </TABLE>
+    <TABLE NAME="artefact_europass_digitalcompetence"> 
+        <FIELDS> 
+            <FIELD NAME="id" TYPE="int" LENGTH="10" SEQUENCE="true" NOTNULL="true" />
+            <FIELD NAME="artefact" TYPE="int" LENGTH="10" NOTNULL="true" />
+            <FIELD NAME="information" TYPE="text" NOTNULL="true" />
+            <FIELD NAME="communication" TYPE="text" NOTNULL="true" />
+            <FIELD NAME="contentcreation" TYPE="text" NOTNULL="true" />
+            <FIELD NAME="safety" TYPE="text" NOTNULL="true" />
+            <FIELD NAME="problemsolving" TYPE="text" NOTNULL="true" />
+            <FIELD NAME="displayorder" TYPE="int" LENGTH="10" NOTNULL="true" />
+        </FIELDS>
+        <KEYS>
+            <KEY NAME="primary" TYPE="primary" FIELDS="id" />
+            <KEY NAME="artefactfk" TYPE="foreign" FIELDS="artefact" REFTABLE="artefact" REFFIELDS="id" />
+        </KEYS>
+    </TABLE>
+</TABLES>
+</XMLDB>

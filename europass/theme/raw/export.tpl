@@ -8,9 +8,9 @@
 {/foreach}
 </ul>
 {else}
-{$exporteuropassform|safe}
+{$form|safe}
 <br><div id="exportgeneration">
-<iframe src="{$WWWROOT}artefact/europass/exportgenerate.php" scrolling="no" frameborder="none" style="border:0px; width:100%; height:50px;"></iframe>
+<iframe src="{$WWWROOT}artefact/europass/export/generate.php" scrolling="no" frameborder="none" style="border:0px; width:100%; height:100px;"></iframe>
 </div>
 {/if}
 

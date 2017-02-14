@@ -1,96 +1,250 @@
 /**
- * CSS rules for the Europass section
  *
- * Copyright (C) 2006-2010 Gregor Anželj
+ * CSS rules for the Europass section
  * This file is distributed under the same terms as Mahara itself
+ * @copyright  (C) 2009-2017 Gregor Anzelj, gregor.anzelj@gmail.com
+ *
  */
 
-/* EUROPASS > EUROPASS EXPORT/IMPORT */
-#exporteuropass-t {
-    margin: 0 auto;
-    min-width: 700px;
-    max-width: 900px;
-    width: 800px;
-	/*background: #aabbcc;*/
+#europass-banner {
+    background-color: #2C4969;
+    padding: 21px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
 }
-#importeuropass-t {
-    margin: 0 auto;
-    min-width: 500px;
-    max-width: 700px;
-    width: 600px;
-	/*background: #aabbcc;*/
+.subpage {
+    padding-bottom: 120px !important; /* for bottom right europass logo */
 }
-#exporteuropass-t thead th,
-#importeuropass-t thead th {
-    text-align: left;
-    font-size: 1.3em;
-    border-bottom: none !important;
+
+table#personalinformation td,
+table#personalinformation th {
+    border-top: 0px solid transparent;
+    padding: 2px;
 }
-#exporteuropass-t td.step1 {
-	background: #f6f6f6;
-	border: 1px solid #ccc;
-    width: 39%;
-	padding: 1em .5em;
+table#personalinformation,
+table#educationhistorylist,
+table#workexperiencelist,
+table#languageskills,
+table#achievementslist {
+    margin-bottom: 0;
 }
-#importeuropass-t td.step1 {
-	background: #f6f6f6;
-	border: 1px solid #ccc;
-    width: 69%;
-	padding: 1em .5em;
+.text-europass {
+    color: #1E6297;
 }
-#exporteuropass-t td.step1 td,
-#importeuropass-t td.step1 td {
-	white-space: nowrap;
-	text-align: left;
+.separator-row {
+    background-color: #F9F9F9;
 }
-#exporteuropass-t td.step2 {
-	background: #f6f6f6;
-	border: 1px solid #ccc;
-    width: 25%;
-	padding: 1em .5em;
-	text-align: center;
+.thead-europass {
+    color: #FFFFFF;
+    background-color: #1E6297;
+    border-bottom: 1px solid #1E6297!important;
 }
-#importeuropass-t td.step2 {
-	background: #f6f6f6;
-	border: 1px solid #ccc;
-    width: 30%;
-	padding: 1em .5em;
-	text-align: center;
-	vertical-align: middle;
+.border-elp th,
+.border-elp td {
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+    border-right: 0px;
 }
-#exporteuropass-t td.step2 td,
-#importeuropass-t td.step2 td {
-	white-space: nowrap;
-	text-align: left;
+.border-elp td:first-child,
+.border-elp th:first-child {
+    border-left: 0!important;
 }
-#exporteuropass-t td.step3 {
-	background: #efefef;
-	border: 1px solid #ccc;
-    width: 20%;
-    text-align: center;
-	padding: 1em .5em;
-	vertical-align: middle;
+.left-border-europass {
+    border-left: 1px solid #1E6297;
 }
-#exporteuropass-t #exporteuropassform_generate,
-#importeuropass-t #importeuropassform_submit {
-	font-size: 1.6em;
-	font-weight: bold;
+.education.panel-body,
+.employment.panel-body,
+.competences.panel-body,
+.achievements.panel-body,
+.languages.panel-body,
+.otherlanguage.panel-body,
+.letters.panel-body {
+    padding: 0;
 }
-/*
-#exporteuropass-t #step3info,
-#importeuropass-t #step2info {
-	margin-top: 2em;
+.languages.panel-body.border-europass {
+    border: 1px solid #1E6297;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
 }
-*/
-#exporteuropass-t td.filler,
-#importeuropass-t td.filler {
-    padding: 0 .25em 0 .25em;
-    font-size: 3.8em;
-    width: 3%;
-	color: #8d8d8d;
-	vertical-align: middle;
+form#delmothertongueform div.description {
+    display: inline-block;
+    font-size: 14px;
+    padding-left: 8px;
+    padding-top: 0px;
+    vertical-align: top !important;
 }
-#exporteuropass-t table table label,
-#importeuropass-t table table label {
-    font-size: .9em;
+
+div.line:after{
+    background: none repeat scroll 0 0 #1093CB;
+    bottom: 0;
+    content: "";
+    height: 0.7rem;
+    position: absolute;
+    right: 0;
+    width: 0.8rem;
+}
+div.line{
+    border-bottom: 2px solid #1093cb;
+    width: 100%;
+    height: 10px;
+    position: relative;
+}
+div.line2{
+    border-bottom: 2px solid #1093cb;
+    width: 100%;
+    height: 2px;
+    margin: 15px 0px;
+}
+
+/* Driving licence(s) buttons */
+.drivingbtn {
+    width: 150px;
+    min-height: 100px;
+    padding: 5px 10px;
+    margin: 0 10px 10px 0;
+    display: inline-block;
+    float: left;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    border: 1px solid #b4b4b4;
+}
+
+.drivingicon,
+.drivinginfo {
+    display: block;
+    height: 90px;
+    margin-bottom: 0;
+}
+.drivingchk {
+    display: inline;
+    float: left;
+}
+.drivinglbl {
+    display: inline;
+    float: right;
+    font-size: 1.7em;
+    font-weight: 700;
+    color: #42637B; /*#1E6297*/
+    padding: 0px;
+}
+
+svg#infoicon {
+    width: 16px;
+    height: 16px;
+    margin: 2px 4px;
+    line-height: 20px;
+    vertical-align: middle;
+}
+svg.drivinglicence path.fill,
+svg.drivinglicence polygon.fill,
+svg.drivinglicence circle.fill,
+svg.drivinglicence ellipse.fill,
+svg.drivinglicence line.fill,
+svg.drivinglicence rect.fill {
+    fill: #42637B!important; /* Mahara th label color: #42637B */
+}
+svg.drivinglicence path.stroke,
+svg.drivinglicence polygon.stroke,
+svg.drivinglicence circle.stroke,
+svg.drivinglicence ellipse.stroke,
+svg.drivinglicence line.stroke,
+svg.drivinglicence rect.stroke {
+    fill: none;
+    stroke: #42637B!important; /* Mahara th label color: #42637B */
+}
+
+svg#category_A,
+svg#category_A1,
+svg#category_A2,
+svg#category_AM,
+svg#category_B,
+svg#category_B1,
+svg#category_C1,
+svg#category_D1 {
+    width: 52px;
+    height: 90px;
+}
+svg#category_BE {
+    width: 80px;
+    height: 90px;
+}
+svg#category_C,
+svg#category_D1E {
+    width: 88px;
+    height: 90px;
+}
+svg#category_C1E {
+    width: 114px;
+    height: 90px;
+}
+svg#category_CE {
+    width: 128px;
+    height: 90px;
+}
+svg#category_D {
+    width: 84px;
+    height: 90px;
+}
+svg#category_DE {
+    width: 120px;
+    height: 90px;
+}
+
+/* Override contextualHelp pop-up appearance */
+.contextualHelp {
+    max-height: 250px !important;
+    overflow: auto !important;
+}
+
+/* For file panel styling in Skills passport section */
+.panel-shadow {
+  box-shadow: 3px 3px 1px #ddd !important;
+  background-color: #fdfdfd !important;
+  margin-bottom: 0px !important; /* Override */
+  margin-top: 20px;
+  margin-right: 20px;
+  width: 30% !important;
+}
+.skillsfolder-heading {
+  background-color: #fdfdfd !important;
+  border-bottom: 1px solid transparent !important;
+}
+.mini-logo {
+  margin-top: -11px;
+}
+.fixed-panel {
+  min-height: 250px;
+  max-height: 250px;
+  padding-top: 0px !important;
+}
+.big-icon {
+  font-size: 180px !important;
+  color: #eee;
+}
+
+/* For panel styling in Export/Import section */
+.step1,
+.step2,
+.step3 {
+    min-height: 350px;
+}
+form#exporteuropass div.radio label,
+form#importeuropass div.radio label {
+    min-width: 100px;
+}
+form#exporteuropass input#documenttype_ecl,
+form#exporteuropass input#documenttype_ecv,
+form#exporteuropass input#documenttype_elp,
+form#exporteuropass input#documenttype_esp,
+form#importeuropass input#importeuropass_identification,
+form#importeuropass input#importeuropass_workexperience,
+form#importeuropass input#importeuropass_education,
+form#importeuropass input#importeuropass_languages,
+form#importeuropass input#importeuropass_skills,
+form#importeuropass input#importeuropass_additionalinfo {
+    display: inline;
 }
