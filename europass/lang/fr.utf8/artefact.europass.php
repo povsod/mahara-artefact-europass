@@ -96,7 +96,7 @@ $string['profilepicinclude'] = 'Include profile picture?';
 // ===================================================================
 
 // Europass GUI form tabs
-$string['ecv-tab'] = 'Curriculum vitae';
+$string['ecv-tab'] = 'CV Europass';
 $string['esp-tab'] = 'Passeport de compétences';
 $string['elp-tab'] = 'Passeport de langues';
 $string['copyright'] = '© Union européenne et Conseil de l\'Europe, 2004 - ';

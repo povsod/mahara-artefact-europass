@@ -57,7 +57,7 @@ class PluginBlocktypeEuropassLP extends MaharaCoreBlocktype {
         return true;
     }
 
-    public static function instance_config_form($instance) {
+    public static function instance_config_form(Blockinstance $instance) {
         $configdata = $instance->get('configdata');
         $locale = (isset($configdata['locale']) ? $configdata['locale'] : get_config('lang'));
 
@@ -80,7 +80,7 @@ class PluginBlocktypeEuropassLP extends MaharaCoreBlocktype {
     }
 
     /**
-     * EuropassLP blocktype is only allowed in personal views, because 
+     * EuropassLP blocktype is only allowed in personal views, because
      * there's no such thing as group/site Europass CV
      */
     public static function allowed_in_view(View $view) {
