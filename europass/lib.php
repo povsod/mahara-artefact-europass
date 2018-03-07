@@ -12,10 +12,10 @@
 defined('INTERNAL') || die();
 
 class PluginArtefactEuropass extends PluginArtefact {
-    
+
     public static function get_artefact_types() {
         return array(
-            'mothertongue', 
+            'mothertongue',
             'otherlanguage',
             'languagediploma',
             'languageexperience',
@@ -29,7 +29,7 @@ class PluginArtefactEuropass extends PluginArtefact {
             'additionalinfo',
         );
     }
-    
+
     public static function get_composite_artefact_types() {
         return array(
             'otherlanguage',
@@ -51,7 +51,7 @@ class PluginArtefactEuropass extends PluginArtefact {
     }
 
     public static function get_block_types() {
-        return array(); 
+        return array();
     }
 
     public static function get_plugin_name() {
@@ -157,7 +157,7 @@ class ArtefactTypeEuropass extends ArtefactType {
     /**
      * Default render method for Europass fields - show their description
      */
-    public function render_self() {
+    public function render_self($options) {
         return clean_html($this->get('description'));
     }
 
@@ -188,7 +188,7 @@ abstract class ArtefactTypeEuropassComposite extends ArtefactTypeEuropass {
     }
 
     /**
-     * Can be overridden to format data retrieved from artefact tables for 
+     * Can be overridden to format data retrieved from artefact tables for
      * display of the resume artefact by render_self
      */
     public static function format_render_self_data($data) {
@@ -221,11 +221,11 @@ abstract class ArtefactTypeEuropassComposite extends ArtefactTypeEuropass {
     }
 
     /**
-    * Takes a pieform that's been set up by all the 
+    * Takes a pieform that's been set up by all the
     * subclass get_form_elements functions
     * and puts the default values in (and hidden id field)
     * ready to be an edit form
-    * 
+    *
     * @param $form pieform structure (before calling pieform() on it
     * passed by _reference_
     */
@@ -247,7 +247,7 @@ abstract class ArtefactTypeEuropassComposite extends ArtefactTypeEuropass {
         }
     }
 
-    /** 
+    /**
     * Returns the name of the supporting table
     */
     public function get_other_table_name() {
@@ -265,12 +265,12 @@ abstract class ArtefactTypeEuropassComposite extends ArtefactTypeEuropass {
         $owner = $USER->get('id');
 
         $sql = 'SELECT ar.*, a.owner
-            FROM {artefact} a 
+            FROM {artefact} a
             JOIN {' . $othertable . '} ar ON ar.artefact = a.id
             WHERE a.owner = ? AND a.artefacttype = ?
             ORDER BY ar.displayorder';
 
-        if (!empty($options['viewid'])) { 
+        if (!empty($options['viewid'])) {
             require_once('view.php');
             $v = new View($options['viewid']);
             $owner = $v->get('owner');
@@ -293,7 +293,7 @@ abstract class ArtefactTypeEuropassComposite extends ArtefactTypeEuropass {
 
 }
 
-class ArtefactTypeOtherlanguage extends ArtefactTypeEuropassComposite { 
+class ArtefactTypeOtherlanguage extends ArtefactTypeEuropassComposite {
 
     public static function get_form_elements() {
         return array(
@@ -353,18 +353,18 @@ class ArtefactTypeOtherlanguage extends ArtefactTypeEuropassComposite {
         );
     }
 
-    public static function bulk_delete($artefactids) {
+    public static function bulk_delete($artefactids, $log = false) {
         parent::bulk_delete_composite($artefactids, 'otherlanguage');
     }
 }
 
-class ArtefactTypeLanguagediploma extends ArtefactTypeEuropassComposite { 
+class ArtefactTypeLanguagediploma extends ArtefactTypeEuropassComposite {
 
     public function can_have_attachments() {
         return true;
     }
 
-    /** 
+    /**
     * Returns the name of the supporting table
     */
     public function get_other_table_name() {
@@ -407,7 +407,7 @@ class ArtefactTypeLanguagediploma extends ArtefactTypeEuropassComposite {
         );
     }
 
-    public static function bulk_delete($artefactids) {
+    public static function bulk_delete($artefactids, $log = false) {
         parent::bulk_delete_composite($artefactids, 'languagediploma');
     }
 }
@@ -447,7 +447,7 @@ class ArtefactTypeLanguageexperience extends ArtefactTypeEuropassComposite {
         );
     }
 
-    public static function bulk_delete($artefactids) {
+    public static function bulk_delete($artefactids, $log = false) {
         parent::bulk_delete_composite($artefactids, 'languageexperience');
     }
 }
@@ -519,18 +519,18 @@ class ArtefactTypeDigitalcompetence extends ArtefactTypeEuropassComposite {
         );
     }
 
-    public static function bulk_delete($artefactids) {
+    public static function bulk_delete($artefactids, $log = false) {
         parent::bulk_delete_composite($artefactids, 'digitalcompetence');
     }
 }
 
-class ArtefactTypeDigitaldiploma extends ArtefactTypeEuropassComposite { 
+class ArtefactTypeDigitaldiploma extends ArtefactTypeEuropassComposite {
 
     public function can_have_attachments() {
         return true;
     }
 
-    /** 
+    /**
     * Returns the name of the supporting table
     */
     public function get_other_table_name() {
@@ -573,7 +573,7 @@ class ArtefactTypeDigitaldiploma extends ArtefactTypeEuropassComposite {
         );
     }
 
-    public static function bulk_delete($artefactids) {
+    public static function bulk_delete($artefactids, $log = false) {
         parent::bulk_delete_composite($artefactids, 'digitaldiploma');
     }
 }
@@ -596,7 +596,7 @@ class ArtefactTypeEuropassElement extends ArtefactTypeEuropass {
     * Takes a pieform that's been set up by all the subclass get_form_elements
     * functions and puts the default values in (and hidden id field) ready to
     * be an edit form
-    * 
+    *
     * @param $form pieform structure (before calling pieform() on it passed by
     * _reference_
     */
@@ -736,7 +736,7 @@ class ArtefactTypeDrivinglicence extends ArtefactTypeEuropassElement {
     * Takes a pieform that's been set up by all the subclass get_form_elements
     * functions and puts the default values in (and hidden id field) ready to
     * be an edit form
-    * 
+    *
     * @param $form pieform structure (before calling pieform() on it passed by
     * _reference_
     */
@@ -771,7 +771,7 @@ class ArtefactTypeDrivinglicence extends ArtefactTypeEuropassElement {
     /**
      * Render method for Driving licence(s) Europass field
      */
-    public function render_self() {
+    public function render_self($options) {
         $licences = unserialize($this->description);
         $renderhtml = '';
         foreach ($licences as $licence => $value) {
@@ -851,7 +851,7 @@ class ArtefactTypeAdditionalinfo extends ArtefactTypeEuropassElement {
 
 function langcompositeform_submit(Pieform $form, $values) {
     try {
-        call_static_method(generate_artefact_class_name($values['compositetype']), 
+        call_static_method(generate_artefact_class_name($values['compositetype']),
             'process_compositeform', $form, $values);
     }
     catch (Exception $e) {
@@ -869,7 +869,7 @@ function langcompositeformedit_submit(Pieform $form, $values) {
         if ($values['compositetype'] == 'languagediploma' || $values['compositetype'] == 'languageexperience') {
             // Find language diploma's or linguistic experience's parent for redirect...
             $sql = 'SELECT aeo.id, aeo.artefact
-                FROM {artefact_europass_otherlanguage} aeo 
+                FROM {artefact_europass_otherlanguage} aeo
                 JOIN {artefact_europass_' . $values['compositetype'] . '} ar ON ar.languageid = aeo.id
                 WHERE ar.id = ? AND ar.artefact = ?';
             $parent = get_record_sql($sql, array($values['id'], $values['artefact']));
@@ -961,7 +961,7 @@ function europassform_submit(Pieform $form, $values) {
 
     $SESSION->add_ok_msg(get_string('europassartefactsaved', 'artefact.europass'));
     redirect(get_config('wwwroot'). 'artefact/europass/' . $values['redirect'] . '.php');
-}   
+}
 
 
 /*************************************
@@ -1128,28 +1128,28 @@ function getoptions_languages() {
     }
     $codes = array(
         // ISO 639-1 codes, filtered by Europass
-        'ab', 'af', 'an', 'ar', 'as', 'az', 
-        'be', 'bg', 'bn', 'bo', 'br', 'bs', 
-        'ca', 'ce', 'co', 'cs', 'cy', 
-        'da', 'de', 
-        'el', 'en', 'eo', 'es', 'et', 'eu', 
-        'fa', 'fi', 'fj', 'fo', 'fr', 'fy', 
-        'ga', 'gd', 'gl', 'gv', 
-        'he', 'hi', 'hr', 'ht', 'hu', 'hy', 
-        'id', 'is', 'it', 
-        'ja', 'jv', 
-        'ka', 'kg', 'ko', 'ku', 'kw', 'ky', 
-        'la', 'lb', 'li', 'ln', 'lt', 'lv', 
-        'mg', 'mk', 'mn', 'mo', 'ms', 'mt', 'my', 
-        'nb', 'ne', 'nl', 'nn', 'no', 
+        'ab', 'af', 'an', 'ar', 'as', 'az',
+        'be', 'bg', 'bn', 'bo', 'br', 'bs',
+        'ca', 'ce', 'co', 'cs', 'cy',
+        'da', 'de',
+        'el', 'en', 'eo', 'es', 'et', 'eu',
+        'fa', 'fi', 'fj', 'fo', 'fr', 'fy',
+        'ga', 'gd', 'gl', 'gv',
+        'he', 'hi', 'hr', 'ht', 'hu', 'hy',
+        'id', 'is', 'it',
+        'ja', 'jv',
+        'ka', 'kg', 'ko', 'ku', 'kw', 'ky',
+        'la', 'lb', 'li', 'ln', 'lt', 'lv',
+        'mg', 'mk', 'mn', 'mo', 'ms', 'mt', 'my',
+        'nb', 'ne', 'nl', 'nn', 'no',
         'oc',
-        'pl', 'pt', 
-        'rm', 'ro', 'ru', 'r0', 
-        'sc', 'se', 'sk', 'sl', 'so', 'sq', 'sr', 'sv', 'sw', 
-        'tk', 'tr', 'ty', 
-        'uk', 'ur', 'uz', 
-        'vi', 'vo', 
-        'yi', 
+        'pl', 'pt',
+        'rm', 'ro', 'ru', 'r0',
+        'sc', 'se', 'sk', 'sl', 'so', 'sq', 'sr', 'sv', 'sw',
+        'tk', 'tr', 'ty',
+        'uk', 'ur', 'uz',
+        'vi', 'vo',
+        'yi',
         'zh',
         // The rest of the ISO 639-1 codes...
         'aa', 'ae', 'ak', 'am', 'av', 'ay',
@@ -1747,9 +1747,11 @@ function get_mother_tongues($export=false, $lang=null, $userid=null) {
     $data = array();
     $data = get_records_select_array('artefact', 'artefacttype=? AND owner=?', array('mothertongue', $userid));
     // Add translated language name for each mother tongue
-    foreach ($data as $language) {
+    if (is_array($data)){
+    foreach ((array)$data as $language) {
         $language->label = get_string_from_language($lang, 'language.' . $language->description, 'artefact.europass');
     }
+}
 
     if (!$export) {
         return $data;
@@ -1950,7 +1952,7 @@ function get_personal_skills($export=false, $userid=null) {
         if ($id !== false) {
             $artefact = artefact_instance_from_id($id);
             $data['skills'][$skill]['id'] = $artefact->get('id');
-            $data['skills'][$skill]['type'] = $skill;        
+            $data['skills'][$skill]['type'] = $skill;
             $data['skills'][$skill]['desc'] = $artefact->render_self();
             if ($skill == 'drivinglicence') {
                 $data['skills'][$skill]['licences'] = $artefact->get_licences_for_export();

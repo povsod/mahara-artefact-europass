@@ -12,8 +12,8 @@
 defined('INTERNAL') || die();
 
 $config = new StdClass;
-$config->version = 2017020107;
-$config->release = '17.02.7';
+$config->version = 2018022400;
+$config->release = '18.02.0';
 // Europass XML Schema version
 $config->xsd_version = 'V3.3';
-$config->xsd_version_full = 'v3.3.0';
+$config->xsd_version_full = 'v3.3.1';

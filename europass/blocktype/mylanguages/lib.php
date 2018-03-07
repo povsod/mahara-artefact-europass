@@ -79,7 +79,7 @@ class PluginBlocktypeMyLanguages extends MaharaCoreBlocktype {
         return true;
     }
 
-    public static function instance_config_form($instance) {
+    public static function instance_config_form(BlockInstance $instance) {
         $configdata = $instance->get('configdata');
 
         return array(
@@ -109,7 +109,7 @@ class PluginBlocktypeMyLanguages extends MaharaCoreBlocktype {
     }
 
     /**
-     * MyLanguages blocktype is only allowed in personal views, because 
+     * MyLanguages blocktype is only allowed in personal views, because
      * there's no such thing as group/site languages
      */
     public static function allowed_in_view(View $view) {

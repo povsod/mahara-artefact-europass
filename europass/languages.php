@@ -83,6 +83,7 @@ $addform = pieform(array(
 
 // Delete mother tongue(s) form
 $elements = array();
+if (is_object($mothertongue_data)) {
 foreach ($mothertongue_data as $lang) {
     $elements[$lang->description] = array(
         'type' => 'checkbox',
@@ -91,6 +92,7 @@ foreach ($mothertongue_data as $lang) {
         'description' => get_string('language.'.$lang->description, 'artefact.europass'),
         'defaultvalue' => 0,
     );
+}
 }
 $elements['submit'] = array(
     'type' => 'submit',
@@ -125,7 +127,7 @@ $smarty->display('artefact:europass:languages.tpl');
 
 function addmothertongueform_submit(Pieform $form, $values) {
     global $SESSION, $USER;
-    
+
     $a = new ArtefactTypeMothertongue();
     $a->set('description', $values['description']);
     $a->set('owner', $USER->get('id'));

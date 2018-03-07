@@ -59,7 +59,7 @@ class PluginBlocktypeEuropassCV extends MaharaCoreBlocktype {
         return true;
     }
 
-    public static function instance_config_form($instance) {
+    public static function instance_config_form(BlockInstance $instance) {
         $configdata = $instance->get('configdata');
         $locale = (isset($configdata['locale']) ? $configdata['locale'] : get_config('lang'));
         $profilepic = (isset($configdata['profilepic']) ? $configdata['profilepic'] : false);
@@ -88,7 +88,7 @@ class PluginBlocktypeEuropassCV extends MaharaCoreBlocktype {
     }
 
     /**
-     * EuropassCV blocktype is only allowed in personal views, because 
+     * EuropassCV blocktype is only allowed in personal views, because
      * there's no such thing as group/site Europass CV
      */
     public static function allowed_in_view(View $view) {
