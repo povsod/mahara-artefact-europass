@@ -35,7 +35,7 @@ class PluginBlocktypeEuropassCV extends MaharaCoreBlocktype {
         return array('dashboard', 'portfolio', 'profile');
     }
 
-    public static function render_instance(BlockInstance $instance, $editing=false) {
+    public static function render_instance(BlockInstance $instance, $editing=false, $versioning=false) {
         $configdata = $instance->get('configdata');
         $locale = (isset($configdata['locale']) ? $configdata['locale'] : get_config('lang'));
         $profilepic = (isset($configdata['profilepic']) ? $configdata['profilepic'] : false);
