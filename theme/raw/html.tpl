@@ -138,7 +138,7 @@ a:active, a:hover { color: #333; text-decoration: underline; }
     </svg>
     {foreach from=$profilefields.socialprofile item=item name='sp'}<span class="marker">{$item.desc}</span> {$item.title}{if !$.foreach.sp.last}<span class="marker"> | </span>{/if}{/foreach}
     <br />
-    <span class="marker">{$text.gender}</span> {if $profilefields.gender == 'male'}{str tag='male' section='artefact.resume'}{/if}{if $profilefields.gender == 'female'}{str tag='female' section='artefact.resume'}{/if}{if $profilefields.gender == 'male' && $profilefields.gender == 'female'}{str tag='gendernotspecified' section='artefact.resume'}{/if}
+    <span class="marker">{$text.gender}</span> {if $profilefields.gender == 'male'}{str tag='man' section='artefact.resume'}{/if}{if $profilefields.gender == 'female'}{str tag='woman' section='artefact.resume'}{/if}{if $profilefields.gender == 'male' && $profilefields.gender == 'female'}{str tag='gendernotspecified' section='artefact.resume'}{/if}
     <span class="marker">| {$text.birthdate}</span> {$profilefields.dateofbirth}
     {if $profilefields.citizenship}<span class="marker">| {$text.nationality}</span> {$profilefields.citizenship}{/if}
   </td>
@@ -152,7 +152,7 @@ a:active, a:hover { color: #333; text-decoration: underline; }
 <tr>
   <td class="stripe"></td>
   <td class="middle"><span class="marker">{$employment->startdate|escape}{if $employment->enddate} - {$employment->enddate|escape}{else} &rarr;{/if}</span></td>
-  <td><span class="marker">{$employment->jobtitle}</span><br />{$employment->employer}{if $employment->employeraddress}, {$employment->employeraddress}{/if}{if $employment->positiondescription}<br /><span class="description">{$employment->positiondescription|nl2br}</span>{/if}</td>
+  <td><span class="marker">{$employment->jobtitle}</span><br />{$employment->employer}{if $employment->employeraddress}, {$employment->employeraddress}{/if}{if $employment->positiondescription}<br /><span class="text-small">{$employment->positiondescription|safe}</span>{/if}</td>
 </tr>
 {/foreach}
 <tr>
@@ -164,7 +164,7 @@ a:active, a:hover { color: #333; text-decoration: underline; }
 <tr>
   <td class="stripe"></td>
   <td class="middle"><span class="marker">{$education->startdate|escape}{if $education->enddate} - {$education->enddate|escape}{else} &rarr;{/if}</span></td>
-  <td><span class="marker">{$education->qualname}</span><br />{$education->institution}{if $education->institutionaddress}, {$education->institutionaddress}{/if}{if $education->qualdescription}<br /><span class="description">{$education->qualdescription|nl2br}</span>{/if}</td>
+  <td><span class="marker">{$education->qualname}</span><br />{$education->institution}{if $education->institutionaddress}, {$education->institutionaddress}{/if}{if $education->qualdescription}<br /><span class="text-small">{$education->qualdescription|safe}</span>{/if}</td>
 </tr>
 {/foreach}
 <tr>
