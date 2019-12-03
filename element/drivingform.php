@@ -257,7 +257,7 @@ echo $form_tag;
             </div>
             </td>
         </tr>
-        <tr id="drivinglicence_submitform_container" class="btn success submitcancel form-group">
+        <tr id="drivinglicence_submitform_container" class="btn btn-primary submitcancel form-group">
             <td id="drivinglicence_submitform"><br /><?php echo $elements['submit']['html']; ?></td>
         </tr>
     </tbody>

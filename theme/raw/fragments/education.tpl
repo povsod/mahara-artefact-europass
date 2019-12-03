@@ -1,7 +1,7 @@
 <div class="ptl pbl">
-  <div class="panel panel-default">
-    <h2 class="panel-heading">{str tag='education' section='artefact.europass'}</h2>
-    <div class="education panel-body">
+  <div class="card">
+    <h2 class="card-header">{str tag='education' section='artefact.europass'}</h2>
+    <div class="education card-body">
         {if $education_data}
         <table id="educationhistorylist" class="resumefive resumecomposite fullwidth table">
             <thead>
@@ -22,13 +22,13 @@
         </table>
         {/if}
     </div>
-    <div class="panel-footer">
+    <div class="card-footer">
         {if $prefs.learnerinfo == 1234567}
-        <a href="{$WWWROOT}artefact/europass/preferences.php?set=1&li=1243567" class="btn btn-default" title="{str tag='moveitemup'}"><span class="icon icon-long-arrow-up icon-lg prs"></span> {str tag='moveitemup'}</a>
+        <a href="{$WWWROOT}artefact/europass/preferences.php?set=1&li=1243567" class="btn btn-secondary" title="{str tag='moveitemup'}"><span class="icon icon-long-arrow-up icon-lg prs"></span> {str tag='moveitemup'}</a>
         {else}
-        <a href="{$WWWROOT}artefact/europass/preferences.php?set=1&li=1234567" class="btn btn-default" title="{str tag='moveitemdown'}"><span class="icon icon-long-arrow-down icon-lg prs"></span> {str tag='moveitemdown'}</a>
+        <a href="{$WWWROOT}artefact/europass/preferences.php?set=1&li=1234567" class="btn btn-secondary" title="{str tag='moveitemdown'}"><span class="icon icon-long-arrow-down icon-lg prs"></span> {str tag='moveitemdown'}</a>
         {/if}
-        <a class="btn btn-default" id="editeducationhistorybutton" href="{$location.education}" title="{str tag='edit'}"><span class="icon icon-pencil icon-lg prs"></span> {str tag='edit'}</a>
+        <a class="btn btn-secondary" id="editeducationhistorybutton" href="{$location.education}" title="{str tag='edit'}"><span class="icon icon-pencil icon-lg prs"></span> {str tag='edit'}</a>
     </div>
   </div>
 </div>

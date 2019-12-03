@@ -51,24 +51,6 @@ table#achievementslist {
 .border-elp th:first-child {
     border-left: 0!important;
 }
-.left-border-europass {
-    border-left: 1px solid #1E6297;
-}
-.education.panel-body,
-.employment.panel-body,
-.competences.panel-body,
-.achievements.panel-body,
-.languages.panel-body,
-.otherlanguage.panel-body,
-.letters.panel-body {
-    padding: 0;
-}
-.languages.panel-body.border-europass {
-    border: 1px solid #1E6297;
-    -webkit-border-radius: 2px;
-    -moz-border-radius: 2px;
-    border-radius: 2px;
-}
 form#delmothertongueform div.description {
     display: inline-block;
     font-size: 14px;
@@ -216,9 +198,9 @@ svg#category_DE {
 .mini-logo {
   margin-top: -11px;
 }
-.fixed-panel {
-  min-height: 250px;
-  max-height: 250px;
+.card-fixed-size {
+  min-height: 230px;
+  max-height: 230px;
   padding-top: 0px !important;
 }
 .big-icon {
@@ -230,7 +212,7 @@ svg#category_DE {
 .step1,
 .step2,
 .step3 {
-    min-height: 350px;
+    min-height: 230px;
 }
 form#exporteuropass div.radio label,
 form#importeuropass div.radio label {

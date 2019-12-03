@@ -14,6 +14,6 @@
 defined('INTERNAL') || die();
 
 $string['title'] = 'Un camp de l\'Europass';
-$string['description'] = 'Mostra la informaci√≥ seleccionada de l\'Europass';
+$string['description'] = 'Mostra la informaciÛ seleccionada de l\'Europass';
 $string['fieldtoshow'] = 'Camp a mostrar';
-$string['defaulttitledescription'] = 'Si el deixeu en blanc s\'utilitzar≈ï el nom del camp';
+$string['defaulttitledescription'] = 'Si el deixeu en blanc s\'utilitzar‡ el nom del camp';

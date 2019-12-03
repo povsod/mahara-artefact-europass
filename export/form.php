@@ -2,10 +2,10 @@
 echo $form_tag;
 ?>
 
-<div class="panel-items mb0 ml0">
-    <div class="step step1 panel panel-default first" id="step1">
-        <h3 class="panel-heading"><?php echo get_string('exportstep1', 'artefact.europass'); ?></h3>
-        <div class="panel-body">
+<div class="card-items card-items-no-margin">
+    <div class="step step1 card first" id="step1">
+        <h3 class="card-header"><?php echo get_string('exportstep1', 'artefact.europass'); ?></h3>
+        <div class="card-body">
             <div class="form-group radio pts pbs">
                 <div class="radio"><input type="checkbox" class="radio" id="documenttype_ecv" name="documenttype[]" tabindex="0" value="ecv" checked="checked"> <label for="documenttype_ecv" class="pls prs"><?php echo get_string('ecv-tab', 'artefact.europass'); ?></label></div>
 
@@ -16,9 +16,9 @@ echo $form_tag;
         </div>
     </div>
 
-    <div class="step step2 panel panel-default">
-        <h3 class="panel-heading"><?php echo get_string('exportstep2', 'artefact.europass'); ?></h3>
-        <div class="panel-body">
+    <div class="step step2 card">
+        <h3 class="card-header"><?php echo get_string('exportstep2', 'artefact.europass'); ?></h3>
+        <div class="card-body">
             <div class="form-group radio pts pbs">
                 <div class="radio"><input type="radio" class="radio" id="fileformat_pdf" name="fileformat" tabindex="0" value="pdf" checked="checked"> <label for="fileformat_pdf"><?php echo get_string('pdf', 'artefact.europass'); ?></label></div>
                 <div class="radio"><input type="radio" class="radio" id="fileformat_word" name="fileformat" tabindex="0" value="word"> <label for="fileformat_word"><?php echo get_string('doc', 'artefact.europass'); ?></label></div>
@@ -29,9 +29,9 @@ echo $form_tag;
         </div>
     </div>
 
-    <div class="step step3 panel panel-default">
-        <h3 class="panel-heading"><?php echo get_string('exportstep3', 'artefact.europass'); ?></h3>
-        <div class="panel-body"><br />
+    <div class="step step3 card">
+        <h3 class="card-header"><?php echo get_string('exportstep3', 'artefact.europass'); ?></h3>
+        <div class="card-body"><br />
             <a href="#" id="showconfig">
                 <span class="icon icon-cog prs text-default"></span>
                 <?php echo get_string('generaloptions', 'artefact.europass'); ?>
@@ -59,27 +59,7 @@ echo $form_tag;
                 <!-- form elements here... -->
                 <div id="europassconf_lang_container" class="<?php //echo $elements['lang']['type']; ?> form-group">
                     <label for="europassconf_lang"><?php echo $elements['locale']['title']; ?></label>
-                    <div class="btn-group" data-toggle="buttons">
-                    <?php
-                        $i = 1;
-                        foreach ($elements['locale']['options'] as $l) {
-                            if (isset($elements['locale']['defaultvalue']) && $elements['locale']['defaultvalue'] == $l) {
-                                echo "<label class=\"btn btn-default active\">";
-                                echo "<input type=\"radio\" name=\"locale\" value=\"$l\" autocomplete=\"off\" checked><span class=\"lang-md\" lang=\"$l\"></span>";
-                                echo "</label>";
-                            }
-                            else {
-                                echo "<label class=\"btn btn-default\">";
-                                echo "<input type=\"radio\" name=\"locale\" value=\"$l\" autocomplete=\"off\"><span class=\"lang-md\" lang=\"$l\"></span>";
-                                echo "</label>";
-                            }
-                            if ($i % 9 == 0) {
-                                echo "<br />";
-                            }
-                            $i++;
-                        }
-                    ?>
-                    </div>
+                    <?php echo $elements['locale']['html']; ?>
                 </div>
                 <div id="europassconf_logo_container" class="<?php echo $elements['logo']['type']; ?> form-group">
                     <label for="europassconf_logo"><?php echo $elements['logo']['title']; ?></label>
@@ -96,7 +76,7 @@ echo $form_tag;
                 </div>
                 <div class="mtl">
                     <?php //echo $elements['submit']['html']; ?>
-                    <input type="submit" class="btn btn-primary btn-lg submit btn" id="exporteuropass_submit" name="submit" tabindex="0" value="<?php echo $elements['submit']['value']; ?>">
+                    <input type="submit" class="btn btn-secondary submit" id="exporteuropass_submit" name="submit" tabindex="0" value="<?php echo $elements['submit']['value']; ?>">
                 </div>
             </div>
         </div>

@@ -41,8 +41,6 @@ $form = array(
     'pluginname' => 'europass',
     'template'   => 'form.php',
     'jsform'     => false,
-    'class'      => 'panel panel-default panel-body',
-    //'configdirs' => array(get_config('libroot') . 'form/', get_config('docroot') . 'artefact/file/form/'),
     'elements'   => array(
         'documenttype' => array(
             'type' => 'checkboxes', 
@@ -90,10 +88,11 @@ $form = array(
             'defaultvalue' => 'numeric/long',
         ),
         'locale' => array(
-            'type' => 'radio',
+            'type' => 'select',
             'title' => get_string('selectlocale', 'artefact.europass'),
-            'options' => getoptions_locales(),
-            'defaultvalue' => (isset($settings['lang']) ? hsc($settings['lang']) : set_default_locale(get_config('lang'))),
+            'options' => getoptions_full_locales(),
+            // Get first 2 characters from system language setting as the default value
+            'defaultvalue' => substr((isset($settings['lang']) ? hsc($settings['lang']) : get_config('lang')), 0, 2)
         ),
         'logo' => array(
             'type' => 'switchbox',

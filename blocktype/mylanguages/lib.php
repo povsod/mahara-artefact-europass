@@ -52,17 +52,20 @@ class PluginBlocktypeMyLanguages extends MaharaCoreBlocktype {
         $configdata = $instance->get('configdata');
         $artefact = (isset($configdata['artefact']) ? $configdata['artefact'] : null);
 
+        $view = new View($instance->get('view'));
+        $owner = $view->get('owner');
+
         if (!empty($artefact)) {
             $result = '';
             if ($artefact == 'mothertongue') {
-                $data = get_mother_tongues();
+                $data = get_mother_tongues(false, get_config('lang'), $owner);
                 foreach ($data as $item) {
                     $result .= get_string('language.' . $item->description, 'artefact.europass') . ', ';
                 }
                 $result = substr($result, 0, strlen($result) - 2);
             }
             if ($artefact == 'otherlanguage') {
-                $data = get_other_languages();
+                $data = get_other_languages(false, get_config('lang'), $owner);
                 $lang = set_default_locale(get_config('lang'));
                 $url = 'http://europass.cedefop.europa.eu/' . $lang . '/resources/european-language-levels-cefr';
                 $smarty = smarty_core();

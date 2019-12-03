@@ -7,7 +7,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL
  * @copyright  (C) 2009-2019 Gregor Anzelj, gregor.anzelj@gmail.com
  *
- * @translator Mari Cruz Garc√≠a
+ * @translator Mari Cruz GarcÌa
  * @translator Inaki Arenaza
  *
  */
@@ -15,6 +15,6 @@
 defined('INTERNAL') || die();
 
 $string['title'] = 'Campo Europass';
-$string['description'] = 'Muestra informaci√≥n seleccionada desde Europass';
+$string['description'] = 'Muestra informaciÛn seleccionada desde Europass';
 $string['fieldtoshow'] = 'Campo a mostrar';
-$string['defaulttitledescription'] = 'Si deja esto en blanco, se usar√° como el nombre del campo';
+$string['defaulttitledescription'] = 'Si deja esto en blanco, se usar· como el nombre del campo';

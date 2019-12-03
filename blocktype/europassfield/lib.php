@@ -74,13 +74,14 @@ class PluginBlocktypeEuropassfield extends MaharaCoreBlocktype {
                 }
             }
             if ($artefact == 'mothertongue') {
-                $data = get_mother_tongues(false, null, $owner);
+                $data = get_mother_tongues(false, get_config('lang'), $owner);
+				print_r($data);
                 $smarty = smarty_core();
                 $smarty->assign('data', $data);
                 $result = $smarty->fetch('artefact:europass:blocktypes/mothertongue.tpl');
             }
             if ($artefact == 'otherlanguage') {
-                $data = get_other_languages(false, null, $owner);
+                $data = get_other_languages(false, get_config('lang'), $owner);
                 $lang = set_default_locale(get_config('lang'));
                 $url = 'http://europass.cedefop.europa.eu/' . $lang . '/resources/european-language-levels-cefr';
                 $smarty = smarty_core();

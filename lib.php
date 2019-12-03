@@ -10,6 +10,8 @@
  */
 
 defined('INTERNAL') || die();
+safe_require('artefact', 'internal');
+safe_require('artefact', 'resume');
 
 class PluginArtefactEuropass extends PluginArtefact {
 
@@ -1006,33 +1008,33 @@ function getoptions_locales() {
 // supported by Europass CV and LP creation tools
 function getoptions_full_locales() {
     return array(
-        'bg.utf8' => get_string('locale.bg_BG', 'artefact.europass'),
-        'cs.utf8' => get_string('locale.cs_CZ', 'artefact.europass'),
-        'da.utf8' => get_string('locale.da_DK', 'artefact.europass'),
-        'de.utf8' => get_string('locale.de_DE', 'artefact.europass'),
-        'et.utf8' => get_string('locale.et_EE', 'artefact.europass'),
-        'el.utf8' => get_string('locale.el_GR', 'artefact.europass'),
-        'en.utf8' => get_string('locale.en_GB', 'artefact.europass'),
-        'es.utf8' => get_string('locale.es_ES', 'artefact.europass'),
-        'fr.utf8' => get_string('locale.fr_FR', 'artefact.europass'),
-        'hr.utf8' => get_string('locale.hr_HR', 'artefact.europass'),
-        'is.utf8' => get_string('locale.is_IS', 'artefact.europass'),
-        'it.utf8' => get_string('locale.it_IT', 'artefact.europass'),
-        'lv.utf8' => get_string('locale.lv_LV', 'artefact.europass'),
-        'lt.utf8' => get_string('locale.lt_LT', 'artefact.europass'),
-        'hu.utf8' => get_string('locale.hu_HU', 'artefact.europass'),
-        'mk.utf8' => get_string('locale.mk_MK', 'artefact.europass'),
-        'mt.utf8' => get_string('locale.mt_MT', 'artefact.europass'),
-        'nl.utf8' => get_string('locale.nl_NL', 'artefact.europass'),
-        'no.utf8' => get_string('locale.no_NO', 'artefact.europass'),
-        'pl.utf8' => get_string('locale.pl_PL', 'artefact.europass'),
-        'pt.utf8' => get_string('locale.pt_PT', 'artefact.europass'),
-        'ro.utf8' => get_string('locale.ro_RO', 'artefact.europass'),
-        'sk.utf8' => get_string('locale.sk_SK', 'artefact.europass'),
-        'sl.utf8' => get_string('locale.sl_SI', 'artefact.europass'),
-        'fi.utf8' => get_string('locale.fi_FI', 'artefact.europass'),
-        'sv.utf8' => get_string('locale.sv_SE', 'artefact.europass'),
-        'tr.utf8' => get_string('locale.tr_TR', 'artefact.europass'),
+        'bg' => get_string('locale.bg_BG', 'artefact.europass'),
+        'cs' => get_string('locale.cs_CZ', 'artefact.europass'),
+        'da' => get_string('locale.da_DK', 'artefact.europass'),
+        'de' => get_string('locale.de_DE', 'artefact.europass'),
+        'et' => get_string('locale.et_EE', 'artefact.europass'),
+        'el' => get_string('locale.el_GR', 'artefact.europass'),
+        'en' => get_string('locale.en_GB', 'artefact.europass'),
+        'es' => get_string('locale.es_ES', 'artefact.europass'),
+        'fr' => get_string('locale.fr_FR', 'artefact.europass'),
+        'hr' => get_string('locale.hr_HR', 'artefact.europass'),
+        'is' => get_string('locale.is_IS', 'artefact.europass'),
+        'it' => get_string('locale.it_IT', 'artefact.europass'),
+        'lv' => get_string('locale.lv_LV', 'artefact.europass'),
+        'lt' => get_string('locale.lt_LT', 'artefact.europass'),
+        'hu' => get_string('locale.hu_HU', 'artefact.europass'),
+        'mk' => get_string('locale.mk_MK', 'artefact.europass'),
+        'mt' => get_string('locale.mt_MT', 'artefact.europass'),
+        'nl' => get_string('locale.nl_NL', 'artefact.europass'),
+        'no' => get_string('locale.no_NO', 'artefact.europass'),
+        'pl' => get_string('locale.pl_PL', 'artefact.europass'),
+        'pt' => get_string('locale.pt_PT', 'artefact.europass'),
+        'ro' => get_string('locale.ro_RO', 'artefact.europass'),
+        'sk' => get_string('locale.sk_SK', 'artefact.europass'),
+        'sl' => get_string('locale.sl_SI', 'artefact.europass'),
+        'fi' => get_string('locale.fi_FI', 'artefact.europass'),
+        'sv' => get_string('locale.sv_SE', 'artefact.europass'),
+        'tr' => get_string('locale.tr_TR', 'artefact.europass'),
     );
 }
 
@@ -1936,9 +1938,9 @@ function get_personal_skills($export=false, $userid=null) {
         $userid = $USER->get('id');
     }
 
-    $mothertongue = get_mother_tongues($export);
-    $otherlanguage = get_other_languages($export);
-    $digital = get_digital_competences($export);
+    $mothertongue = get_mother_tongues($export, get_config('lang'), $userid);
+    $otherlanguage = get_other_languages($export, get_config('lang'), $userid);
+    $digital = get_digital_competences($export, $userid);
 
     $data = array(
         'mothertongue' => $mothertongue,
@@ -1968,6 +1970,7 @@ function get_personal_skills($export=false, $userid=null) {
         return $data;
     }
 
+    $licences = (isset($data['skills']['drivinglicence']['licences']) ? $data['skills']['drivinglicence']['licences'] : null);
 
     $return = array(
         'Linguistic' => array(
@@ -1978,7 +1981,7 @@ function get_personal_skills($export=false, $userid=null) {
         'Organisational' => $data['skills']['organisationalskill']['desc'],
         'Computer' => $digital,
         'Driving' => array(
-            'Description' => $data['skills']['drivinglicence']['licences']
+            'Description' => $licences
         ),
         'Other' => $data['skills']['otherskill']['desc'],
     );
@@ -2090,12 +2093,12 @@ function generate_europass_html($doctypes=array('ecv'), $options=array(), $useri
         'copyright' => get_string_from_language($lang, 'copyright', 'artefact.europass') . date('Y'),
     );
 
-    $work = get_work_experience();
+    $work = get_work_experience(false, $userid);
     foreach ($work as $w) {
         $w->startdate = get_year_from_mahara_date($w->startdate);
         $w->enddate = get_year_from_mahara_date($w->enddate);
     }
-    $edu = get_education_and_training();
+    $edu = get_education_and_training(false, $userid);
     foreach ($edu as $e) {
         $e->startdate = get_year_from_mahara_date($e->startdate);
         $e->enddate = get_year_from_mahara_date($e->enddate);
@@ -2108,7 +2111,7 @@ function generate_europass_html($doctypes=array('ecv'), $options=array(), $useri
         FROM {usr} u
         LEFT OUTER JOIN {artefact_file_files} f ON u.profileicon = f.artefact
         LEFT OUTER JOIN {artefact_file_image} i ON u.profileicon = i.artefact
-        WHERE u.id = ?', array($USER->get('id')));
+        WHERE u.id = ?', array($userid));
     if ($profilepic && $profileicon) {
         $size = get_imagesize_parameters();
         $file = artefact_instance_from_id($profileicon->id);
@@ -2123,12 +2126,12 @@ function generate_europass_html($doctypes=array('ecv'), $options=array(), $useri
     $smarty->assign('ECV', in_array('ecv', $doctypes));
     $smarty->assign('ELP', in_array('elp', $doctypes));
     $smarty->assign('prefs', unserialize($USER->get_account_preference('europassprefs')));
-    $smarty->assign('profilefields', get_personal_information());
+    $smarty->assign('profilefields', get_personal_information($profilepic, false, $userid));
     $smarty->assign('photo', $photo);
     $smarty->assign('education_data', $edu);
     $smarty->assign('employment_data', $work);
-    $smarty->assign('skills', get_personal_skills());
-    $smarty->assign('additionalinfo', get_additional_information());
+    $smarty->assign('skills', get_personal_skills(false, $userid));
+    $smarty->assign('additionalinfo', get_additional_information(false, null, $userid));
     $smarty->assign('europasslang', $USER->get_account_preference('europasslang'));
     $html = $smarty->fetch('artefact:europass:html.tpl');
 
