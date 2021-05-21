@@ -16,7 +16,7 @@
             <img src="{$minilogo}" class="mini-logo">
             <div class="float-right btn-group">
 				<a href="{$WWWROOT}artefact/europass/skillsfolder.php?edit={$file->id}" title="{str tag="edit"}" class="btn btn-secondary btn-sm">
-					<span class="icon icon-pencil icon-lg"></span>
+					<span class="icon icon-pencil-alt icon-lg"></span>
 					<span class="sr-only">{str tag="edit"}</span>
 				</a>
 				<a href="{$WWWROOT}artefact/europass/skillsfolder.php?delete={$file->id}" title="{str tag="delete"}" class="btn btn-secondary btn-sm">

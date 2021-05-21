@@ -10,7 +10,7 @@
   <td width="10%" align="center"><span class="icon icon-book"></span></td>
   <td width="10%" align="center"><span class="icon icon-comments"></span></td>
   <td width="10%" align="center"><span class="icon icon-comment"></span></td>
-  <td width="10%" align="center"><span class="icon icon-pencil"></span></td>
+  <td width="10%" align="center"><span class="icon icon-pencil-alt"></span></td>
 </tr>
 {foreach from=$data item=lang}<tr>
   <td>{$lang->label}</td>

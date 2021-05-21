@@ -8,7 +8,7 @@
   <td width="50%">&nbsp;</td>
   <td width="10%" align="center"><span class="icon icon-cog"></span></td>
   <td width="10%" align="center"><span class="icon icon-comment"></span></td>
-  <td width="10%" align="center"><span class="icon icon-pencil"></span></td>
+  <td width="10%" align="center"><span class="icon icon-pencil-alt"></span></td>
   <td width="10%" align="center"><span class="icon icon-lock"></span></td>
   <td width="10%" align="center"><span class="icon icon-puzzle-piece"></span></td>
 </tr>
