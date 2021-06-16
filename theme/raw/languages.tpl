@@ -103,7 +103,7 @@
                         <th colspan="2" width="20%" class="text-center text-europass"><span class="icon icon-book icon-lg"></span><br />{str tag='language-foreign-reading' section='artefact.europass'}</th>
                         <th colspan="2" width="20%" class="text-center text-europass"><span class="icon icon-comments icon-lg"></span><br />{str tag='language-foreign-spokeninteraction' section='artefact.europass'}</th>
                         <th colspan="2" width="20%" class="text-center text-europass"><span class="icon icon-comment icon-lg"></span><br />{str tag='language-foreign-spokenproduction' section='artefact.europass'}</th>
-                        <th colspan="2" width="20%" class="text-center text-europass"><span class="icon icon-pencil icon-lg"></span><br />{str tag='language-foreign-writing' section='artefact.europass'}</th>
+                        <th colspan="2" width="20%" class="text-center text-europass"><span class="icon icon-pencil-alt icon-lg"></span><br />{str tag='language-foreign-writing' section='artefact.europass'}</th>
                     </tr>
                     <tr>
                         <td colspan="2" class="text-center">{$lang->listening}</td>
@@ -129,7 +129,7 @@
                     <tr>
                         <td colspan="4">
                         <div class="btn-group float-right">
-                            <a href="{$WWWROOT}artefact/europass/element/edit.php?id={$item->artefact}" class="btn btn-secondary btn-sm" title="{str tag='edit'}"><span class="icon icon-pencil"></span></a>
+                            <a href="{$WWWROOT}artefact/europass/element/edit.php?id={$item->artefact}" class="btn btn-secondary btn-sm" title="{str tag='edit'}"><span class="icon icon-pencil-alt"></span></a>
                             <a href="{$WWWROOT}artefact/europass/element/delete.php?id={$item->artefact}" class="btn btn-secondary btn-sm" title="{str tag='delete'}"><span class="icon icon-trash text-danger icon-lg"></span></a>
                         </div>
                         {$item->certificate}
@@ -154,7 +154,7 @@
                     <tr>
                         <td colspan="7">
                         <div class="btn-group float-right">
-                            <a href="{$WWWROOT}artefact/europass/element/edit.php?id={$experience->artefact}" class="btn btn-secondary btn-sm" title="{str tag='edit'}"><span class="icon icon-pencil"></span></a>
+                            <a href="{$WWWROOT}artefact/europass/element/edit.php?id={$experience->artefact}" class="btn btn-secondary btn-sm" title="{str tag='edit'}"><span class="icon icon-pencil-alt"></span></a>
                             <a href="{$WWWROOT}artefact/europass/element/delete.php?id={$experience->artefact}" class="btn btn-secondary btn-sm" title="{str tag='delete'}"><span class="icon icon-trash text-danger icon-lg"></span></a>
                         </div>
                         {$experience->experience}
@@ -165,7 +165,7 @@
                 </table>
             </div>
             <div class="card-footer">
-                <a class="btn btn-secondary" id="editlanguage" href="{$WWWROOT}artefact/europass/element/edit.php?id={$lang->artefact}" title="{str tag='edit'}"><span class="icon icon-pencil icon-lg prs"></span> {str tag='edit'}</a>
+                <a class="btn btn-secondary" id="editlanguage" href="{$WWWROOT}artefact/europass/element/edit.php?id={$lang->artefact}" title="{str tag='edit'}"><span class="icon icon-pencil-alt icon-lg prs"></span> {str tag='edit'}</a>
                 <a class="btn btn-secondary" id="deletelanguage" href="{$WWWROOT}artefact/europass/element/delete.php?id={$lang->artefact}" title="{str tag='delete'}"><span class="icon icon-trash text-danger icon-lg prs"></span> {str tag='delete'}</a>
             </div>
         </div>

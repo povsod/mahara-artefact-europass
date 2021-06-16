@@ -17,7 +17,7 @@
                     <td>{$row->description|safe}</td>
                     <td class="text-right">
                     <div class="btn-group">
-                        <a class="btn btn-secondary btn-sm" id="editskillbutton" href="{$WWWROOT}artefact/europass/element/edit.php?id={$row->id}" title="{str tag='edit'}"><span class="icon icon-pencil"></span></a>
+                        <a class="btn btn-secondary btn-sm" id="editskillbutton" href="{$WWWROOT}artefact/europass/element/edit.php?id={$row->id}" title="{str tag='edit'}"><span class="icon icon-pencil-alt"></span></a>
                         <a class="btn btn-secondary btn-sm" id="deleteskillbutton" href="{$WWWROOT}artefact/europass/element/delete.php?id={$row->id}" title="{str tag='delete'}"><span class="icon icon-trash text-danger icon-lg"></span></a>
                         </div>
                     </td>

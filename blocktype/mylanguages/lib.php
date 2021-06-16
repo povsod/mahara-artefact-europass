@@ -78,7 +78,7 @@ class PluginBlocktypeMyLanguages extends MaharaCoreBlocktype {
         return '';
     }
 
-    public static function has_instance_config() {
+    public static function has_instance_config(BlockInstance $instance) {
         return true;
     }
 
@@ -107,7 +107,7 @@ class PluginBlocktypeMyLanguages extends MaharaCoreBlocktype {
         return $values;
     }
 
-    public static function default_copy_type() {
+    public static function default_copy_type(BlockInstance $instance, View $view) {
         return 'shallow';
     }
 
