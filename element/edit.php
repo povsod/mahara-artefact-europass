@@ -5,7 +5,7 @@
  * @subpackage artefact-europass
  * @author     Gregor Anzelj
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @copyright  (C) 2009-2019 Gregor Anzelj, gregor.anzelj@gmail.com
+ * @copyright  (C) 2009-2022 Gregor Anzelj, gregor.anzelj@gmail.com
  *
  */
 
@@ -158,6 +158,9 @@ function editelement_submit(Pieform $form, array $values) {
             update_record($table, $data, array('id' => $data->id, 'artefact' => $data->artefact));
         }
         else {
+            $nextorder = get_field_sql("SELECT MAX(aeo.displayorder) + 1 FROM {artefact_europass_otherlanguage} aeo
+                                        JOIN {artefact} a ON a.id = aeo.artefact WHERE a.owner = ?", array($artefact->get('owner')));
+            $data->displayorder = $nextorder ? $nextorder : 0;
             insert_record($table, $data);
         }
 

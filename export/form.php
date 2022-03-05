@@ -7,11 +7,8 @@ echo $form_tag;
         <h3 class="card-header"><?php echo get_string('exportstep1', 'artefact.europass'); ?></h3>
         <div class="card-body">
             <div class="form-group radio pts pbs">
-                <div class="radio"><input type="checkbox" class="radio" id="documenttype_ecv" name="documenttype[]" tabindex="0" value="ecv" checked="checked"> <label for="documenttype_ecv" class="pls prs"><?php echo get_string('ecv-tab', 'artefact.europass'); ?></label></div>
-
-                <div class="radio pll text-muted"><?php echo get_string('esp-tab', 'artefact.europass'); ?></div>
-                <div class="radio pll"><input type="checkbox" class="radio" id="documenttype_elp" name="documenttype[]" tabindex="0" value="elp"> <label for="documenttype_elp" class="pls prs"><?php echo get_string('elp-tab', 'artefact.europass'); ?></label></div>
-                <div class="radio pll"><input type="checkbox" class="radio" id="documenttype_esp" name="documenttype[]" tabindex="0" value="esp"> <label for="documenttype_esp" class="pls prs"><?php echo get_string('attach', 'artefact.europass'); ?></label></div>
+                <div class="radio"><input type="radio" class="radio" id="documenttype_ecv" name="documenttype" tabindex="0" value="ecv" checked="checked"> <label for="documenttype_ecv" class="pls prs"><?php echo get_string('ecv-tab', 'artefact.europass'); ?></label></div>
+                <div class="radio pll"><input type="radio" class="radio" id="documenttype_elp" name="documenttype" tabindex="0" value="elp"> <label for="documenttype_elp" class="pls prs"><?php echo get_string('elp-tab', 'artefact.europass'); ?></label></div>
             </div>
         </div>
     </div>
@@ -21,9 +18,11 @@ echo $form_tag;
         <div class="card-body">
             <div class="form-group radio pts pbs">
                 <div class="radio"><input type="radio" class="radio" id="fileformat_pdf" name="fileformat" tabindex="0" value="pdf" checked="checked"> <label for="fileformat_pdf"><?php echo get_string('pdf', 'artefact.europass'); ?></label></div>
-                <div class="radio"><input type="radio" class="radio" id="fileformat_word" name="fileformat" tabindex="0" value="word"> <label for="fileformat_word"><?php echo get_string('doc', 'artefact.europass'); ?></label></div>
+                <!--
+				<div class="radio"><input type="radio" class="radio" id="fileformat_word" name="fileformat" tabindex="0" value="word"> <label for="fileformat_word"><?php echo get_string('doc', 'artefact.europass'); ?></label></div>
                 <div class="radio"><input type="radio" class="radio" id="fileformat_opendoc" name="fileformat" tabindex="0" value="opendoc"> <label for="fileformat_opendoc"><?php echo get_string('odt', 'artefact.europass'); ?></label></div>
-                <div class="radio"><input type="radio" class="radio" id="fileformat_xml" name="fileformat" tabindex="0" value="xml"> <label for="fileformat_xml"><?php echo get_string('xml', 'artefact.europass'); ?></label></div>
+				<div class="radio"><input type="radio" class="radio" id="fileformat_xml" name="fileformat" tabindex="0" value="xml"> <label for="fileformat_xml"><?php echo get_string('xml', 'artefact.europass'); ?></label></div>
+                //-->
                 <div class="radio"><input type="radio" class="radio" id="fileformat_html" name="fileformat" tabindex="0" value="html"> <label for="fileformat_html"><?php echo get_string('html', 'artefact.europass'); ?></label></div>
             </div>
         </div>
@@ -69,10 +68,9 @@ echo $form_tag;
                     <label for="europassconf_profilepic"><?php echo $elements['profilepic']['title']; ?></label>
                     <?php echo $elements['profilepic']['html']; ?>
                 </div>
-                <div id="europassconf_dateformat_container" class="<?php echo $elements['dateformat']['type']; ?> form-group">
-                    <label for="europassconf_dateformat"><?php echo $elements['dateformat']['title']; ?></label>
-                    <?php echo $elements['dateformat']['html']; ?>
-                    <div class="description"><?php echo $elements['dateformat']['description']; ?></div>
+                <div id="europassconf_template_container" class="<?php //echo $elements['template']['type']; ?> form-group">
+                    <label for="europassconf_template"><?php echo $elements['template']['title']; ?></label>
+                    <?php echo $elements['template']['html']; ?>
                 </div>
                 <div class="mtl">
                     <?php //echo $elements['submit']['html']; ?>

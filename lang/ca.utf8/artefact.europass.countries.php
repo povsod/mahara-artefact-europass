@@ -5,7 +5,7 @@
  * @subpackage artefact-europass
  * @author     Gregor Anzelj
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @copyright  (C) 2009-2019 Gregor Anzelj, gregor.anzelj@gmail.com
+ * @copyright  (C) 2009-2022 Gregor Anzelj, gregor.anzelj@gmail.com
  *
  */
 

@@ -16,8 +16,8 @@
                     <td><b>{str tag='language.$row->description|escape' section='artefact.europass'}<b></td>
                     <td class="text-right">
                     <div class="btn-group">
-                        <a class="btn btn-secondary btn-sm" id="editskillbutton" href="{$WWWROOT}artefact/europass/element/edit.php?id={$row->id}" title="{str tag='edit'}"><span class="icon icon-pencil"></span></a>
-                        <a class="btn btn-secondary btn-sm" id="deleteskillbutton" href="{$WWWROOT}artefact/europass/element/delete.php?id={$row->id}" title="{str tag='delete'}"><span class="icon icon-trash text-danger icon-lg"></span></a>
+                        <a class="btn btn-secondary btn-sm" id="editskillbutton" href="{$WWWROOT}artefact/europass/element/edit.php?id={$row->id}" title="{str tag='edit'}"><span class="icon icon-pencil-alt"></span></a>
+                        <a class="btn btn-secondary btn-sm" id="deleteskillbutton" href="{$WWWROOT}artefact/europass/element/delete.php?id={$row->id}" title="{str tag='delete'}"><span class="icon icon-trash-alt text-danger icon-lg"></span></a>
                     </div>
                     </td>
                 </tr>
@@ -37,7 +37,7 @@
                     <th width="12%" class="text-tiny text-center"><span class="icon icon-book icon-lg"></span><br />{str tag='language-foreign-reading' section='artefact.europass'}</th>
                     <th width="12%" class="text-tiny text-center"><span class="icon icon-comments icon-lg"></span><br />{str tag='language-foreign-spokeninteraction' section='artefact.europass'}</th>
                     <th width="12%" class="text-tiny text-center"><span class="icon icon-comment icon-lg"></span><br />{str tag='language-foreign-spokenproduction' section='artefact.europass'}</th>
-                    <th width="12%" class="text-tiny text-center"><span class="icon icon-pencil icon-lg"></span><br />{str tag='language-foreign-writing' section='artefact.europass'}</th>
+                    <th width="12%" class="text-tiny text-center"><span class="icon icon-pencil-alt icon-lg"></span><br />{str tag='language-foreign-writing' section='artefact.europass'}</th>
                     <th width="15%"></th>
                 </tr>
             </thead>
@@ -52,8 +52,8 @@
                     <td class="text-center">{$row->writing|escape}</td>
                     <td class="text-right">
                     <div class="btn-group">
-                        <a class="btn btn-secondary btn-sm" id="editskillbutton" href="{$WWWROOT}artefact/europass/element/edit.php?id={$row->artefact}" title="{str tag='edit'}"><span class="icon icon-pencil"></span></a>
-                        <a class="btn btn-secondary btn-sm" id="deleteskillbutton" href="{$WWWROOT}artefact/europass/element/delete.php?id={$row->artefact}" title="{str tag='delete'}"><span class="icon icon-trash text-danger icon-lg"></span></a>
+                        <a class="btn btn-secondary btn-sm" id="editskillbutton" href="{$WWWROOT}artefact/europass/element/edit.php?id={$row->artefact}" title="{str tag='edit'}"><span class="icon icon-pencil-alt"></span></a>
+                        <a class="btn btn-secondary btn-sm" id="deleteskillbutton" href="{$WWWROOT}artefact/europass/element/delete.php?id={$row->artefact}" title="{str tag='delete'}"><span class="icon icon-trash-alt text-danger icon-lg"></span></a>
                     </div>
                     </td>
                 </tr>
@@ -80,8 +80,8 @@
                     <td>{$row.desc|safe}</td>
                     <td class="text-right">
                     <div class="btn-group">
-                        {if $row.id > 0}<a class="btn btn-secondary btn-sm" id="editskillbutton" href="{$WWWROOT}artefact/europass/element/edit.php?id={$row.id}" title="{str tag='edit'}"><span class="icon icon-pencil"></span></a>{else}<a class="btn btn-secondary btn-sm" id="editskillbutton" href="{$WWWROOT}artefact/europass/element/edit.php?type={$row.type}" title="{str tag='add'}"><span class="icon icon-plus"></span></a>{/if}
-                        {if $row.id > 0}<a class="btn btn-secondary btn-sm" id="deleteskillbutton" href="{$WWWROOT}artefact/europass/element/delete.php?id={$row.id}" title="{str tag='delete'}"><span class="icon icon-trash text-danger icon-lg"></span></a>{/if}
+                        {if $row.id > 0}<a class="btn btn-secondary btn-sm" id="editskillbutton" href="{$WWWROOT}artefact/europass/element/edit.php?id={$row.id}" title="{str tag='edit'}"><span class="icon icon-pencil-alt"></span></a>{else}<a class="btn btn-secondary btn-sm" id="editskillbutton" href="{$WWWROOT}artefact/europass/element/edit.php?type={$row.type}" title="{str tag='add'}"><span class="icon icon-plus"></span></a>{/if}
+                        {if $row.id > 0}<a class="btn btn-secondary btn-sm" id="deleteskillbutton" href="{$WWWROOT}artefact/europass/element/delete.php?id={$row.id}" title="{str tag='delete'}"><span class="icon icon-trash-alt text-danger icon-lg"></span></a>{/if}
                     </div>
                     </td>
                 </tr>
@@ -100,7 +100,7 @@
                     <th width="25%">{str tag='digitalcompetence' section='artefact.europass'}</th>
                     <th width="12%" class="text-tiny text-center"><span class="icon icon-cog icon-lg"></span><br />{str tag='digitalcompetence-information' section='artefact.europass'}</th>
                     <th width="12%" class="text-tiny text-center"><span class="icon icon-comments icon-lg"></span><br />{str tag='digitalcompetence-communication' section='artefact.europass'}</th>
-                    <th width="12%" class="text-tiny text-center"><span class="icon icon-pencil icon-lg"></span><br />{str tag='digitalcompetence-contentcreation' section='artefact.europass'}</th>
+                    <th width="12%" class="text-tiny text-center"><span class="icon icon-pencil-alt icon-lg"></span><br />{str tag='digitalcompetence-contentcreation' section='artefact.europass'}</th>
                     <th width="12%" class="text-tiny text-center"><span class="icon icon-lock icon-lg"></span><br />{str tag='digitalcompetence-safety' section='artefact.europass'}</th>
                     <th width="12%" class="text-tiny text-center"><span class="icon icon-puzzle-piece icon-lg"></span><br />{str tag='digitalcompetence-problemsolving' section='artefact.europass'}</th>
                     <th width="15%"></th>
@@ -116,8 +116,8 @@
                     <td class="text-center">{$skills.digital->problemsolving|escape}</td>
                     <td class="text-right">
                     <div class="btn-group">
-                        {if $skills.digital->id > 0}<a class="btn btn-secondary btn-sm" id="editskillbutton" href="{$WWWROOT}artefact/europass/element/edit.php?id={$skills.digital->artefact}" title="{str tag='edit'}"><span class="icon icon-pencil"></span></a>{else}<a class="btn btn-secondary btn-sm" id="editskillbutton" href="{$WWWROOT}artefact/europass/element/edit.php?type=digitalcompetence" title="{str tag='add'}"><span class="icon icon-plus"></span></a>{/if}
-                        {if $skills.digital->id > 0}<a class="btn btn-secondary btn-sm" id="deleteskillbutton" href="{$WWWROOT}artefact/europass/element/delete.php?id={$skills.digital->artefact}" title="{str tag='delete'}"><span class="icon icon-trash text-danger icon-lg"></span></a>{/if}
+                        {if $skills.digital->id > 0}<a class="btn btn-secondary btn-sm" id="editskillbutton" href="{$WWWROOT}artefact/europass/element/edit.php?id={$skills.digital->artefact}" title="{str tag='edit'}"><span class="icon icon-pencil-alt"></span></a>{else}<a class="btn btn-secondary btn-sm" id="editskillbutton" href="{$WWWROOT}artefact/europass/element/edit.php?type=digitalcompetence" title="{str tag='add'}"><span class="icon icon-plus"></span></a>{/if}
+                        {if $skills.digital->id > 0}<a class="btn btn-secondary btn-sm" id="deleteskillbutton" href="{$WWWROOT}artefact/europass/element/delete.php?id={$skills.digital->artefact}" title="{str tag='delete'}"><span class="icon icon-trash-alt text-danger icon-lg"></span></a>{/if}
                     </div>
                     </td>
                 </tr>
@@ -143,8 +143,8 @@
                 <tr class="border-elp">
                     <td colspan="2">
                     <div class="btn-group float-right">
-                        <a href="{$WWWROOT}artefact/europass/element/edit.php?id={$item->artefact}" class="btn btn-secondary btn-sm" title="{str tag='edit'}"><span class="icon icon-pencil"></span></a>
-                        <a href="{$WWWROOT}artefact/europass/element/delete.php?id={$item->artefact}" class="btn btn-secondary btn-sm" title="{str tag='delete'}"><span class="icon icon-trash text-danger icon-lg"></span></a>
+                        <a href="{$WWWROOT}artefact/europass/element/edit.php?id={$item->artefact}" class="btn btn-secondary btn-sm" title="{str tag='edit'}"><span class="icon icon-pencil-alt"></span></a>
+                        <a href="{$WWWROOT}artefact/europass/element/delete.php?id={$item->artefact}" class="btn btn-secondary btn-sm" title="{str tag='delete'}"><span class="icon icon-trash-alt text-danger icon-lg"></span></a>
                     </div>
                     {$item->certificate}
                     </td>

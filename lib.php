@@ -5,7 +5,7 @@
  * @subpackage artefact-europass
  * @author     Gregor Anzelj
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @copyright  (C) 2009-2019 Gregor Anzelj, gregor.anzelj@gmail.com
+ * @copyright  (C) 2009-2022 Gregor Anzelj, gregor.anzelj@gmail.com
  *
  */
 
@@ -81,11 +81,6 @@ class PluginArtefactEuropass extends PluginArtefact {
                 'page'  => 'index',
                 'url'   => 'artefact/europass/index.php',
                 'title' => get_string('ecv-tab', 'artefact.europass'),
-            ),
-            'skillsfolder' => array(
-                'page'  => 'skillsfolder',
-                'url'   => 'artefact/europass/skillsfolder.php',
-                'title' => get_string('esp-tab', 'artefact.europass'),
             ),
             'languages' => array(
                 'page'  => 'languages',
@@ -1090,7 +1085,7 @@ function set_default_locale($l) {
 
 // Get Mahara lang folder name according to selected locale
 function get_lang_from_locale($l) {
-    switch ($l) {
+	switch ($l) {
         case 'bg': $locale = 'bg.utf8'; break;
         case 'cs': $locale = 'cs.utf8'; break;
         case 'da': $locale = 'da.utf8'; break;
@@ -1558,10 +1553,12 @@ function get_personal_information($profilepic=false, $export=false, $userid=null
                     'Contact' => (!empty($data['mobilenumber']) ? $data['mobilenumber'] : null),
                     'Use' => array('Code' => 'mobile'),
                 ),
-                array(
+                /*
+				array(
                     'Contact' => (!empty($data['businessnumber']) ? $data['businessnumber'] : null),
                     'Use' => array('Code' => 'work'),
                 ),
+				*/
             ),
             'Website' => array(
                 array(
@@ -1760,12 +1757,14 @@ function get_mother_tongues($export=false, $lang=null, $userid=null) {
 
 
     $return = array();
-    foreach ($data as $language) {
-        $return[] = array(
-            'Description' => array(
-                'Code' => strtolower($language->description)
-            ),
-        );
+    if ($data) {
+	    foreach ($data as $language) {
+            $return[] = array(
+                'Description' => array(
+                    'Code' => strtolower($language->description)
+                ),
+            );
+        }
     }
 
     return $return;
@@ -1932,14 +1931,14 @@ function get_digital_competences($export=false, $userid=null) {
     return $return;
 }
 
-function get_personal_skills($export=false, $userid=null) {
+function get_personal_skills($export=false, $lang=null, $userid=null) {
     global $USER;
     if ($userid == null) {
         $userid = $USER->get('id');
     }
 
-    $mothertongue = get_mother_tongues($export, get_config('lang'), $userid);
-    $otherlanguage = get_other_languages($export, get_config('lang'), $userid);
+    $mothertongue = get_mother_tongues($export, $lang, $userid);
+    $otherlanguage = get_other_languages($export, $lang, $userid);
     $digital = get_digital_competences($export, $userid);
 
     $data = array(
@@ -2029,67 +2028,113 @@ function get_additional_information($export=false, $lang=null, $userid=null) {
 
 
 /************************************************
- * Function to generate Europass in HTML format *
+ * Function to generate Europass in JSON format *
  ************************************************/
 
-function generate_europass_html($doctypes=array('ecv'), $options=array(), $userid=null) {
+function generate_europass_json($doctypes=array('ecv'), $options=array(), $userid=null) {
     global $USER;
     if ($userid == null) {
         $userid = $USER->get('id');
     }
 
-    $lang = (!empty($options['lang']) ? $options['lang'] : 'en.utf8');
-    $embed = (!empty($options['embed']) ? $options['embed'] : true);
+	$locale = (!empty($options['locale']) ? $options['locale'] : 'en');
+	$lang   = get_lang_from_locale($options['locale']);
+    $logo   = (!empty($options['logo']) ? $options['logo'] : false);
+    $dateformat = (!empty($options['dateformat']) ? $options['dateformat'] : 'numeric/medium');
     $profilepic = (!empty($options['profilepic']) ? $options['profilepic'] : false);
 
+    $json = array(
+        'SkillsPassport' => array(
+            'Locale' => $locale,
+            'DocumentInfo' => get_document_information($doctype, $logo),
+            'PrintingPreferences' => get_print_preferences($doctypes, $dateformat),
+            'LearnerInfo' => array(
+                'Identification' => get_personal_information($profilepic, true),
+                'WorkExperience' => get_work_experience(true),
+                'Education' => get_education_and_training(true),
+                'Skills' => get_personal_skills(true, $lang),
+                'Achievement' => get_additional_information(true),
+            ),
+        )
+    );
+
+	return json_encode($json, JSON_UNESCAPED_SLASHES);
+}
+
+/************************************************
+ * Function to generate Europass in HTML format *
+ ************************************************/
+
+function generate_europass_html($doctypes=array('ecv'), $options=array(), $userid=null) {
+    global $USER, $SESSION;
+    if ($userid == null) {
+        $userid = $USER->get('id');
+    }
+    
+	$lang = get_lang_from_locale($options['locale']);
+    $print = (!empty($options['print']) ? $options['print'] : false);
+    $embed = (!empty($options['embed']) ? $options['embed'] : false);
+    $profilepic = (!empty($options['profilepic']) ? $options['profilepic'] : false);
+
+	$template = (!empty($options['template']) ? $options['template'] : 'classic');
+	if (in_array('elp', $doctypes)) {
+		$template = 'lp-' . $template;
+	}
+	else {
+		$template = 'cv-' . $template;
+	}
+
     $labels = array(
-        'personalinfo' => mb_strtoupper(get_string_from_language($lang, 'identification', 'artefact.europass')),
+        'personalinfo' => get_string_from_language($lang, 'identification', 'artefact.europass'),
+        'address' => get_string_from_language($lang, 'address', 'artefact.internal'),
+        'email' => get_string_from_language($lang, 'identification-contactinfo-email', 'artefact.europass'),
+        'mobilenumber' => get_string_from_language($lang, 'identification-contactinfo-telephone', 'artefact.europass'),
+        'homenumber' => get_string_from_language($lang, 'identification-contactinfo-telephone', 'artefact.europass'),
         'gender' => get_string_from_language($lang, 'identification-gender', 'artefact.europass'),
+        'man' => get_string_from_language($lang, 'man', 'artefact.resume'),
+        'woman' => get_string_from_language($lang, 'woman', 'artefact.resume'),
+        'gendernotspecified' => get_string_from_language($lang, 'gendernotspecified', 'artefact.resume'),
         'birthdate' => get_string_from_language($lang, 'identification-birthdate', 'artefact.europass'),
         'nationality' => get_string_from_language($lang, 'identification-nationality', 'artefact.europass'),
-        'employment' => mb_strtoupper(get_string_from_language($lang, 'workexperience', 'artefact.europass')),
-        'education' => mb_strtoupper(get_string_from_language($lang, 'education', 'artefact.europass')),
-        'skills' => mb_strtoupper(get_string_from_language($lang, 'skills', 'artefact.europass')),
+        'employment' => get_string_from_language($lang, 'workexperience', 'artefact.europass'),
+        'education' => get_string_from_language($lang, 'education', 'artefact.europass'),
+        'skills' => get_string_from_language($lang, 'skills', 'artefact.europass'),
+        'languageskills' => get_string_from_language($lang, 'languageskills', 'artefact.europass'),
         'mothertongue' => get_string_from_language($lang, 'mothertongue', 'artefact.europass'),
         'otherlanguage' => get_string_from_language($lang, 'otherlanguage', 'artefact.europass'),
-        'listening' => mb_strtoupper(get_string_from_language($lang, 'language-foreign-listening', 'artefact.europass')),
-        'reading' => mb_strtoupper(get_string_from_language($lang, 'language-foreign-reading', 'artefact.europass')),
-        'spokeninteraction' => mb_strtoupper(get_string_from_language($lang, 'language-foreign-spokeninteraction', 'artefact.europass')),
-        'spokenproduction' => mb_strtoupper(get_string_from_language($lang, 'language-foreign-spokenproduction', 'artefact.europass')),
-        'writing' => mb_strtoupper(get_string_from_language($lang, 'language-foreign-writing', 'artefact.europass')),
+        'understanding' => get_string_from_language($lang, 'language-understanding', 'artefact.europass'),
+        'speaking' => get_string_from_language($lang, 'language-speaking', 'artefact.europass'),
+        'listening' => get_string_from_language($lang, 'language-foreign-listening', 'artefact.europass'),
+        'reading' => get_string_from_language($lang, 'language-foreign-reading', 'artefact.europass'),
+        'spokeninteraction' => get_string_from_language($lang, 'language-foreign-spokeninteraction', 'artefact.europass'),
+        'spokenproduction' => get_string_from_language($lang, 'language-foreign-spokenproduction', 'artefact.europass'),
+        'writing' => get_string_from_language($lang, 'language-foreign-writing', 'artefact.europass'),
+        'cef_level' => get_string_from_language($lang, 'language-foreign-CEF-level', 'artefact.europass'),
         'communicationskill' => get_string_from_language($lang, 'socialskill', 'artefact.europass'),
         'organisationalskill' => get_string_from_language($lang, 'organisationalskill', 'artefact.europass'),
         'jobrelatedskill' => get_string_from_language($lang, 'technicalskill', 'artefact.europass'),
         'otherskill' => get_string_from_language($lang, 'otherskill', 'artefact.europass'),
         'drivinglicence' => get_string_from_language($lang, 'drivinglicence', 'artefact.europass'),
+        'digitalskills' => get_string_from_language($lang, 'digitalskills', 'artefact.europass'),
         'digitalcompetence' => get_string_from_language($lang, 'digitalcompetence', 'artefact.europass'),
-        'information' => mb_strtoupper(get_string_from_language($lang, 'digitalcompetence-information', 'artefact.europass')),
-        'communication' => mb_strtoupper(get_string_from_language($lang, 'digitalcompetence-communication', 'artefact.europass')),
-        'contentcreation' => mb_strtoupper(get_string_from_language($lang, 'digitalcompetence-contentcreation', 'artefact.europass')),
-        'safety' => mb_strtoupper(get_string_from_language($lang, 'digitalcompetence-safety', 'artefact.europass')),
-        'problemsolving' => mb_strtoupper(get_string_from_language($lang, 'digitalcompetence-problemsolving', 'artefact.europass')),
-        'additionalinfo' => mb_strtoupper(get_string_from_language($lang, 'additionalinfo', 'artefact.europass')),
-        'honors_awards' => get_string_from_language($lang, 'honors_awards', 'artefact.europass'),
-        'publications' => get_string_from_language($lang, 'publications', 'artefact.europass'),
-        'citations' => get_string_from_language($lang, 'citations', 'artefact.europass'),
-        'projects' => get_string_from_language($lang, 'projects', 'artefact.europass'),
-        'memberships' => get_string_from_language($lang, 'memberships', 'artefact.europass'),
-        'seminars' => get_string_from_language($lang, 'seminars', 'artefact.europass'),
-        'conferences' => get_string_from_language($lang, 'conferences', 'artefact.europass'),
-        'workshops' => get_string_from_language($lang, 'workshops', 'artefact.europass'),
-        'references' => get_string_from_language($lang, 'references', 'artefact.europass'),
-        'courses' => get_string_from_language($lang, 'courses', 'artefact.europass'),
-        'certifications' => get_string_from_language($lang, 'certifications', 'artefact.europass'),
-        'languagepassport' => mb_strtoupper(get_string_from_language($lang, 'elp-tab', 'artefact.europass')),
+        'otherdigitalcompetences' => get_string_from_language($lang, 'digitalcompetence-other', 'artefact.europass'),
+        'information' => get_string_from_language($lang, 'digitalcompetence-information', 'artefact.europass'),
+        'communication' => get_string_from_language($lang, 'digitalcompetence-communication', 'artefact.europass'),
+        'contentcreation' => get_string_from_language($lang, 'digitalcompetence-contentcreation', 'artefact.europass'),
+        'safety' => get_string_from_language($lang, 'digitalcompetence-safety', 'artefact.europass'),
+        'problemsolving' => get_string_from_language($lang, 'digitalcompetence-problemsolving', 'artefact.europass'),
+        'digcomp_level' => get_string_from_language($lang, 'digitalcompetence-DIGCOMP-level', 'artefact.europass'),
+        'additionalinfo' => get_string_from_language($lang, 'additionalinfo', 'artefact.europass'),
+        'languagepassport' => get_string_from_language($lang, 'elp-tab', 'artefact.europass'),
         'selfassessment' => get_string_from_language($lang, 'self-assessment', 'artefact.europass'),
         'languagediplomas' => get_string_from_language($lang, 'language-diplomas', 'artefact.europass'),
-        'diplomatitle' => mb_strtoupper(get_string_from_language($lang, 'diploma-title', 'artefact.europass')),
-        'diplomainstitution' => mb_strtoupper(get_string_from_language($lang, 'diploma-awardingBody', 'artefact.europass')),
-        'diplomadate' => mb_strtoupper(get_string_from_language($lang, 'diploma-date', 'artefact.europass')),
-        'diplomalevel' => mb_strtoupper(get_string_from_language($lang, 'diploma-level', 'artefact.europass')),
+        'diplomatitle' => get_string_from_language($lang, 'diploma-title', 'artefact.europass'),
+        'diplomainstitution' => get_string_from_language($lang, 'diploma-awardingBody', 'artefact.europass'),
+        'diplomadate' => get_string_from_language($lang, 'diploma-date', 'artefact.europass'),
+        'diplomalevel' => get_string_from_language($lang, 'diploma-level', 'artefact.europass'),
         'languageexperience' => get_string_from_language($lang, 'language-experiences', 'artefact.europass'),
-        'description' => mb_strtoupper(get_string_from_language($lang, 'experiences-description', 'artefact.europass')),
-        'period' => mb_strtoupper(get_string_from_language($lang, 'experiences-period', 'artefact.europass')),
+        'description' => get_string_from_language($lang, 'experiences-description', 'artefact.europass'),
+        'period' => get_string_from_language($lang, 'experiences-period', 'artefact.europass'),
         'copyright' => get_string_from_language($lang, 'copyright', 'artefact.europass') . date('Y'),
     );
 
@@ -2123,18 +2168,19 @@ function generate_europass_html($doctypes=array('ecv'), $options=array(), $useri
     $smarty = smarty();
     $smarty->assign('embed', $embed); // false - only when exporting as standalone HTML file!
     $smarty->assign('text', $labels);
-    $smarty->assign('ECV', in_array('ecv', $doctypes));
-    $smarty->assign('ELP', in_array('elp', $doctypes));
+    $smarty->assign('print', $print);
     $smarty->assign('prefs', unserialize($USER->get_account_preference('europassprefs')));
     $smarty->assign('profilefields', get_personal_information($profilepic, false, $userid));
     $smarty->assign('photo', $photo);
-    $smarty->assign('education_data', $edu);
-    $smarty->assign('employment_data', $work);
-    $smarty->assign('skills', get_personal_skills(false, $userid));
-    $smarty->assign('additionalinfo', get_additional_information(false, null, $userid));
+	if (in_array('ecv', $doctypes)) {
+	    $smarty->assign('education_data', $edu);
+        $smarty->assign('employment_data', $work);
+        $smarty->assign('additionalinfo', get_additional_information(false, $lang, $userid));
+    }
+    $smarty->assign('skills', get_personal_skills(false, $lang, $userid));
     $smarty->assign('europasslang', $USER->get_account_preference('europasslang'));
-    $html = $smarty->fetch('artefact:europass:html.tpl');
-
+    $html = $smarty->fetch('artefact:europass:export/' . $template . '.tpl');
+	
     return $html;
 }
 

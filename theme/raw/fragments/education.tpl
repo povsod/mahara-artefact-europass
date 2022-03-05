@@ -24,11 +24,11 @@
     </div>
     <div class="card-footer">
         {if $prefs.learnerinfo == 1234567}
-        <a href="{$WWWROOT}artefact/europass/preferences.php?set=1&li=1243567" class="btn btn-secondary" title="{str tag='moveitemup'}"><span class="icon icon-long-arrow-up icon-lg prs"></span> {str tag='moveitemup'}</a>
+        <!--<a href="{$WWWROOT}artefact/europass/preferences.php?set=1&li=1243567" class="btn btn-secondary" title="{str tag='moveitemup'}"><span class="icon icon-long-arrow-up icon-lg prs"></span> {str tag='moveitemup'}</a>-->
         {else}
-        <a href="{$WWWROOT}artefact/europass/preferences.php?set=1&li=1234567" class="btn btn-secondary" title="{str tag='moveitemdown'}"><span class="icon icon-long-arrow-down icon-lg prs"></span> {str tag='moveitemdown'}</a>
+        <!--<a href="{$WWWROOT}artefact/europass/preferences.php?set=1&li=1234567" class="btn btn-secondary" title="{str tag='moveitemdown'}"><span class="icon icon-long-arrow-down icon-lg prs"></span> {str tag='moveitemdown'}</a>-->
         {/if}
-        <a class="btn btn-secondary" id="editeducationhistorybutton" href="{$location.education}" title="{str tag='edit'}"><span class="icon icon-pencil icon-lg prs"></span> {str tag='edit'}</a>
+        <a class="btn btn-secondary" id="editeducationhistorybutton" href="{$location.education}" title="{str tag='edit'}"><span class="icon icon-pencil-alt icon-lg prs"></span> {str tag='edit'}</a>
     </div>
   </div>
 </div>

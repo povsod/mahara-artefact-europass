@@ -5,7 +5,7 @@
  * @subpackage artefact-europass
  * @author     Gregor Anzelj
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @copyright  (C) 2009-2019 Gregor Anzelj, gregor.anzelj@gmail.com
+ * @copyright  (C) 2009-2022 Gregor Anzelj, gregor.anzelj@gmail.com
  *
  */
 
@@ -40,6 +40,7 @@ $css = array(
 );
 
 $smarty = smarty(array(), $css);
+setpageicon($smarty, 'icon icon-address-book');
 $smarty->assign('profile_str', mb_strtolower(get_string('pluginname', 'artefact.internal'), 'UTF-8'));
 $smarty->assign('resume_str', mb_strtolower(get_string('pluginname', 'artefact.resume'), 'UTF-8'));
 $smarty->assign('order_str', mb_strtolower(get_string('Order', 'interaction.forum'), 'UTF-8'));

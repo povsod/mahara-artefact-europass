@@ -5,7 +5,7 @@
  * @subpackage artefact-europass
  * @author     Gregor Anzelj
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @copyright  (C) 2009-2019 Gregor Anzelj, gregor.anzelj@gmail.com
+ * @copyright  (C) 2009-2022 Gregor Anzelj, gregor.anzelj@gmail.com
  *
  * @translator Mari Cruz García
  * @translator Iñaki Arenaza
@@ -48,7 +48,7 @@ $string['dateformat-numeric-long'] = '31/01/2005';
 $string['dateformat-text-short'] = '31 Jan 2005';
 $string['dateformat-text-long'] = '31 January 2005';
 $string['exportfile'] = 'Fichero';
-$string['pdf'] = 'Adobe® PDF + Europass XML';
+$string['pdf'] = 'Adobe® PDF';
 $string['doc'] = 'Microsoft® Word';
 $string['odt'] = 'OpenDocument';
 $string['html'] = 'HTML';
@@ -58,6 +58,9 @@ $string['generateexport'] = 'Exportar';
 $string['generateexportdesc'] = 'Generate the Europass document and download it on your computer.';
 $string['generaloptions'] = 'General export options';
 $string['includelogo'] = 'Include Europass logo?';
+$string['template'] = 'Template';
+$string['template-classic'] = 'Classic';
+$string['template-modern-navy'] = 'Modern dark blue';
 
 // Import data from Europass XML to Mahara...
 $string['importeuropass'] = 'Importar Europass';
@@ -126,6 +129,7 @@ $string['workexperience'] = 'Experiencia laboral';
 $string['education'] = 'Educación y formación';
 
 // Europass CV - STEP 5
+$string['languageskills'] = 'Capacidades lingüísticas';
 $string['mothertongue'] = 'Idioma(s) materno(s)';
 $string['otherlanguage'] = 'Otro(s) idioma(s)';
 
@@ -158,6 +162,7 @@ $string['otherskill'] = 'Otras capacidades y aptitudes';
 $string['additionalinfo'] = 'Información adicional';
 $string['category'] = 'Categoría';
 
+$string['digitalskills'] = 'Capacidades digitales';
 $string['digitalcompetence'] = 'Competencia digital';
 $string['digitalcompetence-other'] = 'Otras competencias informáticas';
 $string['digitalcompetence-information'] = 'Tratamiento de la información';

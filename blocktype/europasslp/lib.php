@@ -5,7 +5,7 @@
  * @subpackage blocktype-europasslp
  * @author     Gregor Anzelj
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @copyright  (C) 2009-2019 Gregor Anzelj, gregor.anzelj@gmail.com
+ * @copyright  (C) 2009-2022 Gregor Anzelj, gregor.anzelj@gmail.com
  *
  */
 
@@ -24,7 +24,7 @@ class PluginBlocktypeEuropassLP extends MaharaCoreBlocktype {
     }
 
     public static function get_css_icon($blocktypename) {
-        return 'euro';
+        return 'euro-sign';
     }
 
     public static function get_categories() {
@@ -47,13 +47,14 @@ class PluginBlocktypeEuropassLP extends MaharaCoreBlocktype {
 
         $options = array(
             'embed' => true,
-            'lang' => $locale,
+            'locale' => $locale,
+            'profilepic' => $profilepic,
         );
         $html = generate_europass_html(array('elp'), $options, $owner);
         return $html;
     }
 
-    public static function has_instance_config() {
+    public static function has_instance_config(BlockInstance $instance) {
         return true;
     }
 
@@ -75,7 +76,7 @@ class PluginBlocktypeEuropassLP extends MaharaCoreBlocktype {
         return $values;
     }
 
-    public static function default_copy_type() {
+    public static function default_copy_type(BlockInstance $instance, View $view) {
         return 'shallow';
     }
 

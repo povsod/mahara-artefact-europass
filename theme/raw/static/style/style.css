@@ -7,7 +7,7 @@
  */
 
 #europass-banner {
-    background-color: #2C4969;
+    background-color: #004b80; /*#2C4969;*/
     padding: 21px;
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
@@ -30,15 +30,15 @@ table#achievementslist {
     margin-bottom: 0;
 }
 .text-europass {
-    color: #1E6297;
+    color: #004b80; /*#1E6297;*/
 }
 .separator-row {
     background-color: #F9F9F9;
 }
 .thead-europass {
     color: #FFFFFF;
-    background-color: #1E6297;
-    border-bottom: 1px solid #1E6297!important;
+    background-color: #004b80; /*#1E6297;*/
+    border-bottom: 1px solid #004b80 /*#1E6297*/ !important;
 }
 .border-elp th,
 .border-elp td {

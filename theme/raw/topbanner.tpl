@@ -1,5 +1,5 @@
 <div id="europass-banner">
-    <img src="{$WWWROOT}artefact/europass/theme/raw/static/images/europass-logo-orange.png" border="0">
+    <img src="{$WWWROOT}artefact/europass/theme/raw/static/images/europass-logo-white.png" width="200" border="0">
     <div class="btn-top-right btn-group btn-group-top">
       <!--
       <a class="btn btn-secondary" href="{$WWWROOT}artefact/europass/import/index.php">

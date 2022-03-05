@@ -4,10 +4,10 @@
     <div class="card-body">
         <table border="0" id="personalinformation" class="resumeone fullwidth table">
             <colgroup>
-                <col style="width:25%;min-width:110px">
-                <col style="width:25%">
-                <col style="width:25%">
-                <col style="width:25%">
+                <col>
+                <col style="min-width:33%">
+                <col style="min-width:27%">
+                <col style="min-width:27%">
             </colgroup>
             <tbody>
                 <tr>
@@ -15,10 +15,10 @@
                     <td colspan="3">
                     {if $order == 12}
                     <h3 class="pbs">{$profilefields.firstname} {$profilefields.lastname}</h3>
-                    <a class="btn btn-secondary" href="{$WWWROOT}artefact/europass/preferences.php?set=1&pn=21" title="{str tag='change'} {$order_str}"><span class="icon icon-exchange icon-lg"></span></a>
+                    <a class="btn btn-secondary" href="{$WWWROOT}artefact/europass/preferences.php?set=1&pn=21" title="{str tag='change'} {$order_str}"><span class="icon icon-exchange-alt icon-lg"></span></a>
                     {else}
                     <h3 class="pbs">{$profilefields.lastname} {$profilefields.firstname}</h3>
-                    <a class="btn btn-secondary" href="{$WWWROOT}artefact/europass/preferences.php?set=1&pn=12" title="{str tag='change'} {$order_str}"><span class="icon icon-exchange icon-lg"></span></a>
+                    <a class="btn btn-secondary" href="{$WWWROOT}artefact/europass/preferences.php?set=1&pn=12" title="{str tag='change'} {$order_str}"><span class="icon icon-exchange-alt icon-lg"></span></a>
                     {/if}
                     </td>
                 </tr>
@@ -88,8 +88,8 @@
         </table>
     </div>
     <div class="card-footer">
-        <a class="btn btn-secondary" id="editprofilebutton" href="{$location.profile}" title="{str tag='edit'} {$profile_str}"><span class="icon icon-pencil icon-lg prs"></span> {str tag='edit'} {$profile_str}</a>
-        <a class="btn btn-secondary" id="editresumebutton" href="{$location.resume}" title="{str tag='edit'} {$resume_str}"><span class="icon icon-pencil icon-lg prs"></span> {str tag='edit'} {$resume_str}</a>
+        <a class="btn btn-secondary" id="editprofilebutton" href="{$location.profile}" title="{str tag='edit'} {$profile_str}"><span class="icon icon-pencil-alt icon-lg prs"></span> {str tag='edit'} {$profile_str}</a>
+        <a class="btn btn-secondary" id="editresumebutton" href="{$location.resume}" title="{str tag='edit'} {$resume_str}"><span class="icon icon-pencil-alt icon-lg prs"></span> {str tag='edit'} {$resume_str}</a>
     </div>
   </div>
 </div>

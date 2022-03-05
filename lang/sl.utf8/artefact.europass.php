@@ -5,7 +5,7 @@
  * @subpackage artefact-europass
  * @author     Gregor Anzelj
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @copyright  (C) 2009-2019 Gregor Anzelj, gregor.anzelj@gmail.com
+ * @copyright  (C) 2009-2022 Gregor Anzelj, gregor.anzelj@gmail.com
  *
  * @translator Gregor Anzelj
  *
@@ -47,7 +47,7 @@ $string['dateformat-numeric-long'] = '31. 01. 2005';
 $string['dateformat-text-short'] = '31. jan 2005';
 $string['dateformat-text-long'] = '31. januar 2005';
 $string['exportfile'] = 'Datoteka';
-$string['pdf'] = 'Adobe® PDF + Europass XML';
+$string['pdf'] = 'Adobe® PDF';
 $string['doc'] = 'Microsoft® Word';
 $string['odt'] = 'OpenDocument';
 $string['html'] = 'HTML';
@@ -57,6 +57,9 @@ $string['generateexport'] = 'Izvozi';
 $string['generateexportdesc'] = 'Ustvarite dokument Europass in ga shranite na svoj računalnik.';
 $string['generaloptions'] = 'Splošne možnosti izvoza';
 $string['includelogo'] = 'Vključim Europass logo?';
+$string['template'] = 'Predloga';
+$string['template-classic'] = 'Klasična';
+$string['template-modern-navy'] = 'Moderna temno modra';
 
 // Import data from Europass XML to Mahara...
 $string['importeuropass'] = 'Europass uvoz';
@@ -125,6 +128,7 @@ $string['workexperience'] = 'Delovne izkušnje';
 $string['education'] = 'Izobraževanje in usposabljanje';
 
 // Europass CV - STEP 5
+$string['languageskills'] = 'Jezikovno znanje';
 $string['mothertongue'] = 'Materni jezik(i)';
 $string['otherlanguage'] = 'Drugi jezik(i)';
 
@@ -157,6 +161,7 @@ $string['otherskill'] = 'Druga znanja in kompetence';
 $string['additionalinfo'] = 'Dodatni podatki';
 $string['category'] = 'Kategorija';
 
+$string['digitalskills'] = 'Digitalne spretnosti in znanja';
 $string['digitalcompetence'] = 'Digitalna pismenost';
 $string['digitalcompetence-other'] = 'Druge računalniške kompetence';
 $string['digitalcompetence-information'] = 'Obdelava informacij';
@@ -178,6 +183,7 @@ $string['projects'] = 'Projekti';
 $string['memberships'] = 'Članstva';
 $string['seminars'] = 'Seminarji';
 $string['conferences'] = 'Konference';
+$string['workshops'] = 'Delavnice';
 $string['references'] = 'Reference';
 $string['courses'] = 'Tečaji';
 $string['certifications'] = 'Certifikati';
