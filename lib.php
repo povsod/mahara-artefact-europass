@@ -1440,7 +1440,7 @@ function get_personal_information($profilepic=false, $export=false, $userid=null
 
     // User's Profile information
     $fields = call_static_method('ArtefactTypeProfile', 'get_all_fields');
-    $profile = get_records_select_array('artefact', "owner=? AND artefacttype IN (" . join(",", array_map(create_function('$a','return db_quote($a);'), array_keys($fields))) . ")", array($userid));
+    $profile = get_records_select_array('artefact', "owner=? AND artefacttype IN (" . join(",", array_map(function ($a) { return db_quote($a); }, array_keys($fields))) . ")", array($userid));
     if ($profile) {
         foreach ($profile as $field) {
             if ($field->artefacttype == 'socialprofile') {
