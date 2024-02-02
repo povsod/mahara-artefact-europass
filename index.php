@@ -31,7 +31,7 @@ $location = array(
     'profile'    => get_config('wwwroot') . 'artefact/internal/index.php?fs=contact',
     'resume'     => get_config('wwwroot') . 'artefact/resume/',
     'employment' => get_config('wwwroot') . 'artefact/resume/employment.php',
-    'education'  => get_config('wwwroot') . 'artefact/resume/employment.php',
+    'education'  => get_config('wwwroot') . 'artefact/resume/education.php',
     'languages'  => get_config('wwwroot') . 'artefact/europass/languages.php',
 );
 
